@@ -11,6 +11,10 @@ bun.lockb
 # Vercel
 .vercel
 
+# Rust
+Cargo.lock
+
+
 ###########
 # node.js #
 ###########

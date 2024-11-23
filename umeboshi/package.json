@@ -1,13 +1,13 @@
 {
-  "name": "onigiri",
+  "name": "umeboshi",
   "version": "0.0.1",
   "private": true,
-  "description": "🍙 Onigiri 🍙",
+  "description": "🌼 Umeboshi 🌼",
   "keywords": [
-    "onigiri"
+    "umeboshi"
   ],
   "license": "None",
-  "author": "Yan Kuang",
+  "author": "Umeboshi",
   "repository": {
     "type": "git",
     "url": "https://github.com/TeaFTI/Web-Onigiri"
@@ -16,9 +16,12 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "tauri": "tauri"
   },
   "dependencies": {
+    "@tauri-apps/api": "^2",
+    "@tauri-apps/plugin-shell": "^2",
     "bootstrap-icons": "^1.11",
     "bootstrap": "^5.3",
     "next": "^14",
@@ -28,6 +31,7 @@
   },
   "devDependencies": {
     "@svgr/webpack": "^8.1",
+    "@tauri-apps/cli": "^2",
     "@types/node": "^20",
     "@types/react-dom": "^18",
     "@types/react": "^18",

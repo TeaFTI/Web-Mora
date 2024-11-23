@@ -2,28 +2,28 @@
  * Root Layout
  */
 
-import { Viewport } from 'next';
-
-import reactArrayToTree from 'react-array-to-tree';
+import { Metadata, Viewport } from 'next';
 
 // Context
-import BootstrapProvider from '@/context/BootstrapContext';
-import { ThemeProvider } from '@/context/ThemeContext';
+import BootstrapProvider from '@/app/_context/bootstrap';
 
 // CSS
 import '@/style/global.scss';
-import './root.css';
+import './global.css';
+
+export const metadata: Metadata = {
+  title: {
+    template: '%s 🌼 Umebosh 🌼',
+    default: '🌼 Umebosh 🌼',
+  },
+  description: '🌼 Umebosh 🌼',
+}
 
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   maximumScale: 1,
 }
-
-const ProviderTree = reactArrayToTree([
-  <BootstrapProvider children={undefined} />,
-  <ThemeProvider children={undefined} />,
-]);
 
 export default function RootLayout({
   children,
@@ -33,9 +33,9 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body>
-        <ProviderTree>
+        <BootstrapProvider>
           {children}
-        </ProviderTree>
+        </BootstrapProvider>
       </body>
     </html>
   )

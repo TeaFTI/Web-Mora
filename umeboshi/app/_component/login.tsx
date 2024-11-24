@@ -5,7 +5,7 @@
 import Image from 'next/image';
 
 // CSS
-import '@/app/_component/login.scss';
+import '@/app/_component/login.css';
 
 export default function Login() {
   return (

@@ -11,14 +11,15 @@ const internalHost = process.env.TAURI_DEV_HOST || 'localhost';
 const nextConfig = {
   basePath: process.env.BASE_PATH,
   reactStrictMode: true,
-  images: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'github.com',
-      },
-    ],
-  },
+  // images: {
+  //   remotePatterns: [
+  //     {
+  //       protocol: 'https',
+  //       hostname: 'github.com',
+  //     },
+  //   ],
+  // },
+
   /*
    * TAURI Configuration
    */
@@ -32,6 +33,7 @@ const nextConfig = {
   },
   // Configure assetPrefix or else the server won't properly resolve your assets.
   assetPrefix: isProduction ? undefined : `http://${internalHost}:3000`,
+
   /*
    * SVGR (Scalable Vector Graphic Raw) Webpack Configuration
    */
@@ -61,6 +63,13 @@ const nextConfig = {
     fileLoaderRule.exclude = /\.svg$/i
 
     return config
+  },
+
+  /*
+   * Experimental
+   */
+  experimental: {
+    turbo: {},
   },
 };
 

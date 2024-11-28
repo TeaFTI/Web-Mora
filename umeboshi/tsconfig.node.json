@@ -8,7 +8,7 @@
     "allowSyntheticDefaultImports": true
   },
   "include": [
-    "next.config.mjs",
+    "next.config.ts",
     "next-env.d.ts"
   ]
 }

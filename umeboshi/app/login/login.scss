@@ -1,22 +1,26 @@
 /*
- * Login
- */
 
-@use "sass:map";
+Login
 
-$container-max-widths: (
-  sm: 540px,
-  md: 720px,
-  lg: 960px,
-  xl: 1140px,
-  xxl: 1320px
-);
+*/
 
-html,
-body {
-  height: 100%;
+.form-login {
+  max-width: 330px;
+  padding: 1rem;
 }
 
-.container-login {
-  max-width: map.get($container-max-widths, "sm");
+.form-login .form-floating:focus-within {
+  z-index: 2;
+}
+
+.form-login input[type="text"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.form-login input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
 }

@@ -3,13 +3,16 @@
  */
 
 import { Metadata, Viewport } from 'next';
+// import Script from 'next/script';
 
 // Context
 import BootstrapProvider from '@/app/_context/bootstrap';
 
+// SCSS
+import "@/app/global.scss";
+
 // CSS
-import '@/style/global.scss';
-import './global.css';
+import "bootstrap/dist/css/bootstrap.min.css";
 
 export const metadata: Metadata = {
   title: {

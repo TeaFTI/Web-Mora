@@ -21,7 +21,7 @@ const nextConfig = {
   // },
 
   /*
-   * TAURI Configuration
+   * TAURI
    */
   // Ensure Next.js uses SSG instead of SSR
   // https://nextjs.org/docs/pages/building-your-application/deploying/static-exports
@@ -35,9 +35,12 @@ const nextConfig = {
   assetPrefix: isProduction ? undefined : `http://${internalHost}:3000`,
 
   /*
-   * SVGR (Scalable Vector Graphic Raw) Webpack Configuration
+   * webpack
    */
   webpack(config) {
+    /*
+    * SVGR (Scalable Vector Graphic Raw) Webpack Configuration
+    */
     // Grab the existing rule that handles SVG imports
     const fileLoaderRule = config.module.rules.find((rule) =>
       rule.test?.test?.('.svg'),
@@ -69,7 +72,6 @@ const nextConfig = {
    * Experimental
    */
   experimental: {
-    turbo: {},
   },
 };
 

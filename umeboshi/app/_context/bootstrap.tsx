@@ -12,8 +12,6 @@ import {
   useState,
 } from "react";
 
-import "bootstrap/dist/css/bootstrap.min.css";
-
 interface BootstrapContextType {
   bootstrap: any;
 }
@@ -46,7 +44,7 @@ export default function BootstrapProvider({
       const js = require("bootstrap/dist/js/bootstrap.bundle.min.js");
       setBootstrapState(js);
     }
-  }, [boostrapState])
+  }, [])
 
   return (
     <BootstrapContext.Provider value={{ bootstrap: boostrapState }}>

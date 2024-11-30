@@ -2,13 +2,23 @@
  * NEXT.JS Configuration
  */
 
+const path = require('path');
+
 const isProduction = process.env.NODE_ENV === 'production';
 
 const internalHost = process.env.TAURI_DEV_HOST || 'localhost';
 
-/** @type {import('next').NextConfig} */
+import type { NextConfig } from "next";
 
-const nextConfig = {
+/*
+ * Sass
+ */
+const sassOption = {
+  includePaths: ["app"],
+  implementation: 'sass-embedded',
+}
+
+const nextConfig: NextConfig = {
   basePath: process.env.BASE_PATH,
   reactStrictMode: true,
   // images: {
@@ -33,6 +43,13 @@ const nextConfig = {
   },
   // Configure assetPrefix or else the server won't properly resolve your assets.
   assetPrefix: isProduction ? undefined : `http://${internalHost}:3000`,
+
+  /*
+   * Sass
+   */
+  sassOptions: {
+    ...sassOption,
+  },
 
   /*
    * webpack

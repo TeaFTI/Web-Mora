@@ -2,28 +2,31 @@
  * Root Layout
  */
 
-import { Metadata, Viewport } from 'next';
-// import Script from 'next/script';
+import { Metadata, Viewport } from "next";
 
 // Context
-import BootstrapProvider from '@/app/_context/bootstrap';
+import BootstrapProvider from "@/app/_context/bootstrap";
+import BootstrapColorModeProvider from "./_context/bootstrap-color-mode";
 
-// SCSS
-import "@/app/global.scss";
+// Component
+import BootstrapColorMode from "@/app/_component/bootstrap-color-mode";
 
 // CSS
 import "bootstrap/dist/css/bootstrap.min.css";
 
+// SCSS
+import "@/app/global.scss";
+
 export const metadata: Metadata = {
   title: {
-    template: '%s 🌼 Umebosh 🌼',
-    default: '🌼 Umebosh 🌼',
+    template: "%s 🌼 Umebosh 🌼",
+    default: "🌼 Umebosh 🌼",
   },
-  description: '🌼 Umebosh 🌼',
+  description: "🌼 Umebosh 🌼",
 }
 
 export const viewport: Viewport = {
-  width: 'device-width',
+  width: "device-width",
   initialScale: 1,
   maximumScale: 1,
 }
@@ -34,10 +37,13 @@ export default function RootLayout({
   children: React.ReactNode,
 }) {
   return (
-    <html lang='en'>
+    <html lang="en">
       <body>
         <BootstrapProvider>
-          {children}
+          <BootstrapColorModeProvider>
+            <BootstrapColorMode />
+            {children}
+          </BootstrapColorModeProvider>
         </BootstrapProvider>
       </body>
     </html>

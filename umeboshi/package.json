@@ -26,15 +26,15 @@
     "bootstrap": "^5.3",
     "next": "^15",
     "react-array-to-tree": "^2",
-    "react-dom": "^18",
-    "react": "^18"
+    "react-dom": "^18 || ^19",
+    "react": "^18 || ^19"
   },
   "devDependencies": {
     "@svgr/webpack": "^8.1",
     "@tauri-apps/cli": "^2",
     "@types/node": "^22",
-    "@types/react-dom": "^18",
-    "@types/react": "^18",
+    "@types/react-dom": "^18 || ^19",
+    "@types/react": "^18 || ^19",
     "@types/webpack":"^5.28",
     "autoprefixer": "^10",
     "eslint-config-next": "^15",

@@ -103,9 +103,7 @@ export function ColorModeProvider({
 
   // Provider
   return (
-    <ColorModeContext.Provider
-      value={{ colorMode: colorModeState, setColorMode: setColorModeState }}
-    >
+    <ColorModeContext.Provider value={{ colorMode: colorModeState, setColorMode: setColorModeState }}>
       <script dangerouslySetInnerHTML={{ __html: `(${initializeColorMode})()` }} />
       {children}
     </ColorModeContext.Provider>

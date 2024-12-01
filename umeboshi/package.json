@@ -32,16 +32,18 @@
   "devDependencies": {
     "@svgr/webpack": "^8.1",
     "@tauri-apps/cli": "^2",
-    "@types/node": "^20",
+    "@types/node": "^22",
     "@types/react-dom": "^18",
     "@types/react": "^18",
+    "@types/webpack":"^5.28",
     "autoprefixer": "^10",
     "eslint-config-next": "^15",
     "eslint": "^9",
     "postcss": "^8",
-    "sass": "^1.81",
     "sass-embedded": "^1.81",
+    "sass": "^1.81",
     "tailwindcss": "^3.4",
+    "ts-node": "^10.9",
     "typescript": "^5"
   }
 }

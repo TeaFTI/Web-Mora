@@ -2,20 +2,26 @@
  * NEXT.JS Configuration
  */
 
-const path = require('path');
-
-const isProduction = process.env.NODE_ENV === 'production';
-
-const internalHost = process.env.TAURI_DEV_HOST || 'localhost';
-
 import type { NextConfig } from "next";
+
+// const path = require('path');
+
+const isProduction = process.env.NODE_ENV === "production";
+
+const internalHost = process.env.TAURI_DEV_HOST || "localhost";
+
+interface WebpackRuleType {
+  test: {
+    test: (pattern: string) => any;
+  }
+}
 
 /*
  * Sass
  */
 const sassOption = {
   includePaths: ["app"],
-  implementation: 'sass-embedded',
+  implementation: "sass-embedded",
 }
 
 const nextConfig: NextConfig = {
@@ -35,7 +41,7 @@ const nextConfig: NextConfig = {
    */
   // Ensure Next.js uses SSG instead of SSR
   // https://nextjs.org/docs/pages/building-your-application/deploying/static-exports
-  output: 'export',
+  output: "export",
   // Note: This feature is required to use the Next.js Image component in SSG mode.
   // See https://nextjs.org/docs/messages/export-image-api for different workarounds.
   images: {
@@ -59,8 +65,8 @@ const nextConfig: NextConfig = {
     * SVGR (Scalable Vector Graphic Raw) Webpack Configuration
     */
     // Grab the existing rule that handles SVG imports
-    const fileLoaderRule = config.module.rules.find((rule) =>
-      rule.test?.test?.('.svg'),
+    const fileLoaderRule = config.module.rules.find((rule: WebpackRuleType) =>
+      rule.test?.test?.(".svg"),
     )
 
     config.module.rules.push(
@@ -75,7 +81,7 @@ const nextConfig: NextConfig = {
         test: /\.svg$/i,
         issuer: fileLoaderRule.issuer,
         resourceQuery: { not: [...fileLoaderRule.resourceQuery.not, /url/] }, // exclude if *.svg?url
-        use: ['@svgr/webpack'],
+        use: ["@svgr/webpack"],
       },
     )
 

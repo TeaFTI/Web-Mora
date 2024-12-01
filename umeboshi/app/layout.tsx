@@ -5,11 +5,11 @@
 import { Metadata, Viewport } from "next";
 
 // Context
-import BootstrapProvider from "@/app/_context/bootstrap";
-import BootstrapColorModeProvider from "./_context/bootstrap-color-mode";
+import BootstrapProvider from "@/app/_context/bootstrap/bootstrap";
+import { ColorModeProvider } from "@/app/_context/bootstrap/color-mode";
 
 // Component
-import BootstrapColorMode from "@/app/_component/bootstrap-color-mode";
+import ColorMode from "@/app/_component/bootstrap/color-mode";
 
 // CSS
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -37,13 +37,13 @@ export default function RootLayout({
   children: React.ReactNode,
 }) {
   return (
-    <html lang="en">
+    <html lang="en" data-bs-theme="system">
       <body>
         <BootstrapProvider>
-          <BootstrapColorModeProvider>
-            <BootstrapColorMode />
+          <ColorModeProvider>
+            <ColorMode />
             {children}
-          </BootstrapColorModeProvider>
+          </ColorModeProvider>
         </BootstrapProvider>
       </body>
     </html>

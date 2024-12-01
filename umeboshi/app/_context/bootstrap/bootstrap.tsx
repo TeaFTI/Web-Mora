@@ -13,7 +13,7 @@ import {
 } from "react";
 
 interface BootstrapContextType {
-  bootstrap: any;
+  bootstrap: unknown;
 }
 
 const BootstrapContext = createContext<BootstrapContextType | undefined>(undefined);
@@ -35,7 +35,7 @@ export default function BootstrapProvider({
    */
 
   // State
-  const [boostrapState, setBootstrapState] = useState<any>(undefined);
+  const [boostrapState, setBootstrapState] = useState<unknown>(undefined);
 
   // Effect
   useEffect(() => {
@@ -44,7 +44,7 @@ export default function BootstrapProvider({
       const js = require("bootstrap/dist/js/bootstrap.bundle.min.js");
       setBootstrapState(js);
     }
-  }, [])
+  }, [boostrapState])
 
   return (
     <BootstrapContext.Provider value={{ bootstrap: boostrapState }}>

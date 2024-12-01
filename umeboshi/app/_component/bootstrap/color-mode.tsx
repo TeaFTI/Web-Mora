@@ -2,12 +2,19 @@
  * Bootstrap Color Mode Component
  */
 
+"use client";
+
+import { useColorMode } from "@/app/_context/bootstrap/color-mode";
+
 import Check2 from "bootstrap-icons/icons/check2.svg";
 import CircleHalf from "bootstrap-icons/icons/circle-half.svg";
 import MoonFill from "bootstrap-icons/icons/moon-fill.svg";
 import SunFill from "bootstrap-icons/icons/sun-fill.svg";
 
-export default function BootstrapColorMode() {
+export default function ColorMode() {
+  // Context
+  const { setColorMode } = useColorMode();
+
   return (
     <div className="dropdown position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle">
       {/* Toggle */}
@@ -30,7 +37,7 @@ export default function BootstrapColorMode() {
             type="button"
             data-bs-theme-value="light"
             aria-pressed="false"
-          // onClick={() => setColorModeAlpha("light")}
+            onClick={() => setColorMode("light")}
           >
             <SunFill className="bi me-2" width="1em" height="1em" />
             Light
@@ -43,7 +50,7 @@ export default function BootstrapColorMode() {
             type="button"
             data-bs-theme-value="dark"
             aria-pressed="false"
-          // onClick={() => setColorModeAlpha("dark")}
+            onClick={() => setColorMode("dark")}
           >
             <MoonFill className="bi me-2" width="1em" height="1em" />
             Dark
@@ -56,7 +63,7 @@ export default function BootstrapColorMode() {
             type="button"
             data-bs-theme-value="system"
             aria-pressed="true"
-          // onClick={() => setColorModeAlpha("system")}
+            onClick={() => setColorMode("system")}
           >
             <CircleHalf className="bi me-2" width="1em" height="1em" />
             System

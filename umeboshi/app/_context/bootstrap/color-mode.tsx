@@ -28,41 +28,25 @@ export function ColorModeProvider({
 }: {
   children: ReactNode,
 }) {
-  const preferredColorMode = () => {
-    const storedColorMode = localStorage.getItem("bootstrap-color-mode") as ColorMode;
-    return storedColorMode || "system";
+  const getPreferredColorMode = (): ColorMode => {
+    if (typeof window !== "undefined") {
+      const storedColorMode = localStorage.getItem("bootstrap-color-mode") as ColorMode;
+      return storedColorMode || "system";
+    }
+    return "system";
   };
 
   // State
-  const [colorModeState, setColorModeState] = useState<ColorMode>(preferredColorMode);
-
-  // const initializeColorMode = () => {
-  //   const getStoredColorMode = () => localStorage.getItem("bootstrap-color-mode");
-
-  //   const getPreferredColorMode = () => {
-  //     const storedColorMode = getStoredColorMode();
-  //     if (storedColorMode) { return storedColorMode; }
-
-  //     return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-  //   }
-
-  //   const setColorMode = (colorMode: string) => {
-  //     if (colorMode === "system" && window.matchMedia("(prefers-color-scheme: dark)").matches) {
-  //       document.documentElement.setAttribute("data-bs-theme", "dark");
-  //     } else {
-  //       document.documentElement.setAttribute("data-bs-theme", colorMode);
-  //     }
-  //   }
-
-  //   setColorMode(getPreferredColorMode());
-  // }
+  const [colorModeState, setColorModeState] = useState<ColorMode>("system");
 
   const setColorMode = (colorMode: string) => {
-    localStorage.setItem("bootstrap-color-mode", colorMode);
-    if (colorMode === "system" && window.matchMedia("(prefers-color-scheme: dark)").matches) {
-      document.documentElement.setAttribute("data-bs-theme", "dark");
-    } else {
-      document.documentElement.setAttribute("data-bs-theme", colorMode);
+    if (typeof window !== "undefined") {
+      localStorage.setItem("bootstrap-color-mode", colorMode);
+      if (colorMode === "system" && window.matchMedia("(prefers-color-scheme: dark)").matches) {
+        document.documentElement.setAttribute("data-bs-theme", "dark");
+      } else {
+        document.documentElement.setAttribute("data-bs-theme", colorMode);
+      }
     }
   }
 
@@ -96,10 +80,13 @@ export function ColorModeProvider({
 
   // Effect
   useEffect(() => {
-    // if (typeof window !== "undefined") {
-    //   showColorMode(colorMode);
-    // }
+    const preferredColorMode = getPreferredColorMode();
+    setColorModeState(preferredColorMode);
+    setColorMode(colorModeState);
+    showColorMode(colorModeState, true);
+  }, []);
 
+  useEffect(() => {
     setColorMode(colorModeState);
     showColorMode(colorModeState, true);
   }, [colorModeState]);

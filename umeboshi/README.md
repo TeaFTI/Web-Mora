@@ -8,6 +8,16 @@
 
 ## Execute
 
+### npm
+
+```bash
+npm install --prefix umeboshi/
+```
+
+```bash
+npm run dev --prefix umeboshi/
+```
+
 ### Bun
 
 ```bash
@@ -15,7 +25,7 @@ bun install --cwd umeboshi/
 ```
 
 ```bash
-bun run --bun --cwd ulpha/ dev
+bun run --bun --cwd umeboshi/ dev
 ```
 
 ## Reference

@@ -28,33 +28,37 @@ export function ColorModeProvider({
 }: {
   children: ReactNode,
 }) {
+  const preferredColorMode = () => {
+    const storedColorMode = localStorage.getItem("bootstrap-color-mode") as ColorMode;
+    return storedColorMode || "system";
+  };
+
   // State
-  const [colorModeState, setColorModeState] = useState<ColorMode>("system");
+  const [colorModeState, setColorModeState] = useState<ColorMode>(preferredColorMode);
 
-  const initializeColorMode = () => {
-    const getStoredColorMode = () => localStorage.getItem("bootstrap-color-mode");
+  // const initializeColorMode = () => {
+  //   const getStoredColorMode = () => localStorage.getItem("bootstrap-color-mode");
 
-    const getPreferredColorMode = () => {
-      const storedColorMode = getStoredColorMode();
-      if (storedColorMode) { return storedColorMode; }
+  //   const getPreferredColorMode = () => {
+  //     const storedColorMode = getStoredColorMode();
+  //     if (storedColorMode) { return storedColorMode; }
 
-      return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-    }
+  //     return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  //   }
 
-    const setColorMode = (colorMode: string) => {
-      if (colorMode === "system" && window.matchMedia("(prefers-color-scheme: dark)").matches) {
-        document.documentElement.setAttribute("data-bs-theme", "dark");
-      } else {
-        document.documentElement.setAttribute("data-bs-theme", colorMode);
-      }
-    }
+  //   const setColorMode = (colorMode: string) => {
+  //     if (colorMode === "system" && window.matchMedia("(prefers-color-scheme: dark)").matches) {
+  //       document.documentElement.setAttribute("data-bs-theme", "dark");
+  //     } else {
+  //       document.documentElement.setAttribute("data-bs-theme", colorMode);
+  //     }
+  //   }
 
-    setColorMode(getPreferredColorMode());
-  }
-
-  const setStoredColorMode = (colorMode: string) => localStorage.setItem("bootstrap-color-mode", colorMode)
+  //   setColorMode(getPreferredColorMode());
+  // }
 
   const setColorMode = (colorMode: string) => {
+    localStorage.setItem("bootstrap-color-mode", colorMode);
     if (colorMode === "system" && window.matchMedia("(prefers-color-scheme: dark)").matches) {
       document.documentElement.setAttribute("data-bs-theme", "dark");
     } else {
@@ -96,7 +100,6 @@ export function ColorModeProvider({
     //   showColorMode(colorMode);
     // }
 
-    setStoredColorMode(colorModeState);
     setColorMode(colorModeState);
     showColorMode(colorModeState, true);
   }, [colorModeState]);
@@ -104,7 +107,6 @@ export function ColorModeProvider({
   // Provider
   return (
     <ColorModeContext.Provider value={{ colorMode: colorModeState, setColorMode: setColorModeState }}>
-      <script dangerouslySetInnerHTML={{ __html: `(${initializeColorMode})()` }} />
       {children}
     </ColorModeContext.Provider>
   );

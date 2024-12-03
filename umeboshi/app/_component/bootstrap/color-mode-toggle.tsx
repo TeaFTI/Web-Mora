@@ -11,7 +11,7 @@ import CircleHalf from "bootstrap-icons/icons/circle-half.svg";
 import MoonFill from "bootstrap-icons/icons/moon-fill.svg";
 import SunFill from "bootstrap-icons/icons/sun-fill.svg";
 
-export default function ColorMode() {
+export default function ColorModeToggle() {
   // Context
   const { setColorMode } = useColorMode();
 

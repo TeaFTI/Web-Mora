@@ -10,7 +10,7 @@ import BootstrapProvider from "@/app/_context/bootstrap/bootstrap";
 import { ColorModeProvider } from "@/app/_context/bootstrap/color-mode";
 
 // Component
-import ColorMode from "@/app/_component/bootstrap/color-mode";
+import ColorModeToggle from "@/app/_component/bootstrap/color-mode-toggle";
 
 // CSS
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -46,7 +46,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <ProviderTree>
-          <ColorMode />
+          <ColorModeToggle />
           {children}
         </ProviderTree>
       </body>

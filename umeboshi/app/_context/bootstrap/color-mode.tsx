@@ -28,6 +28,27 @@ export function ColorModeProvider({
 }: {
   children: ReactNode,
 }) {
+  const initializeColorMode = () => {
+    const getStoredColorMode = () => localStorage.getItem("bootstrap-color-mode");
+
+    const getPreferredColorMode = () => {
+      const storedColorMode = getStoredColorMode();
+      if (storedColorMode) { return storedColorMode; }
+
+      return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    }
+
+    const setColorMode = (colorMode: string) => {
+      if (colorMode === "system" && window.matchMedia("(prefers-color-scheme: dark)").matches) {
+        document.documentElement.setAttribute("data-bs-theme", "dark");
+      } else {
+        document.documentElement.setAttribute("data-bs-theme", colorMode);
+      }
+    }
+
+    setColorMode(getPreferredColorMode());
+  };
+
   const getPreferredColorMode = (): ColorMode => {
     if (typeof window !== "undefined") {
       const storedColorMode = localStorage.getItem("bootstrap-color-mode") as ColorMode;
@@ -94,6 +115,7 @@ export function ColorModeProvider({
   // Provider
   return (
     <ColorModeContext.Provider value={{ colorMode: colorModeState, setColorMode: setColorModeState }}>
+      <script dangerouslySetInnerHTML={{ __html: `(${initializeColorMode})()` }} />
       {children}
     </ColorModeContext.Provider>
   );

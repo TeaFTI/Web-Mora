@@ -6,14 +6,10 @@ import { Metadata, Viewport } from "next";
 import reactArrayToTree from 'react-array-to-tree';
 
 // Context
-import BootstrapProvider from "@/app/_context/bootstrap/bootstrap";
-import { ColorModeProvider } from "@/app/_context/bootstrap/color-mode";
 
 // Component
-import ColorModeToggle from "@/app/_component/bootstrap/color-mode-toggle";
 
 // CSS
-import "bootstrap/dist/css/bootstrap.min.css";
 
 // SCSS
 import "@/app/global.scss";
@@ -33,8 +29,6 @@ export const viewport: Viewport = {
 }
 
 const ProviderTree = reactArrayToTree([
-  <BootstrapProvider children={undefined} />,
-  <ColorModeProvider children={undefined} />,
 ]);
 
 export default function RootLayout({
@@ -46,7 +40,6 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <ProviderTree>
-          <ColorModeToggle />
           {children}
         </ProviderTree>
       </body>

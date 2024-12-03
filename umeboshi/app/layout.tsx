@@ -43,7 +43,7 @@ export default function RootLayout({
   children: React.ReactNode,
 }) {
   return (
-    <html lang="en" data-bs-theme="system">
+    <html lang="en">
       <body>
         <ProviderTree>
           <ColorMode />

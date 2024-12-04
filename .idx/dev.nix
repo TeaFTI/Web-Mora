@@ -20,7 +20,8 @@
     workspace = {
       # Runs when a workspace is first created with this `dev.nix` file
       onCreate = {
-        npm-install = "npm ci --no-audit --prefer-offline --no-progress --timing --prefix umeboshi/";
+        # npm-install = "npm ci --no-audit --prefer-offline --no-progress --timing --prefix umeboshi/";
+        npm-install = "npm install --prefix umeboshi/";
         # Open editors for the following files by default, if they exist:
         default.openFiles = [
           # Cover all the variations of language, src-dir, router (app/pages)
@@ -28,9 +29,13 @@
           "src/pages/index.tsx" "src/pages/index.jsx"
           "app/page.tsx" "app/page.jsx"
           "src/app/page.tsx" "src/app/page.jsx"
+          "umeboshi/app/page.tsx
         ];
       };
       # To run something each time the workspace is (re)started, use the `onStart` hook
+      onCreate = {
+        npm-install = "npm install --prefix umeboshi/ --no-audit --prefer-offline --no-progress --timing";
+      };
     };
     # Enable previews and customize configuration
     previews = {

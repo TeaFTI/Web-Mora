@@ -11,6 +11,9 @@ bun.lockb
 # Vercel
 .vercel
 
+# NEXT.JS TypeScript
+next-env.d.ts
+
 # Rust
 Cargo.lock
 

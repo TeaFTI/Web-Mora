@@ -45,7 +45,7 @@
     "@types/react": "^19",
     "@types/webpack": "^5.28",
     "autoprefixer": "^10",
-    "eslint-config-next": "^15",
+    "eslint-config-next": "^15.1",
     "eslint": "^9",
     "postcss": "^8",
     "sass-embedded": "^1.81",

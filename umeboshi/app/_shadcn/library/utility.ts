@@ -1,5 +1,5 @@
 /**
- * shadcn Utility
+ * shadcn Utility Library
  */
 
 import { clsx, type ClassValue } from "clsx";

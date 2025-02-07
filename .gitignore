@@ -6,7 +6,7 @@
 package-lock.json
 
 # Bun
-bun.lockb
+bun.lock
 
 # Vercel
 .vercel

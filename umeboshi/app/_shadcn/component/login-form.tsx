@@ -48,11 +48,6 @@ export function LoginForm({
                 Login
               </Button>
             </div>
-            <div className="mt-4 text-center text-sm">
-              <a href="#" className="underline underline-offset-4">
-                Create Account
-              </a>
-            </div>
           </form>
         </CardContent>
       </Card>

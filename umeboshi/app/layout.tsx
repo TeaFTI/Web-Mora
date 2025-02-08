@@ -13,13 +13,17 @@ import reactArrayToTree from 'react-array-to-tree';
 
 // SCSS
 import "@/app/global.scss";
+import { siteConfiguration } from "@/configuration/site";
 
 export const metadata: Metadata = {
   title: {
-    template: "%s 🌼 Umebosh 🌼",
-    default: "🌼 Umebosh 🌼",
+    template: `%s 🌼 ${siteConfiguration.name} 🌼`,
+    default: `🌼 ${siteConfiguration.name} 🌼`,
   },
-  description: "🌼 Umebosh 🌼",
+  description: `🌼 ${siteConfiguration.description} 🌼`,
+  icons: {
+    icon: "/res/img/icon.svg",
+  },
 }
 
 export const viewport: Viewport = {

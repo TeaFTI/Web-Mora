@@ -12,7 +12,7 @@ import reactArrayToTree from 'react-array-to-tree';
 // CSS
 
 // SCSS
-import "@/app/global.scss";
+import "@/app/global.css";
 import { siteConfiguration } from "@/configuration/site";
 
 export const metadata: Metadata = {

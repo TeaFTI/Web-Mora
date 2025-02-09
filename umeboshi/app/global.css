@@ -4,10 +4,8 @@ Global
 
 */
 
-/* @import "tailwindcss"; */
-@import "tailwindcss" prefix(tw);
-
-@plugin "tailwindcss-animate";
+@import "tailwindcss";
+/* @import "tailwindcss" prefix(tw); */
 
 @plugin 'tailwindcss-animate';
 
@@ -177,6 +175,21 @@ Global
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 }
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/*
+
+---break---
+
+*/
 
 @layer base {
   * {

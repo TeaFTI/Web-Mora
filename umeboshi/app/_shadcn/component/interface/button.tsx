@@ -5,26 +5,26 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/app/_shadcn/library/utility"
 
 const buttonVariants = cva(
-  "tw-inline-flex tw-items-center tw-justify-center tw-gap-2 tw-whitespace-nowrap tw-rounded-md tw-text-sm tw-font-medium tw-transition-[color,box-shadow] disabled:tw-pointer-events-none disabled:tw-opacity-50 [&_svg]:tw-pointer-events-none [&_svg:not([class*=size-])]:tw-size-4 [&_svg]:tw-shrink-0 tw-ring-ring/10 dark:tw-ring-ring/20 dark:tw-outline-ring/40 tw-outline-ring/50 focus-visible:tw-ring-4 focus-visible:tw-outline-1 aria-invalid:focus-visible:tw-ring-0",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-[color,box-shadow] disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 [&_svg]:shrink-0 ring-ring/10 dark:ring-ring/20 dark:outline-ring/40 outline-ring/50 focus-visible:ring-4 focus-visible:outline-1 aria-invalid:focus-visible:ring-0",
   {
     variants: {
       variant: {
         default:
-          "tw-bg-primary tw-text-primary-foreground tw-shadow-sm hover:tw-bg-primary/90",
+          "bg-primary text-primary-foreground shadow-sm hover:bg-primary/90",
         destructive:
-          "tw-bg-destructive tw-text-destructive-foreground tw-shadow-xs hover:tw-bg-destructive/90",
+          "bg-destructive text-destructive-foreground shadow-xs hover:bg-destructive/90",
         outline:
-          "tw-border tw-border-input tw-bg-background tw-shadow-xs hover:tw-bg-accent hover:tw-text-accent-foreground",
+          "border border-input bg-background shadow-xs hover:bg-accent hover:text-accent-foreground",
         secondary:
-          "tw-bg-secondary tw-text-secondary-foreground tw-shadow-xs hover:tw-bg-secondary/80",
-        ghost: "hover:tw-bg-accent hover:tw-text-accent-foreground",
-        link: "tw-text-primary tw-underline-offset-4 hover:tw-underline",
+          "bg-secondary text-secondary-foreground shadow-xs hover:bg-secondary/80",
+        ghost: "hover:bg-accent hover:text-accent-foreground",
+        link: "text-primary underline-offset-4 hover:underline",
       },
       size: {
-        default: "tw-h-9 tw-px-4 tw-py-2 has-[>svg]:tw-px-3",
-        sm: "tw-h-8 tw-rounded-md tw-px-3 has-[>svg]:tw-px-2.5",
-        lg: "tw-h-10 tw-rounded-md tw-px-6 has-[>svg]:tw-px-4",
-        icon: "tw-size-9",
+        default: "h-9 px-4 py-2 has-[>svg]:px-3",
+        sm: "h-8 rounded-md px-3 has-[>svg]:px-2.5",
+        lg: "h-10 rounded-md px-6 has-[>svg]:px-4",
+        icon: "size-9",
       },
     },
     defaultVariants: {

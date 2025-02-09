@@ -4,8 +4,8 @@ Global
 
 */
 
-@import "tailwindcss";
-/* @import "tailwindcss" prefix(tw); */
+/* @import "tailwindcss"; */
+@import "tailwindcss" prefix(tw);
 
 @plugin "tailwindcss-animate";
 

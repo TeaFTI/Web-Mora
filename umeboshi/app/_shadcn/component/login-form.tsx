@@ -1,7 +1,3 @@
-/**
- * shadcn Login Form Component
- */
-
 import { Button } from "@/app/_shadcn/component/interface/button"
 import {
   Card,
@@ -17,36 +13,54 @@ import { cn } from "@/app/_shadcn/library/utility"
 export function LoginForm({
   className,
   ...props
-}: React.ComponentPropsWithoutRef<"div">) {
+}: React.ComponentProps<"div">) {
   return (
-    <div className={cn("flex flex-col gap-6", className)} {...props}>
+    <div className={cn("tw-flex tw-flex-col tw-gap-6", className)} {...props}>
       <Card>
         <CardHeader>
-          <CardTitle className="text-2xl">Login</CardTitle>
+          <CardTitle>Login to your account</CardTitle>
           <CardDescription>
-            Please enter Username and Password to login.
+            Enter your email below to login to your account
           </CardDescription>
         </CardHeader>
         <CardContent>
           <form>
-            <div className="flex flex-col gap-6">
-              <div className="grid gap-2">
-                <Label htmlFor="username">Username</Label>
+            <div className="tw-flex tw-flex-col tw-gap-6">
+              <div className="tw-grid tw-gap-3">
+                <Label htmlFor="email">Email</Label>
                 <Input
-                  id="username"
-                  type="username"
-                  placeholder="Username"
+                  id="email"
+                  type="email"
+                  placeholder="m@example.com"
                   required
-                  autoFocus
                 />
               </div>
-              <div className="grid gap-2">
-                <Label htmlFor="password">Password</Label>
+              <div className="tw-grid tw-gap-3">
+                <div className="tw-flex tw-items-center">
+                  <Label htmlFor="password">Password</Label>
+                  <a
+                    href="#"
+                    className="tw-ml-auto tw-inline-block tw-text-sm tw-underline-offset-4 hover:tw-underline"
+                  >
+                    Forgot your password?
+                  </a>
+                </div>
                 <Input id="password" type="password" required />
               </div>
-              <Button type="submit" className="w-full">
-                Login
-              </Button>
+              <div className="tw-flex tw-flex-col tw-gap-3">
+                <Button type="submit" className="tw-w-full">
+                  Login
+                </Button>
+                <Button variant="outline" className="tw-w-full">
+                  Login with Google
+                </Button>
+              </div>
+            </div>
+            <div className="tw-mt-4 tw-text-center tw-text-sm">
+              Don&apos;t have an account?{" "}
+              <a href="#" className="tw-underline tw-underline-offset-4">
+                Sign up
+              </a>
             </div>
           </form>
         </CardContent>

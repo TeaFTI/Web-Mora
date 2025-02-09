@@ -5,26 +5,26 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/app/_shadcn/library/utility"
 
 const buttonVariants = cva(
-  "twinline-flex twitems-center twjustify-center twgap-2 twwhitespace-nowrap twrounded-md twtext-sm twfont-medium twtransition-[color,box-shadow] disabled:twpointer-events-none disabled:twopacity-50 [&_svg]:twpointer-events-none [&_svg:not([class*=size-])]:twsize-4 [&_svg]:twshrink-0 twring-ring/10 dark:twring-ring/20 dark:twoutline-ring/40 twoutline-ring/50 focus-visible:twring-4 focus-visible:twoutline-1 aria-invalid:focus-visible:twring-0",
+  "tw-inline-flex tw-items-center tw-justify-center tw-gap-2 tw-whitespace-nowrap tw-rounded-md tw-text-sm tw-font-medium tw-transition-[color,box-shadow] disabled:tw-pointer-events-none disabled:tw-opacity-50 [&_svg]:tw-pointer-events-none [&_svg:not([class*=size-])]:tw-size-4 [&_svg]:tw-shrink-0 tw-ring-ring/10 dark:tw-ring-ring/20 dark:tw-outline-ring/40 tw-outline-ring/50 focus-visible:tw-ring-4 focus-visible:tw-outline-1 aria-invalid:focus-visible:tw-ring-0",
   {
     variants: {
       variant: {
         default:
-          "twbg-primary twtext-primary-foreground twshadow-sm hover:twbg-primary/90",
+          "tw-bg-primary tw-text-primary-foreground tw-shadow-sm hover:tw-bg-primary/90",
         destructive:
-          "twbg-destructive twtext-destructive-foreground twshadow-xs hover:twbg-destructive/90",
+          "tw-bg-destructive tw-text-destructive-foreground tw-shadow-xs hover:tw-bg-destructive/90",
         outline:
-          "twborder twborder-input twbg-background twshadow-xs hover:twbg-accent hover:twtext-accent-foreground",
+          "tw-border tw-border-input tw-bg-background tw-shadow-xs hover:tw-bg-accent hover:tw-text-accent-foreground",
         secondary:
-          "twbg-secondary twtext-secondary-foreground twshadow-xs hover:twbg-secondary/80",
-        ghost: "hover:twbg-accent hover:twtext-accent-foreground",
-        link: "twtext-primary twunderline-offset-4 hover:twunderline",
+          "tw-bg-secondary tw-text-secondary-foreground tw-shadow-xs hover:tw-bg-secondary/80",
+        ghost: "hover:tw-bg-accent hover:tw-text-accent-foreground",
+        link: "tw-text-primary tw-underline-offset-4 hover:tw-underline",
       },
       size: {
-        default: "twh-9 twpx-4 twpy-2 has-[>svg]:twpx-3",
-        sm: "twh-8 twrounded-md twpx-3 has-[>svg]:twpx-2.5",
-        lg: "twh-10 twrounded-md twpx-6 has-[>svg]:twpx-4",
-        icon: "twsize-9",
+        default: "tw-h-9 tw-px-4 tw-py-2 has-[>svg]:tw-px-3",
+        sm: "tw-h-8 tw-rounded-md tw-px-3 has-[>svg]:tw-px-2.5",
+        lg: "tw-h-10 tw-rounded-md tw-px-6 has-[>svg]:tw-px-4",
+        icon: "tw-size-9",
       },
     },
     defaultVariants: {

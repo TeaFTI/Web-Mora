@@ -15,7 +15,7 @@ export function LoginForm({
   ...props
 }: React.ComponentProps<"div">) {
   return (
-    <div className={cn("tw-flex tw-flex-col tw-gap-6", className)} {...props}>
+    <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card>
         <CardHeader>
           <CardTitle>Login to your account</CardTitle>
@@ -25,8 +25,8 @@ export function LoginForm({
         </CardHeader>
         <CardContent>
           <form>
-            <div className="tw-flex tw-flex-col tw-gap-6">
-              <div className="tw-grid tw-gap-3">
+            <div className="flex flex-col gap-6">
+              <div className="grid gap-3">
                 <Label htmlFor="email">Email</Label>
                 <Input
                   id="email"
@@ -35,30 +35,30 @@ export function LoginForm({
                   required
                 />
               </div>
-              <div className="tw-grid tw-gap-3">
-                <div className="tw-flex tw-items-center">
+              <div className="grid gap-3">
+                <div className="flex items-center">
                   <Label htmlFor="password">Password</Label>
                   <a
                     href="#"
-                    className="tw-ml-auto tw-inline-block tw-text-sm tw-underline-offset-4 hover:tw-underline"
+                    className="ml-auto inline-block text-sm underline-offset-4 hover:underline"
                   >
                     Forgot your password?
                   </a>
                 </div>
                 <Input id="password" type="password" required />
               </div>
-              <div className="tw-flex tw-flex-col tw-gap-3">
-                <Button type="submit" className="tw-w-full">
+              <div className="flex flex-col gap-3">
+                <Button type="submit" className="w-full">
                   Login
                 </Button>
-                <Button variant="outline" className="tw-w-full">
+                <Button variant="outline" className="w-full">
                   Login with Google
                 </Button>
               </div>
             </div>
-            <div className="tw-mt-4 tw-text-center tw-text-sm">
+            <div className="mt-4 text-center text-sm">
               Don&apos;t have an account?{" "}
-              <a href="#" className="tw-underline tw-underline-offset-4">
+              <a href="#" className="underline underline-offset-4">
                 Sign up
               </a>
             </div>

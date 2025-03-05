@@ -62,7 +62,7 @@ const componentList: { title: string; href: string; description: string }[] = [
 
 export function NavigationMain() {
   return (
-    <nav className="" aria-label="Main Navigation">
+    <nav className="flex p-4" aria-label="Main Navigation">
       <Link className="mr-4 flex items-center gap-2 lg:mr-6" href="/" aria-label="Umeboshi">
         <Umeboshi className="h-6 w-6" />
         <span className="hidden font-bold lg:inline-block">

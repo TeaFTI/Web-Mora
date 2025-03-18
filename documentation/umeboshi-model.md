@@ -1,18 +1,23 @@
 # Model
 
 erDiagram
-    ACCOUNT ||--o| ACCOUNT-TYPE : has
+    ACCOUNT ||--o| ACCOUNT-TYPE-DETAIL: has
     ACCOUNT {
         uuid id PK
         text name
         uuid type
     }
+    ACCOUNT-TYPE ||--o| ACCOUNT-TYPE-DETAIL: has
     ACCOUNT-TYPE {
         uuid id PK
         text name
     }
+    ACCOUNT-TYPE-DETAIL {
+        uuid accountid FK
+        uuid accounttypeid FK
+    }
     ACCOUNT ||--o{ TRANSACTION : has
-    TRANSACTION ||--o{ TRANSACTION-CATEGORY : has
+    TRANSACTION ||--o{ TRANSACTION-CATEGORY-DETAIL : has
     TRANSACTION ||--o| TRANSACTION-TAG : has
     TRANSACTION {
         uuid id PK
@@ -26,14 +31,14 @@ erDiagram
         money discount
         enum type
     }
-    CATEGORY ||--o{ TRANSACTION-CATEGORY : associate
-    CATEGORY {
+    TRANSACTION-CATEGORY ||--o{ TRANSACTION-CATEGORY-DETAIL : associate
+    TRANSACTION-CATEGORY {
         uuid id PK
         text name
     }
-    TRANSACTION-CATEGORY {
-        uuid transaction
-        uuid category
+    TRANSACTION-CATEGORY-DETAIL {
+        uuid transactionid FK
+        uuid transactioncategoryid FK
     }
     TRANSACTION-TAG {
         uuid id PK

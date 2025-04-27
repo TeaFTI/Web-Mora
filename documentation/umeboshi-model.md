@@ -2,6 +2,36 @@
 
 erDiagram
     ACCOUNT ||--o| ACCOUNT-TYPE-DETAIL: has
+    CONTACT {
+        uuid id PK
+        text prefix
+        text firstName
+        text middleName
+        text lastName
+        text suffix
+        text phoneticFirstName
+        text phoneticMiddleName
+        text phoneticLastName
+        text nickname
+        text company
+    }
+    EMAIL {
+        uuid id PK
+        text email
+    }
+    TELEPHONE-NUMBER {
+        uuid id PK
+        text countryCode
+        text number
+    }
+    ADDRESS {
+        uuid id PK
+        text street
+        text city
+        text state
+        text postalCode
+    }
+    ACCOUNT ||--o| ACCOUNT-TYPE : has
     ACCOUNT {
         uuid id PK
         text name

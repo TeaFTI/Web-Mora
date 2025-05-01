@@ -1,76 +1,96 @@
 # Model
 
 erDiagram
-    ACCOUNT ||--o| ACCOUNT-TYPE-DETAIL: has
-    CONTACT {
+    %% Global User
+    %% The user of the system
+    global_user ||--o| base_email : has
+    global_user {
+        uuid id PK
+        uuid email_id FK
+        text username
+        text password
+        text first_name
+        text middle_name
+        text last_name
+    }
+    %% Base Contact
+    base_contact {
         uuid id PK
         text prefix
-        text firstName
-        text middleName
-        text lastName
+        text first_name
+        text middle_name
+        text last_name
         text suffix
-        text phoneticFirstName
-        text phoneticMiddleName
-        text phoneticLastName
+        text phonetic_first_name
+        text phonetic_middle_name
+        text phonetic_last_lame
         text nickname
         text company
     }
-    EMAIL {
+    base_contact ||--o| base_contact_email : has
+    base_email ||--o| base_contact_email : belong
+    base_email {
         uuid id PK
         text email
     }
-    TELEPHONE-NUMBER {
+    base_contact_email {
+        uuid contact_id PK
+        uuid email_id PK
+    }
+    base_contact ||--o| base_contact_telephone_number : has
+    base_contact_telephone_number ||--o| base_telephone_number : belong
+    base_telephone_number {
         uuid id PK
-        text countryCode
+        text country_code
         text number
     }
-    ADDRESS {
+    base_contact_telephone_number {
+        uuid contact_id PK
+        uusid telephone_number_id PK
+    }
+    base_contact ||--o| base_contact_address : has
+    base_address ||--o| base_contact_address : belong
+    base_address {
         uuid id PK
         text street
         text city
         text state
         text postalCode
     }
-    ACCOUNT ||--o| ACCOUNT-TYPE : has
-    ACCOUNT {
+    base_contact_address {
+        uuid contact_id PK
+        uusid address_id PK
+    }
+    %% Account
+    base_account {
         uuid id PK
+        uuid account_type_id FK
         text name
         uuid type
     }
-    ACCOUNT-TYPE ||--o| ACCOUNT-TYPE-DETAIL: has
-    ACCOUNT-TYPE {
+    base_account ||--o| base_account_type : has
+    base_account_type {
         uuid id PK
         text name
+        text description
     }
-    ACCOUNT-TYPE-DETAIL {
-        uuid accountid FK
-        uuid accounttypeid FK
-    }
-    ACCOUNT ||--o{ TRANSACTION : has
-    TRANSACTION ||--o{ TRANSACTION-CATEGORY-DETAIL : has
-    TRANSACTION ||--o| TRANSACTION-TAG : has
-    TRANSACTION {
+    %% Base Transaction
+    base_transaction {
         uuid id PK
+        uuid transaction_type_id FK
         timestamptz timestamp
         text description
         uuid source
         uuid destination
-        money originalCost
+        money original_cost
         money tax
         money adjustment
         money discount
-        enum type
+        enum tax_expense
     }
-    TRANSACTION-CATEGORY ||--o{ TRANSACTION-CATEGORY-DETAIL : associate
-    TRANSACTION-CATEGORY {
+    base_transaction ||--o| base_transaction_type : has
+    base_transaction_type {
         uuid id PK
         text name
-    }
-    TRANSACTION-CATEGORY-DETAIL {
-        uuid transactionid FK
-        uuid transactioncategoryid FK
-    }
-    TRANSACTION-TAG {
-        uuid id PK
-        text name
+        text description
     }

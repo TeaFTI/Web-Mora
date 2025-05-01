@@ -71,9 +71,11 @@ export function NavigationMain() {
       </Link>
       <NavigationMenu>
         <NavigationMenuList>
-          {/* Getting Started */}
+          {/* Dashboard */}
           <NavigationMenuItem>
-            <NavigationMenuTrigger>Getting Started</NavigationMenuTrigger>
+            <NavigationMenuLink asChild>
+              <Link href="/">Dashboard</Link>
+            </NavigationMenuLink>
           </NavigationMenuItem>
           {/* Component */}
           <NavigationMenuItem>

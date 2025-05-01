@@ -88,7 +88,7 @@
     "postcss": "^8",
     "sass": "^1.81",
     "sass-embedded": "^1.81",
-    "tailwindcss": "^4.0",
+    "tailwindcss": "^4.1",
     "ts-node": "^10.9",
     "typescript": "^5"
   }

@@ -2,7 +2,7 @@
  * Develop Layout
  */
 
-import NavigationSidebar from "@/app/_component/shadcn/navigation-sidebar";
+import NavigationSidebarAlpha from "@/app/_component/shadcn/navigation-sidebar-alpha";
 import { SidebarProvider, SidebarTrigger } from "@/app/_shadcn/component/interface/sidebar";
 
 export default function DevelopLayout({
@@ -12,7 +12,7 @@ export default function DevelopLayout({
 }) {
   return (
     <SidebarProvider>
-      <NavigationSidebar />
+      <NavigationSidebarAlpha />
       <main>
         <SidebarTrigger />
         {children}

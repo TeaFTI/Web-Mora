@@ -1,5 +1,5 @@
 /**
- * shadcn Navigation Sidebar Component
+ * shadcn Navigation Sidebar Alpha Component
  */
 
 "use client";

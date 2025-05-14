@@ -6,14 +6,13 @@ import { Metadata, Viewport } from "next";
 import reactArrayToTree from 'react-array-to-tree';
 
 // Context
+import { ThemeProvider } from "@/app/_context/shadcn/theme-provider";
 
 // Component
+import { siteConfiguration } from "@/configuration/site";
 
 // CSS
-
-// SCSS
 import "@/app/global.css";
-import { siteConfiguration } from "@/configuration/site";
 
 export const metadata: Metadata = {
   title: {
@@ -33,6 +32,13 @@ export const viewport: Viewport = {
 }
 
 const ProviderTree = reactArrayToTree([
+  <ThemeProvider
+    key="shadcn-theme-provider"
+    attribute="class"
+    defaultTheme="system"
+    enableSystem
+    disableTransitionOnChange
+  />
 ]);
 
 export default function RootLayout({
@@ -41,7 +47,7 @@ export default function RootLayout({
   children: React.ReactNode,
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body>
         <ProviderTree>
           {children}

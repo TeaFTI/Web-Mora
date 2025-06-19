@@ -14,9 +14,11 @@ bun.lock
 # NEXT.JS TypeScript
 next-env.d.ts
 
+# TanStack
+routeTree.gen.ts
+
 # Rust
 Cargo.lock
-
 
 ###########
 # node.js #

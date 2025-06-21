@@ -61,7 +61,7 @@ erDiagram
         uuid contact_id PK
         uusid address_id PK
     }
-    %% Account
+    %% Base Account
     base_account {
         uuid id PK
         uuid account_type_id FK
@@ -93,4 +93,36 @@ erDiagram
         uuid id PK
         text name
         text description
+    }
+
+    %% Base Property
+    base_property ||--|| base_address : is
+    base_property {
+        uuid id PK
+        text key PK
+        uuid address_id FK
+        text parcel_number_local
+        text parcel_number_state
+        text parcel_number_property_id
+        text taxing_district_code
+        text taxing_district_description
+        smallint section
+        smallint township
+        smallint range
+        text subdivision_name
+        smallint subdivision_section
+        smallint deeded_acres
+        text political_township
+        smallint lot_number
+        text state_tax_district
+        text lot
+        text block
+    }
+
+    %% Base Tenant
+    base_tenant ||--|| base_contact : is
+    base_tenant {
+        uuid id PK
+        uuid contact_id FK
+        uuid property_id FK
     }

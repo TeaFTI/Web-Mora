@@ -1,20 +1,18 @@
 # Model
 
 erDiagram
-    %% Global User
+    %% User
     %% The user of the system
-    global_user ||--o| base_email : has
-    global_user {
+    user |o--o| contact : is
+    user {
         uuid id PK
-        uuid email_id FK
+        uuid contact_id FK
         text username
         text password
-        text first_name
-        text middle_name
-        text last_name
     }
-    %% Base Contact
-    base_contact {
+
+    %% Contact
+    contact {
         uuid id PK
         text prefix
         text first_name
@@ -27,55 +25,86 @@ erDiagram
         text nickname
         text company
     }
-    base_contact ||--o| base_contact_email : has
-    base_email ||--o| base_contact_email : belong
-    base_email {
+    contact ||--o| contact_email : has
+    email ||--o| contact_email : belong
+    email {
         uuid id PK
         text email
     }
-    base_contact_email {
+    contact_email {
         uuid contact_id PK
         uuid email_id PK
     }
-    base_contact ||--o| base_contact_telephone_number : has
-    base_contact_telephone_number ||--o| base_telephone_number : belong
-    base_telephone_number {
+    contact ||--o| contact_telephone_number : has
+    contact_telephone_number ||--o| telephone_number : belong
+    telephone_number {
         uuid id PK
         text country_code
         text number
     }
-    base_contact_telephone_number {
+    contact_telephone_number {
         uuid contact_id PK
         uusid telephone_number_id PK
     }
-    base_contact ||--o| base_contact_address : has
-    base_address ||--o| base_contact_address : belong
-    base_address {
+
+    %% Address
+    contact ||--o| contact_address : has
+    address ||--o| contact_address : belong
+    address }|--|| city : has
+    address {
         uuid id PK
+        text city_id
         text street
-        text city
-        text state
-        text postalCode
+        text postal_code
     }
-    base_contact_address {
+    contact_address {
         uuid contact_id PK
         uusid address_id PK
     }
-    %% Base Account
-    base_account {
+
+    %% City
+    city }|--|| division : has
+    city {
+        uuid id PK
+        uuid division_id FK
+        text name
+    }
+
+    %% Division
+    division }|--|| country : has
+    division {
+        uuid id PK
+        uuid country_id FK
+        text name
+        text iso_3166_2
+    }
+
+    %% Country
+    country {
+        uuid id PK
+        text name
+        text official_state_name
+        text iso_3166_1
+        text iso_3166_1_alpha_2
+        text iso_3166_1_alpha_3
+    }
+
+    %% Account
+    account {
         uuid id PK
         uuid account_type_id FK
         text name
         uuid type
     }
-    base_account ||--o| base_account_type : has
-    base_account_type {
+    account ||--o| account_type : has
+    account_type {
         uuid id PK
         text name
         text description
     }
-    %% Base Transaction
-    base_transaction {
+
+    %% Transaction
+    transaction {
         uuid id PK
         uuid transaction_type_id FK
         timestamptz timestamp
@@ -88,16 +117,16 @@ erDiagram
         money discount
         enum tax_expense
     }
-    base_transaction ||--o| base_transaction_type : has
-    base_transaction_type {
+    transaction ||--o| transaction_type : has
+    transaction_type {
         uuid id PK
         text name
         text description
     }
 
-    %% Base Property
-    base_property ||--|| base_address : is
-    base_property {
+    %% Property
+    property ||--|| address : is
+    property {
         uuid id PK
         text key PK
         uuid address_id FK
@@ -119,9 +148,9 @@ erDiagram
         text block
     }
 
-    %% Base Tenant
-    base_tenant ||--|| base_contact : is
-    base_tenant {
+    %% Tenant
+    tenant ||--|| contact : is
+    tenant {
         uuid id PK
         uuid contact_id FK
         uuid property_id FK

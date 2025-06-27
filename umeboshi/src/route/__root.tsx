@@ -14,6 +14,8 @@ import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 
 import { siteConfiguration } from "~/configuration/site";
 
+import "~/global.css";
+
 export const Route = createRootRoute({
   head: () => ({
     meta: [

@@ -16,6 +16,7 @@ export default defineConfig({
   plugins: [
     tailwindcss(),
     tsConfigPaths(),
+    // TanStack
     tanstackStart(),
     tanstackRouter({
       routesDirectory: "src/route",

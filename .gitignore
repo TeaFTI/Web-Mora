@@ -15,7 +15,10 @@ bun.lock
 next-env.d.ts
 
 # TanStack
+.nitro
+.output
 .tanstack
+dist-ssr
 routeTree.gen.ts
 
 # Rust

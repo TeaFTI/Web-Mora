@@ -2,6 +2,8 @@
  * Root
  */
 
+/// <reference types="vite/client" />
+
 import type { ReactNode } from "react";
 
 import {
@@ -12,10 +14,9 @@ import {
 } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 
-
 import { siteConfiguration } from "~/configuration/site";
 
-import "~/global.css";
+import globalCss from "../res/css/global.css?url";
 
 export const Route = createRootRoute({
   head: () => ({
@@ -30,6 +31,12 @@ export const Route = createRootRoute({
       {
         title: siteConfiguration.name,
       },
+    ],
+    links: [
+      {
+        rel: "stylesheet",
+        href: globalCss,
+      }
     ],
   }),
   component: RootComponent,

@@ -6,7 +6,7 @@ import { Metadata, Viewport } from "next";
 import reactArrayToTree from "react-array-to-tree";
 
 // Context
-import { ThemeProvider } from "@/app/_context/shadcn/theme-provider";
+import { ThemeProvider } from "@/context/shadcn/theme-provider";
 
 // Component
 import { siteConfiguration } from "@/configuration/site";

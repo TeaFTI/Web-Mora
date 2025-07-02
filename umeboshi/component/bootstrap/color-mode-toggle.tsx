@@ -4,7 +4,7 @@
 
 "use client";
 
-import { useColorMode } from "@/app/_context/bootstrap/color-mode";
+import { useColorMode } from "@/context/bootstrap/color-mode";
 
 import Check2 from "bootstrap-icons/icons/check2.svg";
 import CircleHalf from "bootstrap-icons/icons/circle-half.svg";

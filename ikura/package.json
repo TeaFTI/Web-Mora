@@ -1,13 +1,13 @@
 {
-  "name": "umeboshi",
+  "name": "ikura",
   "version": "0.0.1",
   "type": "module",
-  "description": "🌼 Umeboshi 🌼",
+  "description": "🍥 Ikura 🍥",
   "keywords": [
-    "umeboshi"
+    "ikura"
   ],
   "license": "None",
-  "author": "Umeboshi",
+  "author": "Ikura",
   "repository": {
     "type": "git",
     "url": "https://github.com/TeaFTI/Web-Onigiri"

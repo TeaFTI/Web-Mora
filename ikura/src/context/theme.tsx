@@ -2,19 +2,16 @@
  * Theme Context
  */
 
-import {
-  createContext,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import { createContext, useContext } from "react";
 
-type Theme = "light" | "dark" | "system";
+import { useRouter } from "@tanstack/react-router";
+import { setThemeServerFn } from "~/server/theme";
+
+export type Theme = "light" | "dark";
 
 type ThemeProviderType = {
   children: React.ReactNode;
   defaultTheme?: Theme;
-  storageKey?: string;
 }
 
 type ThemeProviderState = {
@@ -23,7 +20,7 @@ type ThemeProviderState = {
 }
 
 const initialState: ThemeProviderState = {
-  theme: "system",
+  theme: "dark",
   setTheme: () => null,
 }
 
@@ -31,37 +28,18 @@ const ThemeContext = createContext<ThemeProviderState>(initialState);
 
 export function ThemeProvider({
   children,
-  defaultTheme = "system",
-  storageKey = "vite-theme",
+  defaultTheme = "dark",
   ...props
 }: ThemeProviderType) {
-  const [theme, setTheme] = useState<Theme>(
-    () => (localStorage.getItem(storageKey) as Theme) || defaultTheme
-  );
-
-  useEffect(() => {
-    const root = window.document.documentElement;
-
-    root.classList.remove("light", "dark");
-
-    if (theme === "system") {
-      const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
-        .matches ? "dark" : "light";
-
-      root.classList.add(systemTheme)
-      return
-    }
-
-    root.classList.add(theme);
-  }, [theme])
+  const router = useRouter();
 
   const value = {
-    theme,
+    theme: defaultTheme,
     setTheme: (theme: Theme) => {
-      localStorage.setItem(storageKey, theme)
-      setTheme(theme)
+      setThemeServerFn({ data: theme });
+      router.invalidate();
     },
-  };
+  }
 
   return (
     <ThemeContext.Provider {...props} value={value}>

@@ -18,7 +18,7 @@ export default defineConfig({
     tsConfigPaths(),
     tanstackStart(),
     tanstackRouter({
-      routesDirectory: 'src/route',
+      routesDirectory: "src/route",
     }),
   ],
 })

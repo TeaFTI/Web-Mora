@@ -12,6 +12,7 @@ import {
 } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 
+
 import { siteConfiguration } from "~/configuration/site";
 
 import "~/global.css";

@@ -1,5 +1,3 @@
 /**
- * Authentication Context Provider
+ * Authentication Context
  */
-
-

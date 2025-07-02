@@ -3,8 +3,8 @@
  */
 
 export const siteConfiguration = {
-  name: "Umeboshi",
-  description: "Umeboshi",
+  name: "Ikura",
+  description: "Ikura",
 }
 
 export type SiteConfiguration = typeof siteConfiguration

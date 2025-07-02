@@ -19,7 +19,7 @@ export default defineConfig({
     // TanStack
     tanstackStart(),
     tanstackRouter({
-      routesDirectory: "src/route",
+      // routesDirectory: "./src/route",
     }),
   ],
 })

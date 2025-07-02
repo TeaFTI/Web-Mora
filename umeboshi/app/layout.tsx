@@ -3,7 +3,7 @@
  */
 
 import { Metadata, Viewport } from "next";
-import reactArrayToTree from 'react-array-to-tree';
+import reactArrayToTree from "react-array-to-tree";
 
 // Context
 import { ThemeProvider } from "@/app/_context/shadcn/theme-provider";

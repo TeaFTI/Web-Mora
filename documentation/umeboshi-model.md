@@ -9,6 +9,7 @@ erDiagram
         uuid contact_id FK
         text username
         text password
+        text salt
     }
 
     %% Contact
@@ -25,31 +26,35 @@ erDiagram
         text nickname
         text company
     }
-    contact ||--o| contact_email : has
-    email ||--o| contact_email : belong
+
+    %% Email
     email {
         uuid id PK
         text email
     }
+
+    contact ||--o| contact_email : has
+    email ||--o| contact_email : is
     contact_email {
         uuid contact_id PK
         uuid email_id PK
     }
-    contact ||--o| contact_telephone_number : has
-    contact_telephone_number ||--o| telephone_number : belong
+
+    %% Telephone Number
     telephone_number {
         uuid id PK
         text country_code
         text number
     }
+
+    contact ||--o| contact_telephone_number : has
+    contact_telephone_number ||--o| telephone_number : is
     contact_telephone_number {
         uuid contact_id PK
         uusid telephone_number_id PK
     }
 
     %% Address
-    contact ||--o| contact_address : has
-    address ||--o| contact_address : belong
     address }|--|| city : has
     address {
         uuid id PK
@@ -57,6 +62,9 @@ erDiagram
         text street
         text postal_code
     }
+
+    contact ||--o| contact_address : has
+    address ||--o| contact_address : belong
     contact_address {
         uuid contact_id PK
         uusid address_id PK
@@ -96,6 +104,7 @@ erDiagram
         text name
         uuid type
     }
+
     account ||--o| account_type : has
     account_type {
         uuid id PK
@@ -117,6 +126,7 @@ erDiagram
         money discount
         enum tax_expense
     }
+
     transaction ||--o| transaction_type : has
     transaction_type {
         uuid id PK
@@ -154,4 +164,9 @@ erDiagram
         uuid id PK
         uuid contact_id FK
         uuid property_id FK
+    }
+
+    %% Contract
+    contract {
+        uuid id PK
     }

@@ -12,7 +12,7 @@ import {
   uuid,
 } from "drizzle-orm/pg-core";
 
-import contactEmailTable from "./contactemail";
+import contactEmailTable from "./contact-email";
 
 const emailTable = pgTable("email", {
   id: uuid("id").primaryKey().default(sql`gen_random_uuid()`),

@@ -12,7 +12,6 @@ import { relations } from "drizzle-orm/relations";
 import contactTable from "./contact";
 import emailTable from "./email";
 
-
 const contactEmailTable = pgTable(
   "contact_email",
   {

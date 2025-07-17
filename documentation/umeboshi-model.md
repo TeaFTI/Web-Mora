@@ -36,8 +36,8 @@ erDiagram
     contact ||--o| contact_email : has
     email ||--o| contact_email : is
     contact_email {
-        uuid contact_id PK
-        uuid email_id PK
+        uuid contact_id PK,FK
+        uuid email_id PK,FK
     }
 
     %% Telephone Number
@@ -66,8 +66,8 @@ erDiagram
     contact ||--o| contact_address : has
     address ||--o| contact_address : belong
     contact_address {
-        uuid contact_id PK
-        uusid address_id PK
+        uuid contact_id PK,FK
+        uusid address_id PK,FK
     }
 
     %% City

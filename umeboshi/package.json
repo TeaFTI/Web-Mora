@@ -1,6 +1,7 @@
 {
   "name": "umeboshi",
   "version": "0.0.1",
+  "type": "module",
   "private": true,
   "description": "🌼 Umeboshi 🌼",
   "keywords": [
@@ -17,7 +18,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "database:seed": "dotenvx run -- tsx ./database/seed.ts"
+    "database:generate": "drizzle-kit generate",
+    "database:migrate": "drizzle-kit migrate",
+    "database:seed": "dotenvx run -- tsx ./database/plant.ts"
   },
   "dependencies": {
     "@dotenvx/dotenvx": "^1.48.0",

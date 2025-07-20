@@ -21,6 +21,9 @@ next-env.d.ts
 dist-ssr
 routeTree.gen.ts
 
+# drizzle
+migration/
+
 # Rust
 Cargo.lock
 

@@ -1,0 +1,7 @@
+[
+  {
+    "username": "administrator",
+    "password": "changeme!12345",
+    "salt": "salt"
+  }
+]

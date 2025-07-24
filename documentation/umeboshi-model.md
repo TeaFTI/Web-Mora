@@ -33,8 +33,8 @@ erDiagram
         text email
     }
 
-    contact ||--o| contact_email : has
-    email ||--o| contact_email : is
+    contact ||--o{ contact_email : has
+    email ||--o{ contact_email : is
     contact_email {
         uuid contact_id PK,FK
         uuid email_id PK,FK
@@ -47,11 +47,11 @@ erDiagram
         text number
     }
 
-    contact ||--o| contact_telephone_number : has
-    contact_telephone_number ||--o| telephone_number : is
+    contact ||--o{ contact_telephone_number : has
+    telephone_number ||--o{ contact_telephone_number : is
     contact_telephone_number {
-        uuid contact_id PK
-        uusid telephone_number_id PK
+        uuid contact_id PK,FK
+        uusid telephone_number_id PK,FK
     }
 
     %% Address
@@ -134,6 +134,14 @@ erDiagram
         text description
     }
 
+    %% Tenant
+    tenant ||--|| contact : is
+    tenant {
+        uuid id PK
+        uuid contact_id FK
+        uuid property_id FK
+    }
+
     %% Property
     property ||--|| address : is
     property {
@@ -158,12 +166,10 @@ erDiagram
         text block
     }
 
-    %% Tenant
-    tenant ||--|| contact : is
-    tenant {
-        uuid id PK
-        uuid contact_id FK
-        uuid property_id FK
+    %% Tenant Property
+    tenant_property {
+        uuid tenant_id PK,FK
+        uuid property_id PK,FK
     }
 
     %% Contract

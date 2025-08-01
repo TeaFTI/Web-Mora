@@ -115,35 +115,56 @@ erDiagram
     %% Transaction
     transaction {
         uuid id PK
-        uuid transaction_type_id FK
         timestamptz timestamp
         text description
         uuid source
         uuid destination
-        money original_cost
-        money tax
-        money adjustment
-        money discount
-        enum tax_expense
+        %% money original_cost
+        %% money tax
+        %% money adjustment
+        %% money discount
+        %% enum tax_expense
     }
 
-    transaction ||--o| transaction_type : has
-    transaction_type {
+    %% Transaction Item
+    transaction ||--|{ transaction_item : has
+    transaction_item {
         uuid id PK
+        uuid transaction_id FK
         text name
-        text description
+        money amount
+        enum type
     }
 
     %% Tenant
-    tenant ||--|| contact : is
+    tenant ||--|| user : is
     tenant {
         uuid id PK
-        uuid contact_id FK
+        uuid user_id FK
         uuid property_id FK
     }
 
+    %% Contract
+    contract ||--|| property : lease
+    contract {
+        uuid id PK
+        text name
+        timestampz activeate_date
+        timestampz start_date
+        timestampz end_date
+        enum status
+    }
+
+    %% User Contract
+    user ||--o{ user_contract : own
+    contract ||--o{ user_contract : execute
+    user_contract {
+        uuid user_id PK,FK
+        uuid contract_id PK,FK
+    }
+
     %% Property
-    property ||--|| address : is
+    property ||--|| address : has
     property {
         uuid id PK
         text key PK
@@ -164,15 +185,4 @@ erDiagram
         text state_tax_district
         text lot
         text block
-    }
-
-    %% Tenant Property
-    tenant_property {
-        uuid tenant_id PK,FK
-        uuid property_id PK,FK
-    }
-
-    %% Contract
-    contract {
-        uuid id PK
     }

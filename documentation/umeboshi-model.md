@@ -131,6 +131,7 @@ erDiagram
     transaction_item {
         uuid id PK
         uuid transaction_id FK
+        %% Category?
         text name
         money amount
         enum type

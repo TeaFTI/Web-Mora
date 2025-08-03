@@ -24,14 +24,15 @@ async function unplant() {
       .filter(([, value]) => value && typeof value === "object" && "getSQL" in value);
     console.debug(`Table List Length: ${tableList.length}`);
 
-    for (const [tableName, table] of tableList) {
-      try {
-        const databaseTableName = getTableName(table as PgTable);
-        console.debug(`Table Name: ${databaseTableName}`);
-      } catch (error) {
-        console.error(`Error For Table ${tableName}: ${error}`);
-      }
+    for (const [, tableValue] of tableList) {
+      const tableName = getTableName(tableValue as PgTable);
+      const query = `DROP TABLE IF EXISTS "${tableName}" CASCADE;`;
+      await pgClient.query(query);
+      console.debug(`Unseeding ${tableName} Table Complete.`);
     }
+
+    await pgClient.query(`DROP SCHEMA IF EXISTS "drizzle" CASCADE;`);
+    console.debug(`Unseeding drizzle Schema Complete.`);
 
     console.debug("Unseeding Database Complete.");
   } catch (error) {

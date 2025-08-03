@@ -3,8 +3,7 @@
  */
 
 import {
-  relations,
-  sql,
+  sql
 } from "drizzle-orm";
 import {
   pgTable,
@@ -12,22 +11,22 @@ import {
   uuid,
 } from "drizzle-orm/pg-core";
 
-import contactTable from "./contact";
+// import contactTable from "./contact";
 
 const userTable = pgTable("user", {
   id: uuid("id").primaryKey().default(sql`gen_random_uuid()`),
-  contactId: uuid("contact_id").references(() => contactTable.id),
+  // contactId: uuid("contact_id").references(() => contactTable.id),
   username: text("username").notNull().unique(),
   password: text("password").notNull(),
   salt: text("salt").notNull(),
 });
 
-const userRelation = relations(userTable, ({ one }) => ({
-  contactTable: one(contactTable, {
-    fields: [userTable.contactId],
-    references: [contactTable.id],
-  }),
-}));
+// const userRelation = relations(userTable, ({ one }) => ({
+//   contactTable: one(contactTable, {
+//     fields: [userTable.contactId],
+//     references: [contactTable.id],
+//   }),
+// }));
 
 export default userTable;
-export { userRelation };
+// export { userRelation };

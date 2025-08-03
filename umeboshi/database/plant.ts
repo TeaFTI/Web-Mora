@@ -3,7 +3,9 @@
  */
 
 import { drizzleClient, pgClient } from "@/database";
-import { user } from "@/database/seed";
+import {
+  user,
+} from "@/database/seed";
 
 async function plant() {
   try {
@@ -15,7 +17,7 @@ async function plant() {
 
     console.debug("Seeding Database...");
 
-    await user(drizzleClient);
+    await user.seed(drizzleClient);
     console.debug("Seeding user Complete.");
 
     console.debug("Seeding Database Complete.");

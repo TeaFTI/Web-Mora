@@ -20,7 +20,8 @@
     "lint": "next lint",
     "database:generate": "drizzle-kit generate",
     "database:migrate": "drizzle-kit migrate",
-    "database:seed": "dotenvx run -- tsx ./database/plant.ts"
+    "database:plant": "dotenvx run -- tsx ./database/plant.ts",
+    "database:unplant": "dotenvx run -- tsx ./database/unplant.ts"
   },
   "dependencies": {
     "@dotenvx/dotenvx": "^1.48.0",

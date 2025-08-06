@@ -1,0 +1,40 @@
+/**
+ * Database Clear
+ */
+
+import { drizzleClient, pgClient } from "@/database";
+import { reset } from "drizzle-seed";
+
+import * as schema from "@/database/schema";
+
+async function plant() {
+  try {
+    console.info("Cleaning Start");
+
+    console.debug("Connecting to Database...");
+    await pgClient.connect();
+    console.debug("Connected to Database.");
+
+    console.debug("Cleaning Database...");
+    await reset(drizzleClient, schema);
+
+    console.debug("Cleaning Database Complete.");
+  } catch (error) {
+    console.error(`Error Cleaning Database: ${error}`);
+    process.exit(1);
+  } finally {
+    await pgClient.end();
+    console.debug("Database Connection Closed.");
+  }
+}
+
+// Make sure the function wait for the promise to complete
+plant()
+  .then(() => {
+    console.info("Cleaning Finish");
+    process.exit(0);
+  })
+  .catch((error) => {
+    console.error(`Error Cleaning: ${error}`);
+    process.exit(1);
+  });

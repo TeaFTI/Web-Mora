@@ -18,10 +18,11 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "database:generate": "drizzle-kit generate",
-    "database:migrate": "drizzle-kit migrate",
-    "database:plant": "dotenvx run -- tsx ./database/plant.ts",
-    "database:unplant": "dotenvx run -- tsx ./database/unplant.ts"
+    "database:generate": "dotenvx run -- drizzle-kit generate",
+    "database:migrate": "dotenvx run -- drizzle-kit migrate",
+    "database:plant": "dotenvx run -- npx tsx ./database/plant.ts",
+    "database:unplant": "dotenvx run -- npx tsx ./database/unplant.ts",
+    "database:all": "dotenvx run -- sh -c 'drizzle-kit generate && drizzle-kit migrate && npx tsx ./database/plant.ts'"
   },
   "dependencies": {
     "@dotenvx/dotenvx": "^1.48.0",
@@ -52,7 +53,6 @@
     "eslint": "^9",
     "eslint-config-next": "15.3.4",
     "tailwindcss": "^4",
-    "tsx": "^4.20.3",
     "typescript": "^5"
   }
 }

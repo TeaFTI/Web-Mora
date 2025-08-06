@@ -4,7 +4,12 @@
 
 import crypto from "crypto";
 
-function generateSalt(): string {
+/**
+ * Generate a random salt for hash password.
+ *
+ * @returns {string} The generated salt.
+ */
+export function generateSalt(): string {
   return crypto.randomBytes(16).toString("hex").normalize();
 }
 
@@ -12,9 +17,9 @@ function generateSalt(): string {
  * Hash a password with a salt using the `crypto` module `scrypt` Key
  * Derivation Function (KDF) algorithm.
  *
- * @param password The password to hash in plain text.
- * @param salt The salt to use for hashing.
- * @returns A promise resolve to the hash password.
+ * @param {string} password The password to hash in plain text.
+ * @param {string} salt The salt to use for hashing.
+ * @returns {Promise<string>} A promise resolve to the hash password.
  */
 export function hashPassword(password: string, salt: string): Promise<string> {
   return new Promise((resolve, reject) => {

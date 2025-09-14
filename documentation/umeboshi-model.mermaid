@@ -1,19 +1,26 @@
-# Model
-
 erDiagram
     %% User
     %% The user of the system
-    user |o--o| contact : is
+    user ||--|| profile : has
+    user ||--o| tenant : is
     user {
         uuid id PK
-        uuid contact_id FK
+        uuid profile_id FK
         text username
         text password
         text salt
     }
 
     %% Contact
+    contact ||--|| profile : has
     contact {
+        uuid id PK
+        uuid profile_id FK
+        text company
+    }
+
+    %% Profile
+    profile {
         uuid id PK
         text prefix
         text first_name
@@ -24,7 +31,6 @@ erDiagram
         text phonetic_middle_name
         text phonetic_last_lame
         text nickname
-        text company
     }
 
     %% Email
@@ -33,10 +39,10 @@ erDiagram
         text email
     }
 
-    contact ||--o{ contact_email : has
-    email ||--o{ contact_email : is
-    contact_email {
-        uuid contact_id PK,FK
+    profile ||--o{ profile_email : has
+    email ||--o{ profile_email : is
+    profile_email {
+        uuid profile_id PK,FK
         uuid email_id PK,FK
     }
 
@@ -47,9 +53,9 @@ erDiagram
         text number
     }
 
-    contact ||--o{ contact_telephone_number : has
-    telephone_number ||--o{ contact_telephone_number : is
-    contact_telephone_number {
+    profile ||--o{ profile_telephone_number : has
+    telephone_number ||--o{ profile_telephone_number : is
+    profile_telephone_number {
         uuid contact_id PK,FK
         uusid telephone_number_id PK,FK
     }
@@ -63,9 +69,9 @@ erDiagram
         text postal_code
     }
 
-    contact ||--o| contact_address : has
-    address ||--o| contact_address : belong
-    contact_address {
+    profile ||--o| profile_address : has
+    address ||--o| profile_address : is
+    profile_address {
         uuid contact_id PK,FK
         uusid address_id PK,FK
     }
@@ -138,7 +144,6 @@ erDiagram
     }
 
     %% Tenant
-    tenant ||--|| user : is
     tenant {
         uuid id PK
         uuid user_id FK

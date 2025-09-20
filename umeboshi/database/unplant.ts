@@ -2,10 +2,9 @@
  * Database Unplant
  */
 
+import { pgClient } from "@/database";
 import { getTableName } from "drizzle-orm";
 import { PgTable } from "drizzle-orm/pg-core";
-
-import { pgClient } from "@/database";
 
 import * as schema from "@/database/schema";
 
@@ -21,9 +20,14 @@ async function unplant() {
 
     const tableList = Object.entries(schema)
       .filter(([key]) => key.endsWith("Table"))
-      .filter(([, value]) => value && typeof value === "object" && "getSQL" in value);
+      .filter(([, value]) =>
+        value && typeof value === "object" && "getSQL" in value
+      );
     console.debug(`Table List Length: ${tableList.length}`);
 
+    // const typeList = [];
+
+    // Unseed (DROP) Table
     for (const [, tableValue] of tableList) {
       const tableName = getTableName(tableValue as PgTable);
       const query = `DROP TABLE IF EXISTS "${tableName}" CASCADE;`;
@@ -31,6 +35,11 @@ async function unplant() {
       console.debug(`Unseeding ${tableName} Table Complete.`);
     }
 
+    // Unseed (DROP) Type
+    // for (const typeItem of typeList) {
+    // }
+
+    // Unseed (DROP) drizzle Schema
     await pgClient.query(`DROP SCHEMA IF EXISTS "drizzle" CASCADE;`);
     console.debug(`Unseeding drizzle Schema Complete.`);
 

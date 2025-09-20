@@ -7,7 +7,7 @@ import { reset } from "drizzle-seed";
 
 import * as schema from "@/database/schema";
 
-async function plant() {
+async function clean() {
   try {
     console.info("Cleaning Start");
 
@@ -29,7 +29,7 @@ async function plant() {
 }
 
 // Make sure the function wait for the promise to complete
-plant()
+clean()
   .then(() => {
     console.info("Cleaning Finish");
     process.exit(0);

@@ -6,12 +6,6 @@ import { defineConfig } from "drizzle-kit";
 
 import PostgreSQLConfiguration from "@/configuration/database";
 
-// const DATABASE_SCHEME = PostgreSQLConfiguration.DATABASE_SCHEME;
-// const DATABASE_USERNAME = PostgreSQLConfiguration.DATABASE_USERNAME;
-// const DATABASE_PASSWORD = PostgreSQLConfiguration.DATABASE_PASSWORD;
-// const DATABASE_HOST = PostgreSQLConfiguration.DATABASE_HOST;
-// const DATABASE_PORT = PostgreSQLConfiguration.DATABASE_PORT;
-// const DATABASE_NAME = PostgreSQLConfiguration.DATABASE_NAME;
 const DATABASE_URI = PostgreSQLConfiguration.DATABASE_URI;
 
 export default defineConfig({

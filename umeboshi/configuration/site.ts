@@ -2,9 +2,14 @@
  * Site Configuration
  */
 
-export const siteConfiguration = {
+const siteConfiguration = {
   name: "Umeboshi",
   description: "Umeboshi",
 }
 
-export type SiteConfiguration = typeof siteConfiguration
+type SiteConfiguration = typeof siteConfiguration
+
+export {
+  siteConfiguration,
+  type SiteConfiguration
+};

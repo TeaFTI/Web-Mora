@@ -56,7 +56,7 @@ erDiagram
     profile ||--o{ profile_telephone_number : has
     telephone_number ||--o{ profile_telephone_number : is
     profile_telephone_number {
-        uuid contact_id PK,FK
+        uuid profile_id PK,FK
         uusid telephone_number_id PK,FK
     }
 

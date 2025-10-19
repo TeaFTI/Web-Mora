@@ -2,11 +2,13 @@
  * Database
  */
 
+import PostgreSQLConfiguration from "@/configuration/database";
 import * as schema from "@/database/schema";
 import { drizzle } from "drizzle-orm/node-postgres";
 import { Client, Pool } from "pg";
 
-console.debug(`Database URI: ${process.env.DATABASE_URI}`);
+const DATABASE_URI = PostgreSQLConfiguration.DATABASE_URI;
+console.debug(`Database URI: ${DATABASE_URI}`);
 
 const pgClient = new Client({
   connectionString: process.env.DATABASE_URI,

@@ -2,11 +2,11 @@
  * Database Unplant
  */
 
-import { pgClient } from "@/database";
 import { getTableName } from "drizzle-orm";
 import { PgTable } from "drizzle-orm/pg-core";
 
-import * as schema from "@/database/schema";
+import { pgClient } from ".";
+import * as Schema from "./schema";
 
 async function unplant() {
   try {
@@ -18,12 +18,14 @@ async function unplant() {
 
     console.debug("Unseeding Database...");
 
-    const tableList = Object.entries(schema)
+    const tableList = Object.entries(Schema)
       .filter(([key]) => key.endsWith("Table"))
       .filter(([, value]) =>
         value && typeof value === "object" && "getSQL" in value
       );
     console.debug(`Table List Length: ${tableList.length}`);
+
+    // ${tableList.length}`);
 
     // const typeList = [];
 

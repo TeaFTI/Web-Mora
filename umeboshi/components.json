@@ -4,7 +4,7 @@
   "rsc": true,
   "tsx": true,
   "tailwind": {
-    "config": "tailwind.config.ts",
+    "config": "",
     "css": "app/global.css",
     "baseColor": "neutral",
     "cssVariables": true,
@@ -17,5 +17,5 @@
     "utils": "@/shadcn/library/utility",
     "hooks": "@/shadcn/hook"
   },
-  "iconLibrary": "lucide"
+  "registries": {}
 }

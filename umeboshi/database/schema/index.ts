@@ -1,3 +1,4 @@
-export { emailRelationshipList, default as emailTable } from "./email";
-export { profileRelationList, default as profileTable } from "./profile";
-export { profileEmailRelationshipList, default as profileEmailTable } from "./profile-email";
+export { countryTable } from "./country";
+export { emailRelationshipList, emailTable } from "./email";
+export { profileRelationList, profileTable } from "./profile";
+export { profileEmailRelationshipList, profileEmailTable } from "./profile-email";

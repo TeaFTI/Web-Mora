@@ -3,10 +3,7 @@
  */
 
 import { relations } from "drizzle-orm";
-import {
-  pgTable,
-  uuid,
-} from "drizzle-orm/pg-core";
+import { pgTable, uuid } from "drizzle-orm/pg-core";
 
 import emailTable from "./email";
 import profileTable from "./profile";
@@ -31,4 +28,4 @@ const profileEmailRelationshipList = relations(
 );
 
 export default profileEmailTable;
-export { profileEmailRelationshipList };
+export { profileEmailRelationshipList, profileEmailTable };

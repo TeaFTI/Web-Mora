@@ -3,16 +3,13 @@
  */
 
 import {
-  relations,
-  sql,
+  sql
 } from "drizzle-orm";
 import {
   pgTable,
   text,
   uuid,
 } from "drizzle-orm/pg-core";
-
-import contactEmailTable from "./contact-email";
 
 const contactTable = pgTable("contact", {
   id: uuid("id").primaryKey().default(sql`gen_random_uuid()`),
@@ -28,9 +25,4 @@ const contactTable = pgTable("contact", {
   company: text("company"),
 });
 
-const contactRelation = relations(contactTable, ({ many }) => ({
-  contactEmailTable: many(contactEmailTable),
-}));
-
 export default contactTable;
-export { contactRelation };

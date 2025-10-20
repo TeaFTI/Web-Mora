@@ -2,15 +2,8 @@
  * Profile Table Schema
  */
 
-import {
-  relations,
-  sql
-} from "drizzle-orm";
-import {
-  pgTable,
-  text,
-  uuid,
-} from "drizzle-orm/pg-core";
+import { relations, sql } from "drizzle-orm";
+import { pgTable, text, uuid } from "drizzle-orm/pg-core";
 
 import profileEmailTable from "./profile-email";
 
@@ -32,4 +25,4 @@ const profileRelationList = relations(profileTable, ({ many }) => ({
 }));
 
 export default profileTable;
-export { profileRelationList };
+export { profileRelationList, profileTable };

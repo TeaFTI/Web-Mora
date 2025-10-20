@@ -2,15 +2,8 @@
  * Email Table Schema
  */
 
-import {
-  relations,
-  sql,
-} from "drizzle-orm";
-import {
-  pgTable,
-  text,
-  uuid,
-} from "drizzle-orm/pg-core";
+import { relations, sql } from "drizzle-orm";
+import { pgTable, text, uuid } from "drizzle-orm/pg-core";
 
 import profileEmailTable from "./profile-email";
 
@@ -24,4 +17,4 @@ const emailRelationshipList = relations(emailTable, ({ many }) => ({
 }));
 
 export default emailTable;
-export { emailRelationshipList };
+export { emailRelationshipList, emailTable };

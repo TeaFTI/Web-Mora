@@ -2,10 +2,10 @@
  * Database Plant
  */
 
-import { drizzleClient, pgClient } from "@/database";
+import { drizzleClient, pgClient } from ".";
 import {
   user,
-} from "@/database/seed";
+} from "./seed";
 
 async function plant() {
   try {

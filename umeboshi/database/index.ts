@@ -3,9 +3,10 @@
  */
 
 import PostgreSQLConfiguration from "@/configuration/database";
-import * as schema from "@/database/schema";
 import { drizzle } from "drizzle-orm/node-postgres";
 import { Client, Pool } from "pg";
+
+import * as Schema from "./schema";
 
 const DATABASE_URI = PostgreSQLConfiguration.DATABASE_URI;
 console.debug(`Database URI: ${DATABASE_URI}`);
@@ -21,7 +22,7 @@ const pgPool = new Pool({
 
 export const drizzleClient = drizzle({
   client: pgPool,
-  schema: schema,
+  schema: Schema,
   logger: true,
 });
 

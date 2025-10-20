@@ -1,17 +1,17 @@
-/**
- * shadcn Navigation Sidebar Component
- */
+// /**
+//  * shadcn Navigation Sidebar Component
+//  */
 
-"use client";
+// "use client";
 
-import {
-  Sidebar
-} from "@/app/_shadcn/component/interface/sidebar";
+// import {
+//   Sidebar
+// } from "@shadcn/component/interface/sidebar";
 
-export default function NavigationSidebar() {
-  return (
-    <Sidebar>
+// export default function NavigationSidebar() {
+//   return (
+//     <Sidebar>
 
-    </Sidebar>
-  );
-}
+//     </Sidebar>
+//   );
+// }

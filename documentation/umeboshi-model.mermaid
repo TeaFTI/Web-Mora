@@ -122,19 +122,32 @@ erDiagram
     %% Transaction
     transaction {
         uuid id PK
-        timestamptz timestamp
         text description
-        uuid source
-        uuid destination
+        uuid source_account_id
+        uuid destination_account_id
         money amount
-        text sha1
-        text sha2
-        text sha3
+        char(3) currency
+        timestamptz created
+        timestamptz completed
         %% money original_cost
         %% money tax
         %% money adjustment
         %% money discount
         %% enum tax_expense
+    }
+
+    %% Journal
+    %% Chronological listing of business events using accounting
+    %% debit-and-credit language
+    %% Ledger
+    %% Copy of journal's events, sorted by category or account
+    journal {
+        uuid id PK
+        uuid account_id FK
+        text description
+        money amount
+        char(3) currency
+        timestamptz created
     }
 
     %% Transaction Item
@@ -144,7 +157,6 @@ erDiagram
         uuid transaction_id FK
         %% Category?
         text name
-        money amount
         enum type
     }
 

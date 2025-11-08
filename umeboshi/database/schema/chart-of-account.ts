@@ -12,7 +12,7 @@ import {
   uuid,
 } from "drizzle-orm/pg-core";
 
-import chartOfAccountTypeTable from "./chart-of-account-type";
+import { chartOfAccountTypeTable } from "./chart-of-account-type";
 
 const chartOfAccountTable = pgTable("chart_of_account",
   {

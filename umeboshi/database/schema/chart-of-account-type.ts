@@ -5,7 +5,7 @@
 import { relations, sql } from "drizzle-orm";
 import { pgTable, text, uuid } from "drizzle-orm/pg-core";
 
-import chartOfAccountTable from "./chart-of-account";
+import { chartOfAccountTable } from "./chart-of-account";
 
 const chartOfAccountTypeTable = pgTable("chart_of_account_type",
   {

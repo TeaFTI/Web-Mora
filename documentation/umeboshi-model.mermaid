@@ -1,7 +1,13 @@
 erDiagram
+
+    %%%%%%%%%%%%%
+    %% General %%
+    %%%%%%%%%%%%%
+
     %% User
     %% The user of the system
     user ||--|| profile : has
+    user ||--o{ user_account : has
     user ||--o| tenant : is
     user {
         uuid id PK
@@ -9,6 +15,12 @@ erDiagram
         text username
         text password
         text salt
+    }
+
+    %% User Account
+    user_account {
+        uuid user_id PK,FK
+        uuid account_id PK,FK
     }
 
     %% Contact
@@ -95,6 +107,7 @@ erDiagram
     }
 
     %% Country
+    country ||--|{ country_currency : use
     country {
         uuid id PK
         text name
@@ -104,47 +117,15 @@ erDiagram
         text iso_3166_1_alpha_3
     }
 
-    %% Account
-    account {
-        uuid id PK
-        uuid account_type_id FK
-        text name
-        uuid type
-    }
-
-    account ||--o| account_type : has
-    account_type {
-        uuid id PK
-        text name
-        text description
-    }
-
-    chart_of_account ||--|{ chart_of_account : contain
-    %% Chart of Account
-    %% Asset, Liability, Equity, Revenue, Expense, Other
-    chart_of_account {
-        uuid id PK
-        uuid parent_id FK
-        uuid type_id FK
-        text name
-        text description
-        boolean active
-    }
-
-    chart_of_account_type ||--|{ chart_of_account : categorize
-    chart_of_account_type {
-        uuid id PK
-        text name
-    }
-
     %% Transaction
+    transaction ||--o{ journal : contain
     transaction {
         uuid id PK
+        uuid transaction_type_id FK
+        uuid currency_id FK
         text description
         uuid source_account_id
         uuid destination_account_id
-        money amount
-        char(3) currency
         timestamptz created
         timestamptz completed
         %% money original_cost
@@ -154,28 +135,11 @@ erDiagram
         %% enum tax_expense
     }
 
-    %% Journal
-    %% Chronological listing of business events using accounting
-    %% debit-and-credit language
-    %% Ledger
-    %% Copy of journal's events, sorted by category or account
-    journal {
+    %% Transaction Type
+    transaction_type ||--o{ transaction : categorize
+    transaction_type {
         uuid id PK
-        uuid account_id FK
-        text description
-        money amount
-        char(3) currency
-        timestamptz created
-    }
-
-    %% Transaction Item
-    transaction ||--|{ transaction_item : has
-    transaction_item {
-        uuid id PK
-        uuid transaction_id FK
-        %% Category?
         text name
-        enum type
     }
 
     %% Tenant
@@ -226,4 +190,81 @@ erDiagram
         text state_tax_district
         text lot
         text block
+    }
+
+    %%%%%%%%%%%%%
+    %% Finance %%
+    %%%%%%%%%%%%%
+
+    %% Account
+    account ||--o{ user_account : is
+    account ||--o{ journal : affect
+    account {
+        uuid id PK
+        uuid account_type_id FK
+        text name
+        uuid type
+    }
+
+    account_type ||--o{ account : categorize
+    account_type {
+        uuid id PK
+        text name
+        text description
+    }
+
+    %% Chart of Account
+    %% Asset, Liability, Equity, Revenue, Expense, Other
+    chart_of_account ||--|{ chart_of_account : contain
+    chart_of_account ||--o{ journal : record
+    chart_of_account {
+        uuid id PK
+        uuid parent_id FK
+        uuid chart_of_account_type_id FK
+        uuid transaction_id FK
+        text name
+        text description
+        boolean active
+    }
+
+    %% Chart of Account Type
+    chart_of_account_type ||--o{ chart_of_account : categorize
+    chart_of_account_type {
+        uuid id PK
+        text name
+        text description
+    }
+
+    %% Journal
+    %% Chronological listing of business events using accounting
+    %% debit-and-credit language
+    %% Ledger
+    %% Copy of journal's events, sorted by category or account
+    journal {
+        uuid id PK
+        uuid transaction_id FK "(Index)"
+        uuid chart_of_account_id FK "(Index)"
+        uuid currency_id FK
+        text description
+        enum type "(Index), [debit | credit]"
+        money amount "(Positive)"
+        timestamptz created
+    }
+
+    %% Currency
+    currency ||--|{ country_currency : has
+    currency ||--o{ journal : has
+    currency {
+        uuid id PK
+        text name
+        text abbreviation
+        text symbol
+        char(3) iso_4217
+        text fractional_unit
+        smallserial base
+    }
+
+    country_currency {
+        uuid country_id PK,FK
+        uuid currency_id PK,FK
     }

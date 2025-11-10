@@ -19,7 +19,7 @@ const chartOfAccountTable = pgTable("chart_of_account",
     id: uuid("id").primaryKey().default(sql`gen_random_uuid()`),
     parentId: uuid("parent_id")
       .references((): AnyPgColumn => chartOfAccountTable.id),
-    typeId: uuid("type_id")
+    typeId: uuid("chart_of_account_type_id")
       .references(() => chartOfAccountTypeTable.id),
     name: text("name").notNull(),
     description: text("description").notNull(),

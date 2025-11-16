@@ -9,7 +9,8 @@ import accountTypeTable from "./account-type";
 
 const accountTable = pgTable("account", {
   id: uuid("id").primaryKey().default(sql`gen_random_uuid()`),
-  accountTypeId: uuid("account_type_id").references(() => accountTypeTable.id),
+  accountTypeId: uuid("account_type_id")
+    .references(() => accountTypeTable.id),
   name: text("name").notNull(),
   description: text("description"),
 });

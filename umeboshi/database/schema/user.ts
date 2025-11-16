@@ -2,31 +2,29 @@
  * User Table Schema
  */
 
-import {
-  sql
-} from "drizzle-orm";
+import { relations, sql } from "drizzle-orm";
 import {
   pgTable,
   text,
   uuid,
 } from "drizzle-orm/pg-core";
 
-// import contactTable from "./contact";
+import profileTable from "./profile";
 
 const userTable = pgTable("user", {
   id: uuid("id").primaryKey().default(sql`gen_random_uuid()`),
-  // contactId: uuid("contact_id").references(() => contactTable.id),
+  profileId: uuid("profile_id").references(() => profileTable.id),
   username: text("username").notNull().unique(),
   password: text("password").notNull(),
   salt: text("salt").notNull(),
 });
 
-// const userRelation = relations(userTable, ({ one }) => ({
-//   contactTable: one(contactTable, {
-//     fields: [userTable.contactId],
-//     references: [contactTable.id],
-//   }),
-// }));
+const userRelationList = relations(userTable, ({ one }) => ({
+  profile: one(profileTable, {
+    fields: [userTable.profileId],
+    references: [profileTable.id],
+  }),
+}));
 
 export default userTable;
-// export { userRelation };
+export { userRelationList, userTable };

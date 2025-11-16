@@ -117,31 +117,6 @@ erDiagram
         text iso_3166_1_alpha_3
     }
 
-    %% Transaction
-    transaction ||--o{ journal : contain
-    transaction {
-        uuid id PK
-        uuid transaction_type_id FK
-        uuid currency_id FK
-        text description
-        uuid source_account_id
-        uuid destination_account_id
-        timestamptz created
-        timestamptz completed
-        %% money original_cost
-        %% money tax
-        %% money adjustment
-        %% money discount
-        %% enum tax_expense
-    }
-
-    %% Transaction Type
-    transaction_type ||--o{ transaction : categorize
-    transaction_type {
-        uuid id PK
-        text name
-    }
-
     %% Tenant
     tenant {
         uuid id PK
@@ -199,6 +174,7 @@ erDiagram
     %% Account
     account ||--o{ user_account : is
     account ||--o{ journal : affect
+    account ||--o{ account_transaction : involve
     account {
         uuid id PK
         uuid account_type_id FK
@@ -208,6 +184,49 @@ erDiagram
 
     account_type ||--o{ account : categorize
     account_type {
+        uuid id PK
+        text name
+        text description
+    }
+
+    %% Account Transaction
+    account_transaction {
+        uuid account_id PK,FK
+        uuid transaction_id PK,FK
+        uuid account_transcation_role_id FK
+    }
+
+    %% Account Transaction Role
+    account_transaction_role ||--o{ account_transaction : assign
+    account_transaction_role {
+        uuid id PK
+        text name
+        text description
+    }
+
+    %% Transaction
+    transaction ||--o{ journal : contain
+    transaction ||--o{ account_transaction : involve
+    transaction {
+        uuid id PK
+        uuid transaction_type_id FK
+        uuid currency_id FK
+        uuid reverse_transaction_id FK
+        %% uuid source_account_id
+        %% uuid destination_account_id
+        text description
+        timestamptz created
+        timestamptz completed
+        %% money original_cost
+        %% money tax
+        %% money adjustment
+        %% money discount
+        %% enum tax_expense
+    }
+
+    %% Transaction Type
+    transaction_type ||--o{ transaction : categorize
+    transaction_type {
         uuid id PK
         text name
         text description

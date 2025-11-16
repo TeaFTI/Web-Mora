@@ -34,7 +34,7 @@ const chartOfAccountTable = pgTable("chart_of_account",
   // ]
 );
 
-const chartOfAccountRelation = relations(chartOfAccountTable,
+const chartOfAccountRelationList = relations(chartOfAccountTable,
   ({ one, many }) => ({
     parentChartOfAccount: one(chartOfAccountTable, {
       fields: [chartOfAccountTable.parentId],
@@ -52,5 +52,5 @@ const chartOfAccountRelation = relations(chartOfAccountTable,
 );
 
 export default chartOfAccountTable;
-export { chartOfAccountRelation, chartOfAccountTable };
+export { chartOfAccountRelationList, chartOfAccountTable };
 

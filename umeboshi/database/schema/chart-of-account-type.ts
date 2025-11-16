@@ -14,12 +14,12 @@ const chartOfAccountTypeTable = pgTable("chart_of_account_type",
   },
 );
 
-const chartOfAccountTypeRelation = relations(chartOfAccountTypeTable,
-  ({ many }) => ({
+const chartOfAccountTypeRelationList = relations(
+  chartOfAccountTypeTable, ({ many }) => ({
     chartOfAccountList: many(chartOfAccountTable),
   })
 );
 
 export default chartOfAccountTypeTable;
-export { chartOfAccountTypeRelation, chartOfAccountTypeTable };
+export { chartOfAccountTypeRelationList, chartOfAccountTypeTable };
 

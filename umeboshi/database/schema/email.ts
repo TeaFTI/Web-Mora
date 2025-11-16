@@ -12,9 +12,9 @@ const emailTable = pgTable("email", {
   email: text("email").notNull().unique(),
 });
 
-const emailRelationshipList = relations(emailTable, ({ many }) => ({
+const emailRelationList = relations(emailTable, ({ many }) => ({
   profileEmailList: many(profileEmailTable),
 }));
 
 export default emailTable;
-export { emailRelationshipList, emailTable };
+export { emailRelationList, emailTable };

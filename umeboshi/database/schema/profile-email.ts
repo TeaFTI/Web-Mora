@@ -8,8 +8,7 @@ import { pgTable, primaryKey, uuid } from "drizzle-orm/pg-core";
 import emailTable from "./email";
 import profileTable from "./profile";
 
-const profileEmailTable = pgTable(
-  "profile_email",
+const profileEmailTable = pgTable("profile_email",
   {
     profileId: uuid("profile_id").notNull().references(() => profileTable.id),
     emailId: uuid("email_id").notNull().references(() => emailTable.id),

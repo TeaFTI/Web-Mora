@@ -10,8 +10,10 @@ import profileTable from "./profile";
 
 const profileEmailTable = pgTable("profile_email",
   {
-    profileId: uuid("profile_id").notNull().references(() => profileTable.id),
-    emailId: uuid("email_id").notNull().references(() => emailTable.id),
+    profileId: uuid("profile_id").notNull()
+      .references(() => profileTable.id),
+    emailId: uuid("email_id").notNull()
+      .references(() => emailTable.id),
   },
   (table) => [
     primaryKey({

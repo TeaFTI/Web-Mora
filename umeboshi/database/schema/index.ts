@@ -11,4 +11,5 @@ export { accountRelationList, accountTable } from "./account";
 export { accountTypeRelationList, accountTypeTable } from "./account-type";
 export { chartOfAccountTable } from "./chart-of-account";
 export { chartOfAccountTypeTable } from "./chart-of-account-type";
-
+export { transactionRelationList, transactionTable } from "./transaction";
+export { transactionTypeRelationList, transactionTypeTable } from "./transaction-type";

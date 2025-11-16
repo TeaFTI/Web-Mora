@@ -4,6 +4,7 @@ export { emailRelationList, emailTable } from "./email";
 export { profileRelationList, profileTable } from "./profile";
 export { profileEmailRelationList, profileEmailTable } from "./profile-email";
 export { userRelationList, userTable } from "./user";
+export { userAccountRelationList, userAccountTable } from "./user-account";
 
 // Finance
 export { accountRelationList, accountTable } from "./account";

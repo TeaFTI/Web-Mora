@@ -3,17 +3,25 @@
  */
 
 import { relations } from "drizzle-orm";
-import { pgTable, uuid } from "drizzle-orm/pg-core";
+import { pgTable, primaryKey, uuid } from "drizzle-orm/pg-core";
 
 import emailTable from "./email";
 import profileTable from "./profile";
 
-const profileEmailTable = pgTable("profile_email", {
-  profileId: uuid("profile_id").notNull().references(() => profileTable.id),
-  emailId: uuid("email_id").notNull().references(() => emailTable.id),
-});
+const profileEmailTable = pgTable(
+  "profile_email",
+  {
+    profileId: uuid("profile_id").notNull().references(() => profileTable.id),
+    emailId: uuid("email_id").notNull().references(() => emailTable.id),
+  },
+  (table) => [
+    primaryKey({
+      columns: [table.profileId, table.emailId],
+    })
+  ],
+);
 
-const profileEmailRelationshipList = relations(
+const profileEmailRelationList = relations(
   profileEmailTable,
   ({ one }) => ({
     profile: one(profileTable, {
@@ -28,4 +36,4 @@ const profileEmailRelationshipList = relations(
 );
 
 export default profileEmailTable;
-export { profileEmailRelationshipList, profileEmailTable };
+export { profileEmailRelationList, profileEmailTable };

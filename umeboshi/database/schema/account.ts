@@ -24,4 +24,3 @@ const accountRelationList = relations(accountTable, ({ one }) => ({
 
 export default accountTable;
 export { accountRelationList, accountTable };
-

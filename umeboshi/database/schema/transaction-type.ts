@@ -9,7 +9,7 @@ import transactionTable from "./transaction";
 
 const transactionTypeTable = pgTable("transaction_type", {
   id: uuid("id").primaryKey().default(sql`gen_random_uuid()`),
-  name: text("name"),
+  name: text("name").notNull(),
   description: text("description"),
 });
 

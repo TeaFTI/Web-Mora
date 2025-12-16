@@ -1,5 +1,6 @@
 /**
  * Chart of Account Table Schema
+ * Asset, Liability, Equity, Revenue, Expense, Other
  */
 
 import { relations, sql } from "drizzle-orm";

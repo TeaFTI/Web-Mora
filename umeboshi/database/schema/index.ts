@@ -1,15 +1,17 @@
 // General
-export { countryTable } from "./country";
-export { emailRelationList, emailTable } from "./email";
-export { profileRelationList, profileTable } from "./profile";
-export { profileEmailRelationList, profileEmailTable } from "./profile-email";
-export { userRelationList, userTable } from "./user";
-export { userAccountRelationList, userAccountTable } from "./user-account";
+export * from "./country";
+export * from "./email";
+export * from "./profile";
+export * from "./profile-email";
+export * from "./user";
+export * from "./user-account";
 
 // Finance
-export { accountRelationList, accountTable } from "./account";
-export { accountTypeRelationList, accountTypeTable } from "./account-type";
-export { chartOfAccountTable } from "./chart-of-account";
-export { chartOfAccountTypeTable } from "./chart-of-account-type";
-export { transactionRelationList, transactionTable } from "./transaction";
-export { transactionTypeRelationList, transactionTypeTable } from "./transaction-type";
+export * from "./account";
+export * from "./account-type";
+export * from "./chart-of-account";
+export * from "./chart-of-account-type";
+export * from "./transaction";
+export * from "./transaction-type";
+
+// Property

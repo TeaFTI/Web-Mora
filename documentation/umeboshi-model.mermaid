@@ -9,7 +9,7 @@ erDiagram
     user ||--|| profile : has
     user ||--o{ user_account : has
     user ||--o| tenant : is
-    user {
+    user:::general {
         uuid id PK
         uuid profile_id FK
         text username
@@ -32,7 +32,7 @@ erDiagram
     }
 
     %% Profile
-    profile {
+    profile:::general {
         uuid id PK
         text prefix
         text first_name
@@ -46,20 +46,20 @@ erDiagram
     }
 
     %% Email
-    email {
+    email:::general {
         uuid id PK
         text email
     }
 
     profile ||--o{ profile_email : has
     email ||--o{ profile_email : is
-    profile_email {
+    profile_email:::general {
         uuid profile_id PK,FK
         uuid email_id PK,FK
     }
 
     %% Telephone Number
-    telephone_number {
+    telephone_number:::general {
         uuid id PK
         text country_code
         text number
@@ -67,7 +67,7 @@ erDiagram
 
     profile ||--o{ profile_telephone_number : has
     telephone_number ||--o{ profile_telephone_number : is
-    profile_telephone_number {
+    profile_telephone_number:::general {
         uuid profile_id PK,FK
         uusid telephone_number_id PK,FK
     }
@@ -117,8 +117,12 @@ erDiagram
         text iso_3166_1_alpha_3
     }
 
+    %%%%%%%%%%%%%%
+    %% Property %%
+    %%%%%%%%%%%%%%
+
     %% Tenant
-    tenant {
+    tenant:::property {
         uuid id PK
         uuid user_id FK
         uuid property_id FK
@@ -126,7 +130,7 @@ erDiagram
 
     %% Contract
     contract ||--|| property : lease
-    contract {
+    contract:::property {
         uuid id PK
         text name
         timestampz activeate_date
@@ -145,7 +149,7 @@ erDiagram
 
     %% Property
     property ||--|| address : has
-    property {
+    property:::property {
         uuid id PK
         text key PK
         uuid address_id FK
@@ -175,22 +179,24 @@ erDiagram
     account ||--o{ user_account : is
     account ||--o{ journal : affect
     account ||--o{ account_transaction : involve
-    account {
+    account:::finance {
         uuid id PK
         uuid account_type_id FK
         text name
+        text display_name
         text description
     }
 
-    account_type ||--o{ account : categorize
+    account_type:::finance ||--o{ account : categorize
     account_type {
         uuid id PK
         text name
+        text display_name
         text description
     }
 
     %% Account Transaction
-    account_transaction {
+    account_transaction:::finance {
         uuid account_id PK,FK
         uuid transaction_id PK,FK
         uuid account_transcation_role_id FK
@@ -198,7 +204,7 @@ erDiagram
 
     %% Account Transaction Role
     account_transaction_role ||--o{ account_transaction : assign
-    account_transaction_role {
+    account_transaction_role:::finance {
         uuid id PK
         text name
         text description
@@ -207,7 +213,7 @@ erDiagram
     %% Transaction
     transaction ||--o{ journal : contain
     transaction ||--o{ account_transaction : involve
-    transaction {
+    transaction:::finance {
         uuid id PK
         uuid transaction_type_id FK
         uuid currency_id FK
@@ -226,7 +232,7 @@ erDiagram
 
     %% Transaction Type
     transaction_type ||--o{ transaction : categorize
-    transaction_type {
+    transaction_type:::finance {
         uuid id PK
         text name
         text description
@@ -236,7 +242,7 @@ erDiagram
     %% Asset, Liability, Equity, Revenue, Expense, Other
     chart_of_account ||--|{ chart_of_account : contain
     chart_of_account ||--o{ journal : record
-    chart_of_account {
+    chart_of_account:::finance {
         uuid id PK
         uuid parent_id FK
         uuid chart_of_account_type_id FK
@@ -248,7 +254,7 @@ erDiagram
 
     %% Chart of Account Type
     chart_of_account_type ||--o{ chart_of_account : categorize
-    chart_of_account_type {
+    chart_of_account_type:::finance {
         uuid id PK
         text name
         text description
@@ -259,7 +265,7 @@ erDiagram
     %% debit-and-credit language
     %% Ledger
     %% Copy of journal's events, sorted by category or account
-    journal {
+    journal:::finance {
         uuid id PK
         uuid transaction_id FK "(Index)"
         uuid chart_of_account_id FK "(Index)"
@@ -287,3 +293,7 @@ erDiagram
         uuid country_id PK,FK
         uuid currency_id PK,FK
     }
+
+    classDef general fill:#009
+    classDef finance fill:#030
+    classDef property fill:#c60

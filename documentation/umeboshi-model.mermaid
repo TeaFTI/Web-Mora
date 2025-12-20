@@ -95,6 +95,7 @@ erDiagram
         uuid id PK
         uuid division_id FK
         text name
+        text display_name
     }
 
     %% Division
@@ -103,6 +104,7 @@ erDiagram
         uuid id PK
         uuid country_id FK
         text name
+        text display_name
         text iso_3166_2
     }
 
@@ -111,6 +113,7 @@ erDiagram
     country {
         uuid id PK
         text name
+        text display_name
         text official_state_name
         text iso_3166_1
         text iso_3166_1_alpha_2
@@ -133,6 +136,7 @@ erDiagram
     contract:::property {
         uuid id PK
         text name
+        text display_name
         timestampz activeate_date
         timestampz start_date
         timestampz end_date
@@ -207,6 +211,7 @@ erDiagram
     account_transaction_role:::finance {
         uuid id PK
         text name
+        text display_name
         text description
     }
 
@@ -235,6 +240,7 @@ erDiagram
     transaction_type:::finance {
         uuid id PK
         text name
+        text display_name
         text description
     }
 
@@ -248,6 +254,7 @@ erDiagram
         uuid chart_of_account_type_id FK
         uuid transaction_id FK
         text name
+        text display_name
         text description
         boolean active
     }
@@ -257,6 +264,7 @@ erDiagram
     chart_of_account_type:::finance {
         uuid id PK
         text name
+        text display_name
         text description
     }
 
@@ -282,6 +290,7 @@ erDiagram
     currency {
         uuid id PK
         text name
+        text display_name
         text abbreviation
         text symbol
         char(3) iso_4217

@@ -5,10 +5,12 @@
 import { relations, sql } from "drizzle-orm";
 import { pgTable, text, uuid } from "drizzle-orm/pg-core";
 
+import { TABLE_PREFIX } from "@/configuration/database";
+
 import profileEmailTable from "./profile-email";
 
-const profileTable = pgTable("profile", {
-  id: uuid("id").primaryKey().default(sql`gen_random_uuid()`),
+const profileTable = pgTable(`${TABLE_PREFIX}profile`, {
+  id: uuid("id").primaryKey().default(sql`uuidv7()`),
   prefix: text("prefix"),
   firstName: text("first_name").notNull(),
   middleName: text("middle_name"),

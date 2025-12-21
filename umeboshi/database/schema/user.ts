@@ -9,10 +9,12 @@ import {
   uuid,
 } from "drizzle-orm/pg-core";
 
+import { TABLE_PREFIX } from "@/configuration/database";
+
 import profileTable from "./profile";
 
-const userTable = pgTable("user", {
-  id: uuid("id").primaryKey().default(sql`gen_random_uuid()`),
+const userTable = pgTable(`${TABLE_PREFIX}user`, {
+  id: uuid("id").primaryKey().default(sql`uuidv7()`),
   profileId: uuid("profile_id").references(() => profileTable.id),
   username: text("username").notNull().unique(),
   password: text("password").notNull(),

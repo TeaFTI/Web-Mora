@@ -10,8 +10,10 @@ import { userTable } from "./user";
 
 const userAccountTable = pgTable("user_account",
   {
-    userId: uuid("user_id").notNull(),
-    accountId: uuid("account_id").notNull(),
+    userId: uuid("user_id").notNull()
+      .references(() => userTable.id),
+    accountId: uuid("account_id").notNull()
+      .references(() => accountTable.id),
   },
   (table) => [
     primaryKey({

@@ -1,0 +1,19 @@
+---
+services:
+  umeboshi:
+    container_name: umeboshi
+    image: ghcr.io/umeboshi
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      # General
+      NODE_ENV: "development"
+      # Database
+      DATABASE_SCHEME: "${DATABASE_SCHEME:-postgresql}"
+      DATABASE_USERNAME: "DATABASE_USERNAME"
+      DATABASE_PASSWORD: "DATABASE_PASSWORD"
+      DATABASE_HOST: "DATABASE_HOST"
+      DATABASE_PORT: "${DATABASE_PORT:-5432}"
+      DATABASE_NAME: "DATABASE_NAME"
+...

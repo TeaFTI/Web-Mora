@@ -8,7 +8,7 @@ import { pgTable, text, uuid } from "drizzle-orm/pg-core";
 import profileEmailTable from "./profile-email";
 
 const emailTable = pgTable("email", {
-  id: uuid("id").primaryKey().default(sql`gen_random_uuid()`),
+  id: uuid("id").primaryKey().default(sql`uuidv7()`),
   email: text("email").notNull().unique(),
 });
 

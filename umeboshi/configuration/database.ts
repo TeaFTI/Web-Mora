@@ -4,6 +4,8 @@
 
 import * as z from "zod";
 
+const TABLE_PREFIX = process.env.UMEBOSHI_TABLE_PREFIX ?? "";
+
 const PostgreSQLSchema = z.object({
   NODE_ENV: z.enum([
     "development",
@@ -18,13 +20,17 @@ const PostgreSQLSchema = z.object({
   DATABASE_URI: z.string().default(""),
 });
 
-export type PostgreSQLSchema = z.infer<typeof PostgreSQLSchema>;
+type PostgreSQLSchema = z.infer<typeof PostgreSQLSchema>;
 
-process.env.DATABASE_URI = [
-  process.env.DATABASE_SCHEME, "://",
-  process.env.DATABASE_USERNAME, ":", process.env.DATABASE_PASSWORD,
-  "@", process.env.DATABASE_HOST, ":", process.env.DATABASE_PORT,
-  "/", process.env.DATABASE_NAME,
+// Database Uniform Resource Identifier (URI)
+// SCHEME://USERNAME:PASSWORD@HOST:PORT/NAME
+process.env.UMEBOSHI_DATABASE_URI = [
+  process.env.UMEBOSHI_DATABASE_SCHEME,
+  "://", process.env.UMEBOSHI_DATABASE_USERNAME,
+  ":", process.env.UMEBOSHI_DATABASE_PASSWORD,
+  "@", process.env.UMEBOSHI_DATABASE_HOST,
+  ":", process.env.UMEBOSHI_DATABASE_PORT,
+  "/", process.env.UMEBOSHI_DATABASE_NAME,
 ].join("");
 
 try {
@@ -44,3 +50,8 @@ try {
 }
 
 export default PostgreSQLSchema.parse(process.env);
+export {
+  PostgreSQLSchema,
+  TABLE_PREFIX
+};
+

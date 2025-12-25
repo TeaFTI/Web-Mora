@@ -10,4 +10,4 @@ type ChartOfAccountDefault =
   | "expense"
   | "other";
 
-export { ChartOfAccountDefault };
+export type { ChartOfAccountDefault };

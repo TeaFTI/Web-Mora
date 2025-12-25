@@ -2,16 +2,12 @@
  * Chart of Account Declaration Type
  */
 
-export type ChartOfAccountDefault =
-  // Asset
+type ChartOfAccountDefault =
   | "asset"
-  // Liability
   | "liability"
-  // Equity
   | "equity"
-  // Revenue
   | "revenue"
-  // Expense
   | "expense"
-  // Other
   | "other";
+
+export { ChartOfAccountDefault };

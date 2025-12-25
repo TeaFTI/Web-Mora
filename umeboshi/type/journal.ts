@@ -4,4 +4,4 @@
 
 type JournalType = "credit" | "debit";
 
-export { JournalType };
+export type { JournalType };

@@ -53,6 +53,10 @@ bun run --bun --cwd umeboshi/ dev
 - [UPU UNIVERSAL POSTAL UNION Address API](https://www.address.post/Home/Addressapi)
 - [What address standards tell us about addresses](https://www.researchgate.net/publication/228640608_What_address_standards_tell_us_about_addresses)
 
+### Currency
+- [List of circulating currencies](https://en.wikipedia.org/wiki/List_of_circulating_currencies)
+- [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217)
+
 ### Miscellaneous
 
 - [TypeScript, Declaration Files](https://www.typescriptlang.org/docs/handbook/declaration-files/introduction.html)

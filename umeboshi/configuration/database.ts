@@ -24,7 +24,7 @@ type PostgreSQLSchema = z.infer<typeof PostgreSQLSchema>;
 
 // Database Uniform Resource Identifier (URI)
 // SCHEME://USERNAME:PASSWORD@HOST:PORT/NAME
-process.env.UMEBOSHI_DATABASE_URI = [
+process.env.DATABASE_URI = [
   process.env.UMEBOSHI_DATABASE_SCHEME,
   "://", process.env.UMEBOSHI_DATABASE_USERNAME,
   ":", process.env.UMEBOSHI_DATABASE_PASSWORD,

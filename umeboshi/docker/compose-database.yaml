@@ -1,0 +1,22 @@
+---
+services:
+  database:
+    container_name: postgresql-primary
+    image: postgres:latest
+    restart: unless-stopped
+    # set shared memory limit when using docker compose
+    shm_size: 256mb
+    environment:
+      POSTGRES_USER: postgres_username
+      POSTGRES_PASSWORD: example
+      # POSTGRES_PASSWORD_FILE: /run/secrets/postgres_password
+      POSTGRES_DB: postgres_database_name
+    volumes:
+      - ./postgresql:/var/lib/postgresql
+    # secrets:
+    #   - postgres_password
+
+# secrets:
+#   postgres_password:
+#     environment: DATABASE_PASSWORD
+...

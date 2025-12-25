@@ -5,9 +5,11 @@
 import { relations, sql } from "drizzle-orm";
 import { pgTable, text, uuid } from "drizzle-orm/pg-core";
 
+import { TABLE_PREFIX } from "@/configuration/database";
+
 import profileEmailTable from "./profile-email";
 
-const emailTable = pgTable("email", {
+const emailTable = pgTable(`${TABLE_PREFIX}email`, {
   id: uuid("id").primaryKey().default(sql`uuidv7()`),
   email: text("email").notNull().unique(),
 });

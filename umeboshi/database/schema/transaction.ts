@@ -3,20 +3,29 @@
  */
 
 import { relations, sql } from "drizzle-orm";
-import { AnyPgColumn, pgTable, text, timestamp, uuid } from "drizzle-orm/pg-core";
+import {
+  AnyPgColumn,
+  pgTable,
+  text,
+  timestamp,
+  uuid,
+} from "drizzle-orm/pg-core";
+
+import { TABLE_PREFIX } from "@/configuration/database";
+
 import transactionTypeTable from "./transaction-type";
 
-const transactionTable = pgTable("transaction", {
-  id: uuid("id").primaryKey().default(sql`gen_random_uuid()`),
+const transactionTable = pgTable(`${TABLE_PREFIX}transaction`, {
+  id: uuid("id").primaryKey().default(sql`uuidv7()`),
   transactionTypeId: uuid("transaction_type_id")
     .references(() => transactionTypeTable.id),
   reverseTransactionId: uuid("reverse_transaction_id")
     .references((): AnyPgColumn => transactionTable.id),
   description: text("description"),
   created: timestamp("created", { withTimezone: true })
-    .default(sql`now()`),
+    .defaultNow(),
   completed: timestamp("completed", { withTimezone: true })
-    .default(sql`now()`),
+    .defaultNow(),
 });
 
 const transactionRelationList = relations(

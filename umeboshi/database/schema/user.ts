@@ -12,6 +12,7 @@ import {
 import { TABLE_PREFIX } from "@/configuration/database";
 
 import profileTable from "./profile";
+import userAccountTable from "./user-account";
 
 const userTable = pgTable(`${TABLE_PREFIX}user`, {
   id: uuid("id").primaryKey().default(sql`uuidv7()`),
@@ -21,11 +22,12 @@ const userTable = pgTable(`${TABLE_PREFIX}user`, {
   salt: text("salt").notNull(),
 });
 
-const userRelationList = relations(userTable, ({ one }) => ({
+const userRelationList = relations(userTable, ({ one, many }) => ({
   profile: one(profileTable, {
     fields: [userTable.profileId],
     references: [profileTable.id],
   }),
+  userAccountList: many(userAccountTable),
 }));
 
 export default userTable;

@@ -2,7 +2,7 @@
  * Property Table Schema
  */
 
-import { sql } from "drizzle-orm";
+import { relations, sql } from "drizzle-orm";
 import {
   pgTable,
   smallint,
@@ -10,10 +10,14 @@ import {
   uuid,
 } from "drizzle-orm/pg-core";
 
-const propertyTable = pgTable("property", {
-  id: uuid("id").primaryKey().default(sql`gen_random_uuid()`),
+import addressTable from "./address";
+
+import { TABLE_PREFIX } from "@/configuration/database";
+
+const propertyTable = pgTable(`${TABLE_PREFIX}property`, {
+  id: uuid("id").primaryKey().default(sql`uuidv7()`),
   key: text("key").primaryKey().notNull(),
-  addressId: uuid("address_id"),
+  addressId: uuid("address_id").references(() => addressTable.id),
   parcelNumberLocal: text("parcel_number_local"),
   parcelNumberState: text("parcel_number_state"),
   parcelNumberPropertyId: text("parcel_number_property_id"),
@@ -32,4 +36,12 @@ const propertyTable = pgTable("property", {
   block: text("block"),
 });
 
+const propertyRelationList = relations(propertyTable, ({ one }) => ({
+  address: one(addressTable, {
+    fields: [propertyTable.addressId],
+    references: [addressTable.id],
+  }),
+}));
+
 export default propertyTable;
+export { propertyRelationList, propertyTable };

@@ -8,13 +8,11 @@ import {
   uuid
 } from "drizzle-orm/pg-core";
 
-import contactTable from "@/database/schema/contact";
-import propertyTable from "@/database/schema/property";
+import { TABLE_PREFIX } from "@/configuration/database";
 
-const tenantTable = pgTable("tenant", {
-  id: uuid("id").primaryKey().default(sql`gen_random_uuid()`),
-  contactId: uuid("contact_id").references(() => contactTable.id),
-  propertyId: uuid("property_id").references(() => propertyTable.id),
+const tenantTable = pgTable(`${TABLE_PREFIX}tenant`, {
+  id: uuid("id").primaryKey().default(sql`uuidv7()`),
 });
 
 export default tenantTable;
+export { tenantTable };

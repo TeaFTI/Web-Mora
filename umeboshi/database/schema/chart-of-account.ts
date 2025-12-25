@@ -13,17 +13,20 @@ import {
   uuid,
 } from "drizzle-orm/pg-core";
 
+import { TABLE_PREFIX } from "@/configuration/database";
+
 import { chartOfAccountTypeTable } from "./chart-of-account-type";
 
-const chartOfAccountTable = pgTable("chart_of_account",
+const chartOfAccountTable = pgTable(`${TABLE_PREFIX}chart_of_account`,
   {
-    id: uuid("id").primaryKey().default(sql`gen_random_uuid()`),
+    id: uuid("id").primaryKey().default(sql`uuidv7()`),
     parentId: uuid("parent_id")
       .references((): AnyPgColumn => chartOfAccountTable.id),
     typeId: uuid("chart_of_account_type_id")
       .references(() => chartOfAccountTypeTable.id),
     name: text("name").notNull(),
-    description: text("description").notNull(),
+    displayName: text("display_name"),
+    description: text("description"),
     active: boolean("active").default(true),
   },
   // (table) => [

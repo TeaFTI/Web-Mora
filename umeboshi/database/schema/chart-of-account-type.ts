@@ -5,11 +5,14 @@
 import { relations, sql } from "drizzle-orm";
 import { pgTable, text, uuid } from "drizzle-orm/pg-core";
 
+import { TABLE_PREFIX } from "@/configuration/database";
+
 import { chartOfAccountTable } from "./chart-of-account";
 
-const chartOfAccountTypeTable = pgTable("chart_of_account_type",
+const chartOfAccountTypeTable = pgTable(
+  `${TABLE_PREFIX}chart_of_account_type`,
   {
-    id: uuid("id").primaryKey().default(sql`gen_random_uuid()`),
+    id: uuid("id").primaryKey().default(sql`uuidv7()`),
     name: text("name").unique().notNull(),
   },
 );

@@ -5,10 +5,12 @@
 import { relations } from "drizzle-orm";
 import { pgTable, primaryKey, uuid } from "drizzle-orm/pg-core";
 
+import { TABLE_PREFIX } from "@/configuration/database";
+
 import { accountTable } from "./account";
 import { userTable } from "./user";
 
-const userAccountTable = pgTable("user_account",
+const userAccountTable = pgTable(`${TABLE_PREFIX}user_account`,
   {
     userId: uuid("user_id").notNull()
       .references(() => userTable.id),

@@ -85,7 +85,7 @@ erDiagram
     profile ||--o| profile_address : has
     address ||--o| profile_address : is
     profile_address {
-        uuid contact_id PK,FK
+        uuid profile_id PK,FK
         uusid address_id PK,FK
     }
 
@@ -135,12 +135,21 @@ erDiagram
     contract ||--|| property : lease
     contract:::property {
         uuid id PK
+        uuid contract_status_id FK
         text name
         text display_name
-        timestampz activeate_date
+        timestampz activate_date
         timestampz start_date
         timestampz end_date
-        enum status
+    }
+
+    %% Contract Status
+    contract_status ||--o{ contract : categorize
+    contract_status:::property {
+        uuid id PK
+        text name
+        text display_name
+        text description
     }
 
     %% User Contract
@@ -191,8 +200,8 @@ erDiagram
         text description
     }
 
-    account_type:::finance ||--o{ account : categorize
-    account_type {
+    account_type ||--o{ account : categorize
+    account_type:::finance {
         uuid id PK
         text name
         text display_name

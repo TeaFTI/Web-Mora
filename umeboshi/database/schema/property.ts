@@ -10,9 +10,9 @@ import {
   uuid,
 } from "drizzle-orm/pg-core";
 
-import addressTable from "./address";
-
 import { TABLE_PREFIX } from "@/configuration/database";
+
+import addressTable from "./address";
 
 const propertyTable = pgTable(`${TABLE_PREFIX}property`, {
   id: uuid("id").primaryKey().default(sql`uuidv7()`),

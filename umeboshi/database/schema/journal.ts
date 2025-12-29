@@ -14,8 +14,8 @@ import {
 } from "drizzle-orm/pg-core";
 
 import { TABLE_PREFIX } from "@/configuration/database";
-
 import { JournalType } from "@/type/journal";
+
 import chartOfAccountTable from "./chart-of-account";
 import currencyTable from "./currency";
 import transactionTable from "./transaction";

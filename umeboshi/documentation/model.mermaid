@@ -9,6 +9,7 @@ erDiagram
     user ||--|| profile : has
     user ||--o{ user_account : has
     user ||--o| tenant : is
+    user ||--o{ user_contract : own
     user:::general {
         uuid id PK
         uuid profile_id FK
@@ -121,19 +122,20 @@ erDiagram
     }
 
     %%%%%%%%%%%%%%
-    %% Property %%
+    %% Business %%
     %%%%%%%%%%%%%%
 
     %% Tenant
-    tenant:::property {
+    tenant:::business {
         uuid id PK
         uuid user_id FK
         uuid property_id FK
     }
 
     %% Contract
-    contract ||--|| property : lease
-    contract:::property {
+    contract ||--o{ user_contract : execute
+    contract ||--|{ contract_item: cover
+    contract:::business {
         uuid id PK
         uuid contract_status_id FK
         text name
@@ -143,9 +145,25 @@ erDiagram
         timestampz end_date
     }
 
+    %% Contract Item
+    contract_item |o--o{ contract_item : contain
+    contract_item ||--|| property : lease
+    contract_item:::business {
+        uuid id PK
+        uuid parent_id FK
+        uuid contract_id FK
+        %% Relate To `property.id`
+        uuid product_id FK
+        text name
+        text display_name
+        text description
+        timestampz start_date
+        timestampz end_date
+    }
+
     %% Contract Status
     contract_status ||--o{ contract : categorize
-    contract_status:::property {
+    contract_status:::business {
         uuid id PK
         text name
         text display_name
@@ -153,8 +171,6 @@ erDiagram
     }
 
     %% User Contract
-    user ||--o{ user_contract : own
-    contract ||--o{ user_contract : execute
     user_contract {
         uuid user_id PK,FK
         uuid contract_id PK,FK
@@ -162,7 +178,7 @@ erDiagram
 
     %% Property
     property ||--|| address : has
-    property:::property {
+    property:::business {
         uuid id PK
         text key PK
         uuid address_id FK
@@ -255,7 +271,7 @@ erDiagram
 
     %% Chart of Account
     %% Asset, Liability, Equity, Revenue, Expense, Other
-    chart_of_account ||--|{ chart_of_account : contain
+    chart_of_account |o--o{ chart_of_account : contain
     chart_of_account ||--o{ journal : record
     chart_of_account:::finance {
         uuid id PK
@@ -314,4 +330,4 @@ erDiagram
 
     classDef general fill:#009
     classDef finance fill:#030
-    classDef property fill:#c60
+    classDef business fill:#c60

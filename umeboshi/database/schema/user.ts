@@ -13,6 +13,7 @@ import { TABLE_PREFIX } from "@/configuration/database";
 
 import profileTable from "./profile";
 import userAccountTable from "./user-account";
+import userContractTable from "./user-contract";
 
 const userTable = pgTable(`${TABLE_PREFIX}user`, {
   id: uuid("id").primaryKey().default(sql`uuidv7()`),
@@ -28,6 +29,7 @@ const userRelationList = relations(userTable, ({ one, many }) => ({
     references: [profileTable.id],
   }),
   userAccountList: many(userAccountTable),
+  userContractList: many(userContractTable),
 }));
 
 export default userTable;

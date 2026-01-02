@@ -2,11 +2,11 @@
  * Country Currency Table Schema
  */
 
+import { defineRelations } from "drizzle-orm";
 import { pgTable, primaryKey, uuid } from "drizzle-orm/pg-core";
 
 import { TABLE_PREFIX } from "@/configuration/database";
 
-import { relations } from "drizzle-orm";
 import countryTable from "./country";
 import currencyTable from "./currency";
 
@@ -22,16 +22,22 @@ const countryCurrencyTable = pgTable(`${TABLE_PREFIX}country_currency`,
   ],
 );
 
-const countryCurrencyRelationList = relations(countryCurrencyTable,
-  ({ one }) => ({
-    country: one(countryTable, {
-      fields: [countryCurrencyTable.countryId],
-      references: [countryTable.id],
-    }),
-    currency: one(currencyTable, {
-      fields: [countryCurrencyTable.currencyId],
-      references: [currencyTable.id],
-    }),
+const countryCurrencyRelationList = defineRelations(
+  { countryTable, countryCurrencyTable, currencyTable },
+  (relation) => ({
+    countryTable: {
+      currencyList: relation.many.currencyTable({
+        from: relation.countryTable.id.through(
+          relation.countryCurrencyTable.countryId,
+        ),
+        to: relation.currencyTable.id.through(
+          relation.countryCurrencyTable.currencyId,
+        ),
+      })
+    },
+    currencyTable: {
+      countryList: relation.many.countryTable()
+    },
   })
 );
 

@@ -2,7 +2,7 @@
  * Contract Item Table Schema
  */
 
-import { relations, sql } from "drizzle-orm";
+import { defineRelations, sql } from "drizzle-orm";
 import { AnyPgColumn, pgTable, timestamp, uuid } from "drizzle-orm/pg-core";
 
 import { TABLE_PREFIX } from "@/configuration/database";
@@ -25,24 +25,26 @@ const contractItemTable = pgTable(`${TABLE_PREFIX}contract_item`, {
   endDate: timestamp("end_date", { withTimezone: true }),
 });
 
-const contractItemRelationList = relations(contractItemTable,
-  ({ one, many }) => ({
-    parentContractItem: one(contractItemTable, {
-      fields: [contractItemTable.parentId],
-      references: [contractItemTable.id],
-      relationName: "childContractItem",
-    }),
-    childContractItemList: many(contractItemTable, {
-      relationName: "childContractItem",
-    }),
-    contract: one(contractTable, {
-      fields: [contractItemTable.contractId],
-      references: [contractTable.id],
-    }),
-    property: one(propertyTable, {
-      fields: [contractItemTable.productId],
-      references: [propertyTable.id],
-    }),
+const contractItemRelationList = defineRelations(
+  { contractItemTable, contractTable, propertyTable },
+  (relation) => ({
+    contractItemTable: {
+      parentContractItem: relation.one.contractItemTable({
+        from: relation.contractItemTable.parentId,
+        to: relation.contractItemTable.id,
+      }),
+      contract: relation.one.contractTable({
+        from: relation.contractItemTable.contractId,
+        to: relation.contractTable.id,
+      }),
+      property: relation.one.propertyTable({
+        from: relation.contractItemTable.productId,
+        to: relation.propertyTable.id,
+      }),
+    },
+    contractTable: {
+      contractItemList: relation.many.contractItemTable()
+    },
   })
 );
 

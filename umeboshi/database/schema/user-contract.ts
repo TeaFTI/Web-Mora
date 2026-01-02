@@ -6,7 +6,7 @@ import { pgTable, primaryKey, uuid } from "drizzle-orm/pg-core";
 
 import { TABLE_PREFIX } from "@/configuration/database";
 
-import { relations } from "drizzle-orm";
+import { defineRelations } from "drizzle-orm";
 import contractTable from "./contract";
 import userTable from "./user";
 
@@ -24,19 +24,25 @@ const userContractTable = pgTable(`${TABLE_PREFIX}user_contract`,
   ],
 );
 
-const userContractRelationList = relations(
-  userContractTable,
-  ({ one }) => ({
-    user: one(userTable, {
-      fields: [userContractTable.userId],
-      references: [userTable.id],
-    }),
-    contract: one(contractTable, {
-      fields: [userContractTable.contractId],
-      references: [contractTable.id],
-    }),
+const userContractRelationList = defineRelations(
+  { userTable, userContractTable, contractTable },
+  (relation) => ({
+    userTable: {
+      contractList: relation.many.contractTable({
+        from: relation.userTable.id.through(
+          relation.userContractTable.userId,
+        ),
+        to: relation.contractTable.id.through(
+          relation.userContractTable.contractId,
+        ),
+      })
+    },
+    contractTable: {
+      userList: relation.many.userTable()
+    },
   })
 );
 
 export default userContractTable;
-export { userContractTable };
+export { userContractRelationList, userContractTable };
+

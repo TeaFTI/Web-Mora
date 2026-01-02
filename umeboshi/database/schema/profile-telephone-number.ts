@@ -2,18 +2,13 @@
  * Contact Telephone Number Table Schema
  */
 
-import {
-  pgTable,
-  primaryKey,
-  uuid,
-} from "drizzle-orm/pg-core";
-import { relations } from "drizzle-orm/relations";
+import { pgTable, primaryKey, uuid } from "drizzle-orm/pg-core";
+import { defineRelations } from "drizzle-orm/relations";
 
 import { TABLE_PREFIX } from "@/configuration/database";
 
 import profileTable from "./profile";
 import telephoneNumberTable from "./telephone-number";
-
 
 const profileTelephoneNumberTable = pgTable(
   `${TABLE_PREFIX}profile_telephone_number`,
@@ -28,17 +23,22 @@ const profileTelephoneNumberTable = pgTable(
   ],
 );
 
-const profileTelephoneNumberRelation = relations(
-  profileTelephoneNumberTable,
-  ({ one }) => ({
-    profileTable: one(profileTable, {
-      fields: [profileTelephoneNumberTable.profileId],
-      references: [profileTable.id],
-    }),
-    telephoneNumberTable: one(telephoneNumberTable, {
-      fields: [profileTelephoneNumberTable.telephoneNumberId],
-      references: [telephoneNumberTable.id],
-    }),
+const profileTelephoneNumberRelation = defineRelations(
+  { profileTable, profileTelephoneNumberTable, telephoneNumberTable },
+  (relation) => ({
+    profileTable: {
+      telephoneNumberList: relation.many.telephoneNumberTable({
+        from: relation.profileTable.id.through(
+          relation.profileTelephoneNumberTable.profileId,
+        ),
+        to: relation.telephoneNumberTable.id.through(
+          relation.profileTelephoneNumberTable.telephoneNumberId,
+        ),
+      })
+    },
+    telephoneNumberTable: {
+      profileList: relation.many.profileTable()
+    },
   })
 );
 

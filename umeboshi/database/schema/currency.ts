@@ -2,12 +2,10 @@
  * Currency Table Schema
  */
 
-import { relations, sql } from "drizzle-orm";
+import { sql } from "drizzle-orm";
 import { pgTable, text, uuid } from "drizzle-orm/pg-core";
 
 import { TABLE_PREFIX } from "@/configuration/database";
-
-import countryCurrencyTable from "./country-currency";
 
 const currencyTable = pgTable(`${TABLE_PREFIX}currency`, {
   id: uuid("id").primaryKey().default(sql`uuidv7()`),
@@ -20,9 +18,5 @@ const currencyTable = pgTable(`${TABLE_PREFIX}currency`, {
   base: text("base"),
 });
 
-const currencyRelationList = relations(currencyTable, ({ many }) => ({
-  countryCurrencyList: many(countryCurrencyTable),
-}));
-
 export default currencyTable;
-export { currencyRelationList, currencyTable };
+export { currencyTable };

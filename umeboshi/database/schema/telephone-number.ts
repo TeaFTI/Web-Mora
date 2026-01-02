@@ -2,19 +2,10 @@
  * Telephone Number Table Schema
  */
 
-import {
-  relations,
-  sql,
-} from "drizzle-orm";
-import {
-  pgTable,
-  text,
-  uuid,
-} from "drizzle-orm/pg-core";
+import { sql } from "drizzle-orm";
+import { pgTable, text, uuid } from "drizzle-orm/pg-core";
 
 import { TABLE_PREFIX } from "@/configuration/database";
-
-import contactTelephoneNumberTable from "./profile-telephone-number";
 
 const telephoneNumberTable = pgTable(`${TABLE_PREFIX}telephone_number`,
   {
@@ -24,11 +15,5 @@ const telephoneNumberTable = pgTable(`${TABLE_PREFIX}telephone_number`,
   }
 );
 
-const telephoneNumberRelation = relations(telephoneNumberTable,
-  ({ many }) => ({
-    contactTelephoneNumberTable: many(contactTelephoneNumberTable),
-  })
-);
-
 export default telephoneNumberTable;
-export { telephoneNumberRelation };
+export { telephoneNumberTable };

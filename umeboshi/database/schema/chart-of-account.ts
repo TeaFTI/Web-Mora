@@ -3,7 +3,7 @@
  * Asset, Liability, Equity, Revenue, Expense, Other
  */
 
-import { relations, sql } from "drizzle-orm";
+import { defineRelations, sql } from "drizzle-orm";
 import {
   AnyPgColumn,
   boolean,
@@ -38,20 +38,22 @@ const chartOfAccountTable = pgTable(`${TABLE_PREFIX}chart_of_account`,
   // ]
 );
 
-const chartOfAccountRelationList = relations(chartOfAccountTable,
-  ({ one, many }) => ({
-    parentChartOfAccount: one(chartOfAccountTable, {
-      fields: [chartOfAccountTable.parentId],
-      references: [chartOfAccountTable.id],
-      relationName: "childChartOfAccount",
-    }),
-    childChartOfAccountList: many(chartOfAccountTable, {
-      relationName: "childChartOfAccount",
-    }),
-    chartOfAccountType: one(chartOfAccountTypeTable, {
-      fields: [chartOfAccountTable.typeId],
-      references: [chartOfAccountTypeTable.id],
-    }),
+const chartOfAccountRelationList = defineRelations(
+  { chartOfAccountTable, chartOfAccountTypeTable },
+  (relation) => ({
+    chartOfAccountTable: {
+      parentChartOfAccount: relation.one.chartOfAccountTable({
+        from: relation.chartOfAccountTable.parentId,
+        to: relation.chartOfAccountTable.id,
+      }),
+      chartOfAccountType: relation.one.chartOfAccountTypeTable({
+        from: relation.chartOfAccountTable.typeId,
+        to: relation.chartOfAccountTypeTable.id,
+      }),
+    },
+    chartOfAccountTypeTable: {
+      chartOfAccountList: relation.many.chartOfAccountTable()
+    },
   })
 );
 

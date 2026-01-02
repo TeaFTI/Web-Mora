@@ -2,12 +2,8 @@
  * Contact Table Schema
  */
 
-import { relations, sql } from "drizzle-orm";
-import {
-  pgTable,
-  text,
-  uuid,
-} from "drizzle-orm/pg-core";
+import { defineRelations, sql } from "drizzle-orm";
+import { pgTable, text, uuid } from "drizzle-orm/pg-core";
 
 import { TABLE_PREFIX } from "@/configuration/database";
 
@@ -19,12 +15,17 @@ const contactTable = pgTable(`${TABLE_PREFIX}contact`, {
   company: text("company"),
 });
 
-const contactRelationList = relations(contactTable, ({ one }) => ({
-  profile: one(profileTable, {
-    fields: [contactTable.profileId],
-    references: [profileTable.id],
-  }),
-}));
+const contactRelationList = defineRelations(
+  { contactTable, profileTable },
+  (relation) => ({
+    contactTable: {
+      profile: relation.one.profileTable({
+        from: relation.contactTable.profileId,
+        to: relation.profileTable.id,
+      })
+    },
+  })
+);
 
 export default contactTable;
 export { contactRelationList, contactTable };

@@ -2,7 +2,7 @@
  * User Account Table Schema
  */
 
-import { relations } from "drizzle-orm";
+import { defineRelations } from "drizzle-orm";
 import { pgTable, primaryKey, uuid } from "drizzle-orm/pg-core";
 
 import { TABLE_PREFIX } from "@/configuration/database";
@@ -24,17 +24,22 @@ const userAccountTable = pgTable(`${TABLE_PREFIX}user_account`,
   ],
 );
 
-const userAccountRelationList = relations(
-  userAccountTable,
-  ({ one }) => ({
-    user: one(userTable, {
-      fields: [userAccountTable.userId],
-      references: [userTable.id],
-    }),
-    account: one(accountTable, {
-      fields: [userAccountTable.accountId],
-      references: [accountTable.id],
-    }),
+const userAccountRelationList = defineRelations(
+  { userTable, userAccountTable, accountTable },
+  (relation) => ({
+    userTable: {
+      accountList: relation.many.accountTable({
+        from: relation.userTable.id.through(
+          relation.userAccountTable.userId,
+        ),
+        to: relation.accountTable.id.through(
+          relation.userAccountTable.accountId,
+        ),
+      })
+    },
+    accountTable: {
+      userList: relation.many.userTable()
+    },
   })
 );
 

@@ -2,7 +2,7 @@
  * Address Table Schema
  */
 
-import { relations, sql } from "drizzle-orm";
+import { defineRelations, sql } from "drizzle-orm";
 import { pgTable, text, uuid } from "drizzle-orm/pg-core";
 
 import { TABLE_PREFIX } from "@/configuration/database";
@@ -17,12 +17,20 @@ const addressTable = pgTable(`${TABLE_PREFIX}address`, {
   postalCode: text("postal_code").notNull(),
 });
 
-const addressRelationList = relations(addressTable, ({ one }) => ({
-  city: one(cityTable, {
-    fields: [addressTable.cityId],
-    references: [cityTable.id],
-  }),
-}));
+const addressRelationList = defineRelations(
+  { addressTable, cityTable },
+  (relation) => ({
+    addressTable: {
+      city: relation.one.cityTable({
+        from: relation.addressTable.cityId,
+        to: relation.cityTable.id,
+      })
+    },
+    cityTable: {
+      addressList: relation.many.addressTable(),
+    },
+  })
+);
 
 export default addressTable;
 export { addressRelationList, addressTable };

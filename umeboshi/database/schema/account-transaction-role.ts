@@ -2,12 +2,11 @@
  * Account Transaction Role Table Schema
  */
 
-import { relations, sql } from "drizzle-orm";
+import { sql } from "drizzle-orm";
 import { pgTable, text, uuid } from "drizzle-orm/pg-core";
 
 import { TABLE_PREFIX } from "@/configuration/database";
 
-import accountTransactionTable from "./account-transaction";
 
 const accountTransactionRoleTable = pgTable(
   `${TABLE_PREFIX}account_transaction_role`,
@@ -19,14 +18,5 @@ const accountTransactionRoleTable = pgTable(
   },
 );
 
-const accountTransactionRoleRelationList = relations(
-  accountTransactionRoleTable, ({ many }) => ({
-    accountTransactionList: many(accountTransactionTable),
-  })
-);
-
 export default accountTransactionRoleTable;
-export {
-  accountTransactionRoleRelationList,
-  accountTransactionRoleTable
-};
+export { accountTransactionRoleTable };

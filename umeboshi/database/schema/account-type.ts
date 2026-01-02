@@ -2,12 +2,11 @@
  * Account Type Table Schema
  */
 
-import { relations, sql } from "drizzle-orm";
+import { sql } from "drizzle-orm";
 import { pgTable, text, uuid } from "drizzle-orm/pg-core";
 
 import { TABLE_PREFIX } from "@/configuration/database";
 
-import accountTable from "./account";
 
 const accountTypeTable = pgTable(`${TABLE_PREFIX}account_type`, {
   id: uuid("id").primaryKey().default(sql`uuidv7()`),
@@ -16,11 +15,6 @@ const accountTypeTable = pgTable(`${TABLE_PREFIX}account_type`, {
   description: text("description"),
 });
 
-const accountTypeRelationList = relations(
-  accountTypeTable, ({ many }) => ({
-    accountList: many(accountTable),
-  })
-);
-
 export default accountTypeTable;
-export { accountTypeRelationList, accountTypeTable };
+export { accountTypeTable };
+

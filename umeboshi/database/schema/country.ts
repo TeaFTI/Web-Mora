@@ -2,12 +2,10 @@
  * Country Table Schema
  */
 
-import { relations, sql } from "drizzle-orm";
+import { sql } from "drizzle-orm";
 import { char, pgTable, text, uuid } from "drizzle-orm/pg-core";
 
 import { TABLE_PREFIX } from "@/configuration/database";
-
-import countryCurrencyTable from "./country-currency";
 
 const countryTable = pgTable(`${TABLE_PREFIX}country`, {
   id: uuid("id").primaryKey().default(sql`uuidv7()`),
@@ -19,9 +17,5 @@ const countryTable = pgTable(`${TABLE_PREFIX}country`, {
   iso31661Numeric: char("iso_3166_1_numeric", { length: 3 }).notNull().unique(),
 });
 
-const countryRelationList = relations(countryTable, ({ many }) => ({
-  countryCurrencyList: many(countryCurrencyTable),
-}));
-
 export default countryTable;
-export { countryRelationList, countryTable };
+export { countryTable };

@@ -2,7 +2,7 @@
  * Account Transaction Table Schema
  */
 
-import { relations } from "drizzle-orm";
+import { defineRelations } from "drizzle-orm";
 import { pgTable, primaryKey, uuid } from "drizzle-orm/pg-core";
 
 import { TABLE_PREFIX } from "@/configuration/database";
@@ -29,21 +29,36 @@ const accountTransactionTable = pgTable(
   ],
 );
 
-const accountTransactionRelationList = relations(
-  accountTransactionTable,
-  ({ one, many }) => ({
-    account: one(accountTable, {
-      fields: [accountTransactionTable.accountId],
-      references: [accountTable.id],
-    }),
-    transaction: one(transactionTable, {
-      fields: [accountTransactionTable.transactionId],
-      references: [transactionTable.id],
-    }),
-    accountTransactionRole: one(accountTransactionRoleTable, {
-      fields: [accountTransactionTable.accountTransactionRoleId],
-      references: [accountTransactionRoleTable.id],
-    }),
+const accountTransactionRelationList = defineRelations(
+  {
+    accountTable,
+    accountTransactionTable,
+    transactionTable,
+    accountTransactionRoleTable,
+  },
+  (relation) => ({
+    accountTable: {
+      transactionList: relation.many.transactionTable({
+        from: relation.accountTable.id.through(
+          relation.accountTransactionTable.accountId,
+        ),
+        to: relation.transactionTable.id.through(
+          relation.accountTransactionTable.transactionId,
+        ),
+      }),
+    },
+    transactionTable: {
+      accountList: relation.many.accountTable()
+    },
+    accountTransactionTable: {
+      accountTransactionRole: relation.one.accountTransactionRoleTable({
+        from: relation.accountTransactionTable.accountTransactionRoleId,
+        to: relation.accountTransactionRoleTable.id,
+      }),
+    },
+    accountTransactionRoleTable: {
+      accountTransactionList: relation.many.accountTransactionTable()
+    },
   })
 );
 

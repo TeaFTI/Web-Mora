@@ -2,7 +2,7 @@
  * Journal Table Schema
  */
 
-import { relations, sql } from "drizzle-orm";
+import { defineRelations, sql } from "drizzle-orm";
 import {
   check,
   numeric,
@@ -16,6 +16,7 @@ import {
 import { TABLE_PREFIX } from "@/configuration/database";
 import { JournalType } from "@/type/journal";
 
+import accountTable from "./account";
 import chartOfAccountTable from "./chart-of-account";
 import currencyTable from "./currency";
 import transactionTable from "./transaction";
@@ -28,6 +29,8 @@ const journalTypeEnum = pgEnum(
 const journalTable = pgTable(`${TABLE_PREFIX}journal`,
   {
     id: uuid("id").primaryKey().default(sql`uuidv7()`),
+    accountId: uuid("account_id")
+      .references(() => accountTable.id),
     transactionId: uuid("transaction_id")
       .references(() => transactionTable.id),
     chartOfAccountId: uuid("chart_of_account_id")
@@ -43,20 +46,47 @@ const journalTable = pgTable(`${TABLE_PREFIX}journal`,
   ]
 );
 
-const journalRelationList = relations(journalTable, ({ one }) => ({
-  transaction: one(transactionTable, {
-    fields: [journalTable.transactionId],
-    references: [transactionTable.id],
-  }),
-  chartOfAccount: one(chartOfAccountTable, {
-    fields: [journalTable.chartOfAccountId],
-    references: [chartOfAccountTable.id],
-  }),
-  currency: one(currencyTable, {
-    fields: [journalTable.currencyId],
-    references: [currencyTable.id],
-  }),
-}));
+const journalRelationList = defineRelations(
+  {
+    journalTable,
+    accountTable,
+    transactionTable,
+    chartOfAccountTable,
+    currencyTable,
+  },
+  (relation) => ({
+    journalTable: {
+      account: relation.one.accountTable({
+        from: relation.journalTable.accountId,
+        to: relation.accountTable.id,
+      }),
+      transaction: relation.one.transactionTable({
+        from: relation.journalTable.transactionId,
+        to: relation.transactionTable.id,
+      }),
+      chartOfAccount: relation.one.chartOfAccountTable({
+        from: relation.journalTable.chartOfAccountId,
+        to: relation.chartOfAccountTable.id,
+      }),
+      currency: relation.one.currencyTable({
+        from: relation.journalTable.currencyId,
+        to: relation.currencyTable.id,
+      }),
+    },
+    accountTable: {
+      journalList: relation.many.journalTable()
+    },
+    transactionTable: {
+      journalList: relation.many.journalTable()
+    },
+    chartOfAccountTable: {
+      journalList: relation.many.journalTable()
+    },
+    currencyTable: {
+      journalList: relation.many.journalTable()
+    },
+  })
+);
 
 export default journalTable;
 export { journalRelationList, journalTable };

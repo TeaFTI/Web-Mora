@@ -2,18 +2,12 @@
  * User Table Schema
  */
 
-import { relations, sql } from "drizzle-orm";
-import {
-  pgTable,
-  text,
-  uuid,
-} from "drizzle-orm/pg-core";
+import { defineRelations, sql } from "drizzle-orm";
+import { pgTable, text, uuid } from "drizzle-orm/pg-core";
 
 import { TABLE_PREFIX } from "@/configuration/database";
 
 import profileTable from "./profile";
-import userAccountTable from "./user-account";
-import userContractTable from "./user-contract";
 
 const userTable = pgTable(`${TABLE_PREFIX}user`, {
   id: uuid("id").primaryKey().default(sql`uuidv7()`),
@@ -23,14 +17,17 @@ const userTable = pgTable(`${TABLE_PREFIX}user`, {
   salt: text("salt").notNull(),
 });
 
-const userRelationList = relations(userTable, ({ one, many }) => ({
-  profile: one(profileTable, {
-    fields: [userTable.profileId],
-    references: [profileTable.id],
-  }),
-  userAccountList: many(userAccountTable),
-  userContractList: many(userContractTable),
-}));
+const userRelationList = defineRelations(
+  { userTable, profileTable },
+  (relation) => ({
+    userTable: {
+      profile: relation.one.profileTable({
+        from: relation.userTable.profileId,
+        to: relation.profileTable.id,
+      }),
+    },
+  })
+);
 
 export default userTable;
 export { userRelationList, userTable };

@@ -2,7 +2,7 @@
  * City Table Schema
  */
 
-import { relations, sql } from "drizzle-orm";
+import { defineRelations, sql } from "drizzle-orm";
 import { pgTable, text, uuid } from "drizzle-orm/pg-core";
 
 import { TABLE_PREFIX } from "@/configuration/database";
@@ -17,12 +17,20 @@ const cityTable = pgTable(`${TABLE_PREFIX}city`, {
   displayName: text("display_name"),
 });
 
-const cityRelationList = relations(cityTable, ({ one }) => ({
-  division: one(divisionTable, {
-    fields: [cityTable.divisionId],
-    references: [divisionTable.id],
-  }),
-}));
+const cityRelationList = defineRelations(
+  { cityTable, divisionTable },
+  (relation) => ({
+    cityTable: {
+      division: relation.one.divisionTable({
+        from: relation.cityTable.divisionId,
+        to: relation.divisionTable.id,
+      })
+    },
+    divisionTable: {
+      cityList: relation.many.cityTable(),
+    },
+  })
+);
 
 export default cityTable;
 export { cityRelationList, cityTable };

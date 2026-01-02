@@ -31,5 +31,5 @@ export * from "./contract";
 export * from "./contract-item";
 export * from "./contract-status";
 export * from "./property";
-export * from "./tenant";
+// export * from "./tenant";
 export * from "./user-contract";

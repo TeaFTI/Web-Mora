@@ -2,7 +2,7 @@
  * Property Table Schema
  */
 
-import { relations, sql } from "drizzle-orm";
+import { defineRelations, sql } from "drizzle-orm";
 import {
   pgTable,
   smallint,
@@ -36,12 +36,17 @@ const propertyTable = pgTable(`${TABLE_PREFIX}property`, {
   block: text("block"),
 });
 
-const propertyRelationList = relations(propertyTable, ({ one }) => ({
-  address: one(addressTable, {
-    fields: [propertyTable.addressId],
-    references: [addressTable.id],
-  }),
-}));
+const propertyRelationList = defineRelations(
+  { propertyTable, addressTable },
+  (relation) => ({
+    propertyTable: {
+      address: relation.one.addressTable({
+        from: relation.propertyTable.addressId,
+        to: relation.addressTable.id,
+      }),
+    },
+  })
+);
 
 export default propertyTable;
 export { propertyRelationList, propertyTable };

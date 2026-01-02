@@ -2,7 +2,7 @@
  * Division Table Schema
  */
 
-import { relations, sql } from "drizzle-orm";
+import { defineRelations, sql } from "drizzle-orm";
 import { pgTable, text, uuid } from "drizzle-orm/pg-core";
 
 import { TABLE_PREFIX } from "@/configuration/database";
@@ -18,12 +18,20 @@ const divisionTable = pgTable(`${TABLE_PREFIX}division`, {
   iso31662: text("iso_3166_2"),
 });
 
-const divisionRelationList = relations(divisionTable, ({ one }) => ({
-  country: one(countryTable, {
-    fields: [divisionTable.countryId],
-    references: [countryTable.id],
-  }),
-}));
+const divisionRelationList = defineRelations(
+  { divisionTable, countryTable },
+  (relation) => ({
+    divisionTable: {
+      country: relation.one.countryTable({
+        from: relation.divisionTable.countryId,
+        to: relation.countryTable.id,
+      })
+    },
+    countryTable: {
+      divisionList: relation.many.divisionTable(),
+    },
+  })
+);
 
 export default divisionTable;
 export { divisionRelationList, divisionTable };

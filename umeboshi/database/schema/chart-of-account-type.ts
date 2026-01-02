@@ -2,12 +2,10 @@
  * Chart of Account Type Table Schema
  */
 
-import { relations, sql } from "drizzle-orm";
+import { sql } from "drizzle-orm";
 import { pgTable, text, uuid } from "drizzle-orm/pg-core";
 
 import { TABLE_PREFIX } from "@/configuration/database";
-
-import { chartOfAccountTable } from "./chart-of-account";
 
 const chartOfAccountTypeTable = pgTable(
   `${TABLE_PREFIX}chart_of_account_type`,
@@ -17,12 +15,6 @@ const chartOfAccountTypeTable = pgTable(
   },
 );
 
-const chartOfAccountTypeRelationList = relations(
-  chartOfAccountTypeTable, ({ many }) => ({
-    chartOfAccountList: many(chartOfAccountTable),
-  })
-);
-
 export default chartOfAccountTypeTable;
-export { chartOfAccountTypeRelationList, chartOfAccountTypeTable };
+export { chartOfAccountTypeTable };
 

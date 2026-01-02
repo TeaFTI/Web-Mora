@@ -2,7 +2,7 @@
  * Profile Email Table Schema
  */
 
-import { relations } from "drizzle-orm";
+import { defineRelations } from "drizzle-orm";
 import { pgTable, primaryKey, uuid } from "drizzle-orm/pg-core";
 
 import { TABLE_PREFIX } from "@/configuration/database";
@@ -24,17 +24,22 @@ const profileEmailTable = pgTable(`${TABLE_PREFIX}profile_email`,
   ],
 );
 
-const profileEmailRelationList = relations(
-  profileEmailTable,
-  ({ one }) => ({
-    profile: one(profileTable, {
-      fields: [profileEmailTable.profileId],
-      references: [profileTable.id],
-    }),
-    email: one(emailTable, {
-      fields: [profileEmailTable.profileId],
-      references: [emailTable.id],
-    }),
+const profileEmailRelationList = defineRelations(
+  { profileTable, profileEmailTable, emailTable },
+  (relation) => ({
+    profileTable: {
+      emailList: relation.many.emailTable({
+        from: relation.profileTable.id.through(
+          relation.profileEmailTable.profileId,
+        ),
+        to: relation.emailTable.id.through(
+          relation.profileEmailTable.emailId,
+        ),
+      })
+    },
+    emailTable: {
+      profileList: relation.many.profileTable()
+    },
   })
 );
 

@@ -2,8 +2,8 @@
  * Database Unplant
  */
 
-import { getTableName } from "drizzle-orm";
-import { PgTable } from "drizzle-orm/pg-core";
+import { getTableName, is, Table } from "drizzle-orm";
+import { isPgEnum, PgEnum, PgTable } from "drizzle-orm/pg-core";
 
 import { pgClient } from ".";
 import * as Schema from "./schema";
@@ -18,16 +18,11 @@ async function unplant() {
 
     console.debug("Unseeding Database...");
 
+    // Filter Table
     const tableList = Object.entries(Schema)
-      .filter(([key]) => key.endsWith("Table"))
-      .filter(([, value]) =>
-        value && typeof value === "object" && "getSQL" in value
-      );
-    console.debug(`Table List Length: ${tableList.length}`);
-
-    // ${tableList.length}`);
-
-    // const typeList = [];
+      .filter(([, value]) => is(value, Table));
+    // console.debug("Table List Length:", tableList.length);
+    // console.debug("Table List:", tableList.map(([name]) => name));
 
     // Unseed (DROP) Table
     for (const [, tableValue] of tableList) {
@@ -37,9 +32,21 @@ async function unplant() {
       console.debug(`Unseeding ${tableName} Table Complete.`);
     }
 
+    // Filter Enum
+    const typeList = Object.entries(Schema)
+      .filter(([, value]) => isPgEnum(value));
+    // console.debug("Enum List Length:", enumList.length);
+    // console.debug("Enum List:", enumList.map(([name]) => name));
+
     // Unseed (DROP) Type
-    // for (const typeItem of typeList) {
-    // }
+    for (const [, typeValue] of typeList) {
+      const typeName = (
+        typeValue as unknown as PgEnum<[string, ...string[]]>
+      ).enumName;
+      const query = `DROP TYPE IF EXISTS "${typeName}" CASCADE;`;
+      await pgClient.query(query);
+      console.debug(`Unseeding ${typeName} Type Complete.`);
+    }
 
     // Unseed (DROP) drizzle Schema
     await pgClient.query(`DROP SCHEMA IF EXISTS "drizzle" CASCADE;`);

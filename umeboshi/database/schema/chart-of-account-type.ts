@@ -12,6 +12,8 @@ const chartOfAccountTypeTable = pgTable(
   {
     id: uuid("id").primaryKey().default(sql`uuidv7()`),
     name: text("name").unique().notNull(),
+    displayName: text("display_name"),
+    description: text("description"),
   },
 );
 

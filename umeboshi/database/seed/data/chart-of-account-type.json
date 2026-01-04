@@ -1,0 +1,32 @@
+[
+  {
+    "name": "asset",
+    "displayName": "Asset",
+    "description": "Asset"
+  },
+  {
+    "name": "liability",
+    "displayName": "Liability",
+    "description": "Liability"
+  },
+  {
+    "name": "equity",
+    "displayName": "Equity",
+    "description": "Equity"
+  },
+  {
+    "name": "revenue",
+    "displayName": "Revenue",
+    "description": "Revenue"
+  },
+  {
+    "name": "expense",
+    "displayName": "Expense",
+    "description": "Expense"
+  },
+  {
+    "name": "other",
+    "displayName": "Other",
+    "description": "Other"
+  }
+]

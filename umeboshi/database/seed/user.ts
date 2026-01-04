@@ -8,7 +8,7 @@ import userList from "./data/user.json";
 
 async function seed(drizzleClient: DrizzleClient) {
   await drizzleClient.insert(userTable).values(userList);
-};
+}
 
-const userSeed = { seed };
-export default userSeed;
+export default seed;
+export { seed };

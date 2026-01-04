@@ -2,10 +2,10 @@
  * Database
  */
 
-import PostgreSQLConfiguration from "@/configuration/database";
 import { drizzle } from "drizzle-orm/node-postgres";
 import { Client, Pool } from "pg";
 
+import PostgreSQLConfiguration from "@/configuration/database";
 import * as Schema from "./schema";
 
 const DATABASE_URI = PostgreSQLConfiguration.DATABASE_URI;

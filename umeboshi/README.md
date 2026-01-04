@@ -47,6 +47,9 @@ bun run --bun --cwd umeboshi/ dev
 
 ### Address
 
+- [Country](https://en.wikipedia.org/wiki/Country)
+- [Sovereign state](https://en.wikipedia.org/wiki/Sovereign_state)
+- [List of sovereign states](https://en.wikipedia.org/wiki/List_of_sovereign_states)
 - [Addressing and Postcode Manual](https://www.upu.int/UPU/media/upu/publications/manualAddressingAddressingAndPostcodeManualEn.pdf)
 - [The Universal Postal Union, UPU Addressing Standards and ISO 19160](https://committee.iso.org/files/live/users/fh/aj/aj/tc211contributor%40iso.org/files/Presentations/2012-06%20Toulouse/Piotrowski_UPU.pdf)
 - [STANDARDIZED ADDRESS FORMAT DESCRIPTION (SAFD)](https://www.upu.int/UPU/media/upu/PostalEntitiesFiles/s42/usaEn.pdf)

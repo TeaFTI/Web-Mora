@@ -30,5 +30,5 @@ export const drizzleClient = drizzle({
 });
 
 export { pgClient, pgPool };
-export type drizzleClient = typeof drizzleClient;
+export type DrizzleClient = typeof drizzleClient;
 export default drizzleClient;

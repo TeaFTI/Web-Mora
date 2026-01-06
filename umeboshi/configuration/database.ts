@@ -9,6 +9,7 @@ const TABLE_PREFIX = process.env.UMEBOSHI_TABLE_PREFIX ?? "";
 const PostgreSQLSchema = z.object({
   NODE_ENV: z.enum([
     "development",
+    "test",
     "production",
   ]).default("development"),
   DATABASE_SCHEME: z.string().default("postgresql"),
@@ -54,4 +55,3 @@ export {
   PostgreSQLSchema,
   TABLE_PREFIX
 };
-

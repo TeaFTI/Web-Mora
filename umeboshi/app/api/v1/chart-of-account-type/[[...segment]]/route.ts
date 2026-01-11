@@ -36,12 +36,13 @@ async function GET(request: NextRequest, {
           uuid: chartOfAccountTypeKey,
           expand: expandRelation,
         }));
-      } else {
-        return Response.json(await chartOfAccountType.retrieveByName({
-          name: chartOfAccountTypeKey,
-          expand: expandRelation,
-        }));
       }
+      // else {
+      //   return Response.json(await chartOfAccountType.retrieveByName({
+      //     name: chartOfAccountTypeKey,
+      //     expand: expandRelation,
+      //   }));
+      // }
     }
 
     return Response.json(await chartOfAccountType.retrieve({

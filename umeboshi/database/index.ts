@@ -2,12 +2,14 @@
  * Database
  */
 
-import { defineRelations } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/node-postgres";
 import { Client, Pool } from "pg";
 
 import PostgreSQLConfiguration from "@/configuration/database";
 import * as schema from "./schema";
+import {
+  chartOfAccountRelationList,
+} from "./schema";
 
 const DATABASE_URI = PostgreSQLConfiguration.DATABASE_URI;
 // console.debug(`Database URI: ${DATABASE_URI}`);
@@ -21,11 +23,16 @@ const pgPool = new Pool({
   max: 5,
 })
 
+// Combined relations from schema exports
+const schemaRelationList = {
+  ...chartOfAccountRelationList,
+};
+
 export const drizzleClient = drizzle({
   client: pgPool,
   schema: schema,
   // Required For Relational Query
-  relations: defineRelations(schema, () => ({})),
+  relations: schemaRelationList,
   logger: true,
 });
 

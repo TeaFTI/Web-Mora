@@ -16,14 +16,17 @@ import {
 import { TABLE_PREFIX } from "@/configuration/database";
 
 import { chartOfAccountTypeTable } from "./chart-of-account-type";
+// import transactionTable from "./transaction";
 
 const chartOfAccountTable = pgTable(`${TABLE_PREFIX}chart_of_account`,
   {
     id: uuid("id").primaryKey().default(sql`uuidv7()`),
     parentId: uuid("parent_id")
       .references((): AnyPgColumn => chartOfAccountTable.id),
-    typeId: uuid("chart_of_account_type_id")
+    chartOfAccountTypeId: uuid("chart_of_account_type_id")
       .references(() => chartOfAccountTypeTable.id),
+    // transactionId: uuid("transaction_id")
+    //   .references(() => transactionTable.id),
     name: text("name").notNull(),
     displayName: text("display_name"),
     description: text("description"),
@@ -47,7 +50,7 @@ const chartOfAccountRelationList = defineRelations(
         to: relation.chartOfAccountTable.id,
       }),
       chartOfAccountType: relation.one.chartOfAccountTypeTable({
-        from: relation.chartOfAccountTable.typeId,
+        from: relation.chartOfAccountTable.chartOfAccountTypeId,
         to: relation.chartOfAccountTypeTable.id,
       }),
     },

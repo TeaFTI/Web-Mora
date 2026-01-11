@@ -8,7 +8,25 @@ import { Client, Pool } from "pg";
 import PostgreSQLConfiguration from "@/configuration/database";
 import * as schema from "./schema";
 import {
+  accountRelationList,
+  accountTransactionRelationList,
+  addressRelationList,
   chartOfAccountRelationList,
+  cityRelationList,
+  contactRelationList,
+  contractItemRelationList,
+  contractRelationList,
+  countryCurrencyRelationList,
+  divisionRelationList,
+  journalRelationList,
+  profileAddressRelationList,
+  profileEmailRelationList,
+  profileTelephoneNumberRelation,
+  propertyRelationList,
+  transactionRelationList,
+  userAccountRelationList,
+  userContractRelationList,
+  userRelationList
 } from "./schema";
 
 const DATABASE_URI = PostgreSQLConfiguration.DATABASE_URI;
@@ -24,15 +42,33 @@ const pgPool = new Pool({
 })
 
 // Combined relations from schema exports
-const schemaRelationList = {
+const relationList = {
+  ...accountRelationList,
+  ...accountTransactionRelationList,
+  ...addressRelationList,
   ...chartOfAccountRelationList,
+  ...cityRelationList,
+  ...contactRelationList,
+  ...contractItemRelationList,
+  ...contractRelationList,
+  ...countryCurrencyRelationList,
+  ...divisionRelationList,
+  ...journalRelationList,
+  ...profileAddressRelationList,
+  ...profileEmailRelationList,
+  ...profileTelephoneNumberRelation,
+  ...propertyRelationList,
+  ...transactionRelationList,
+  ...userAccountRelationList,
+  ...userContractRelationList,
+  ...userRelationList,
 };
 
 export const drizzleClient = drizzle({
   client: pgPool,
   schema: schema,
   // Required For Relational Query
-  relations: schemaRelationList,
+  relations: relationList,
   logger: true,
 });
 

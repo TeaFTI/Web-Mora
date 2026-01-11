@@ -16,7 +16,6 @@ import {
 import { TABLE_PREFIX } from "@/configuration/database";
 
 import { chartOfAccountTypeTable } from "./chart-of-account-type";
-// import transactionTable from "./transaction";
 
 const chartOfAccountTable = pgTable(`${TABLE_PREFIX}chart_of_account`,
   {
@@ -25,8 +24,6 @@ const chartOfAccountTable = pgTable(`${TABLE_PREFIX}chart_of_account`,
       .references((): AnyPgColumn => chartOfAccountTable.id),
     chartOfAccountTypeId: uuid("chart_of_account_type_id")
       .references(() => chartOfAccountTypeTable.id),
-    // transactionId: uuid("transaction_id")
-    //   .references(() => transactionTable.id),
     name: text("name").notNull(),
     displayName: text("display_name"),
     description: text("description"),

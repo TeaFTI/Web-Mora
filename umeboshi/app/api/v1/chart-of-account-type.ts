@@ -3,6 +3,8 @@
  * API (Application Programming Interface) Version 1
  */
 
+import { eq } from "drizzle-orm";
+
 import drizzleClient from "@/database";
 import {
   ChartOfAccountType,
@@ -69,26 +71,47 @@ async function create({
   data,
 }: {
   data: ChartOfAccountType;
-}) {
-  const chartOfAccountTypeData = await retrieveByName({
-    name: data.name,
-  });
+}): Promise<ChartOfAccountType | undefined> {
+  return await drizzleClient
+    .insert(chartOfAccountTypeTable)
+    .values(data)
+    .returning()
+    .then((result) => result[0]);
+}
 
-  if (!chartOfAccountTypeData) {
-    return await drizzleClient
-      .insert(chartOfAccountTypeTable)
-      .values(data)
-      .returning()
-      .then((result) => result[0]);
-  }
+async function updateByUuid({
+  uuid,
+  data,
+}: {
+  uuid: string;
+  data: ChartOfAccountType;
+}): Promise<ChartOfAccountType | undefined> {
+  return await drizzleClient
+    .update(chartOfAccountTypeTable)
+    .set(data)
+    .where(eq(chartOfAccountTypeTable.id, uuid))
+    .returning()
+    .then((result) => result[0]);
+}
 
-  return chartOfAccountTypeData;
+async function deleteByUuid({
+  uuid,
+}: {
+  uuid: string;
+}): Promise<ChartOfAccountType | undefined> {
+  return await drizzleClient
+    .delete(chartOfAccountTypeTable)
+    .where(eq(chartOfAccountTypeTable.id, uuid))
+    .returning()
+    .then((result) => result[0]);
 }
 
 export {
   create,
+  deleteByUuid,
   retrieve,
   retrieveByName,
-  retrieveByUuid
+  retrieveByUuid,
+  updateByUuid
 };
 

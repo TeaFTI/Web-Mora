@@ -65,7 +65,10 @@ async function GET(request: NextRequest, {
  */
 async function POST(request: NextRequest) {
   try {
-
+    return Response.json(
+      await chartOfAccountType.create({ data: await request.json() }),
+      { status: 201 },
+    );
   } catch (error) {
     console.error(error);
     return new Response(

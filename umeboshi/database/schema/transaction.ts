@@ -42,7 +42,7 @@ const transactionRelationList = defineRelations(
       }),
     },
     transactionTypeTable: {
-      transactionList: relation.many.transactionTable()
+      transactionList: relation.many.transactionTable(),
     },
   })
 );

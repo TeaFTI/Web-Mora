@@ -22,7 +22,17 @@ async function retrieve({
 }: {
   expand?: boolean;
 } = {}): Promise<ChartOfAccountType[]> {
-  return drizzleClient.query.chartOfAccountTypeTable.findMany();
+  console.debug("Expand:", expand);
+
+  const result = await drizzleClient.query.chartOfAccountTypeTable.findMany({
+    with: {
+      chartOfAccountList: expand,
+    }
+  });
+
+  console.debug("Chart of Account Type List:", result);
+
+  return result;
 }
 
 /**
@@ -43,7 +53,10 @@ async function retrieveByUuid({
   expand?: boolean;
 }): Promise<ChartOfAccountType | undefined> {
   return await drizzleClient.query.chartOfAccountTypeTable.findFirst({
-    where: { id: uuid }
+    where: { id: uuid },
+    with: {
+      chartOfAccountList: expand,
+    }
   });
 }
 

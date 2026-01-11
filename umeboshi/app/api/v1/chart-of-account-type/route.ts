@@ -3,12 +3,15 @@
  * API (Application Programming Interface) Version 1 Route
  */
 
-import drizzleClient from "@/database";
-import { ChartOfAccountType } from "@/database/schema";
+import { chartOfAccountType } from "@api/v1";
 
 async function GET(request: Request) {
   try {
-    return Response.json(await retrieve());
+    const expandRelation = /expand\/?$/.test(request.url);
+
+    return Response.json(await chartOfAccountType.retrieve({
+      expand: expandRelation,
+    }));
   } catch (error) {
     console.error(error);
     return new Response(
@@ -16,10 +19,6 @@ async function GET(request: Request) {
       { status: 500 }
     );
   }
-}
-
-async function retrieve(): Promise<ChartOfAccountType[]> {
-  return drizzleClient.query.chartOfAccountTypeTable.findMany();
 }
 
 export { GET };

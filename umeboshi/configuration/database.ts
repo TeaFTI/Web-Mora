@@ -12,12 +12,12 @@ const PostgreSQLSchema = z.object({
     "test",
     "production",
   ]).default("development"),
-  DATABASE_SCHEME: z.string().default("postgresql"),
-  DATABASE_USERNAME: z.string(),
-  DATABASE_PASSWORD: z.string(),
-  DATABASE_HOST: z.string(),
-  DATABASE_PORT: z.coerce.number().default(5432),
-  DATABASE_NAME: z.string(),
+  UMEBOSHI_DATABASE_SCHEME: z.string().default("postgresql"),
+  UMEBOSHI_DATABASE_USERNAME: z.string(),
+  UMEBOSHI_DATABASE_PASSWORD: z.string(),
+  UMEBOSHI_DATABASE_HOST: z.string(),
+  UMEBOSHI_DATABASE_PORT: z.coerce.number().default(5432),
+  UMEBOSHI_DATABASE_NAME: z.string(),
   DATABASE_URI: z.string().default(""),
 });
 

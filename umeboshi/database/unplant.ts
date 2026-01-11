@@ -6,7 +6,7 @@ import { getTableName, is, Table } from "drizzle-orm";
 import { isPgEnum, PgEnum, PgTable } from "drizzle-orm/pg-core";
 
 import { pgClient } from ".";
-import * as Schema from "./schema";
+import * as schema from "./schema";
 
 async function unplant() {
   try {
@@ -18,8 +18,13 @@ async function unplant() {
 
     console.debug("Unseeding Database...");
 
+    // const relationList = Object.entries(schema)
+    //   .filter(([, value]) => !is(value, Table) && !isPgEnum(value));
+
+    // console.debug("Relation List:", relationList.map(([name]) => name));
+
     // Filter Table
-    const tableList = Object.entries(Schema)
+    const tableList = Object.entries(schema)
       .filter(([, value]) => is(value, Table));
     // console.debug("Table List Length:", tableList.length);
     // console.debug("Table List:", tableList.map(([name]) => name));
@@ -33,7 +38,7 @@ async function unplant() {
     }
 
     // Filter Enum
-    const typeList = Object.entries(Schema)
+    const typeList = Object.entries(schema)
       .filter(([, value]) => isPgEnum(value));
     // console.debug("Enum List Length:", enumList.length);
     // console.debug("Enum List:", enumList.map(([name]) => name));

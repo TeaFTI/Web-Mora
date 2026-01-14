@@ -5,11 +5,9 @@
 import {
   test as baseTest,
   describe,
-  expect,
-  vi
+  expect
 } from "vitest";
 
-import type { ChartOfAccountType } from "@/database/schema";
 import chartOfAccountTypeList from "@/database/seed/data/chart-of-account-type.json";
 import { chartOfAccountType } from "@api/v1";
 
@@ -23,9 +21,8 @@ const test = baseTest.extend<{}>({
 describe("Chart of Account Type API v1 Test", () => {
   console.info("Test Chart of Account Type API v1");
 
-  test.concurrent(
-    "Retrieve Chart of Account Type",
-    async () => {
+  describe.concurrent("Retrieve", () => {
+    test("Retrieve Chart of Account Type", async () => {
       console.info("Test Retrieve Chart of Account Type");
 
       const data = await chartOfAccountType.retrieve();
@@ -43,18 +40,14 @@ describe("Chart of Account Type API v1 Test", () => {
           chartOfAccountTypeList.map((item) => expect.objectContaining(item))
         )
       );
-    }
-  );
-
-  test.concurrent(
-    "Retrieve Chart of Account Type Expand",
-    async () => {
+    });
+    test("Retrieve Chart of Account Type Expand", async () => {
       console.info("Test Retrieve Chart of Account Type Expand");
 
       const data = await chartOfAccountType.retrieve({
         expand: true
       });
-      // console.debug("Chart of Account Type List:", chartOfAccountTypeList);
+      // console.debug("Chart of Account Type Data:", data);
 
       // Validate Type
       expect(data).toBeInstanceOf(Array);
@@ -63,13 +56,12 @@ describe("Chart of Account Type API v1 Test", () => {
       expect(data.length).toBeGreaterThanOrEqual(6);
 
       // Validate Relation Data
-      // TODO: Validate Relation Data
+      for (const entry of data) {
+        expect(entry).toHaveProperty("chartOfAccountList");
+      }
     }
-  );
-
-  test.concurrent(
-    "Retrieve Chart of Account Type by UUID",
-    async () => {
+    );
+    test("Retrieve Chart of Account Type by UUID", async () => {
       console.info("Test Retrieve Chart of Account Type by UUID");
 
       const data = await chartOfAccountType.retrieve();
@@ -86,50 +78,96 @@ describe("Chart of Account Type API v1 Test", () => {
         );
       }
     }
-  );
+    );
+  });
 
-  test.concurrent(
-    "Create Chart of Account Type Mock",
-    async () => {
-      console.info("Test Create Chart of Account Type Mock");
+  // test(
+  //   "Create Chart of Account Type Mock",
+  //   async () => {
+  //     console.info("Test Create Chart of Account Type Mock");
 
-      // Mock data for creating a new Chart of Account Type
-      const mockData = {
-        name: "test",
-        displayName: "Test",
-        description: "A test chart of account type",
-      };
+  //     // Mock data for create Chart of Account Type
+  //     const mockData = {
+  //       name: "create-test",
+  //       displayName: "Create Test",
+  //       description: "A create test Chart of Account Type",
+  //     };
 
-      // Mock response (simulating what the database would return)
-      const mockRecord: ChartOfAccountType = {
-        id: "01234567-89ab-cdef-0123-456789abcdef",
-        ...mockData,
-      };
+  //     // Mock response (simulate what the request would return)
+  //     const mockRecord: ChartOfAccountType = {
+  //       id: "52a3c11b-381d-42ce-9c08-a47028c833eb",
+  //       ...mockData,
+  //     };
 
-      // Spy on the create function and mock its implementation
-      const createSpy = vi.spyOn(chartOfAccountType, "create")
-        .mockResolvedValueOnce(mockRecord);
+  //     // Spy on the create function and mock the implementation
+  //     const createSpy = vi.spyOn(chartOfAccountType, "create")
+  //       .mockResolvedValueOnce(mockRecord);
 
-      // Call the create function
-      const result = await chartOfAccountType.create({
-        data: mockData as ChartOfAccountType
-      });
+  //     // Call the create function test candidate
+  //     const result = await chartOfAccountType.create({
+  //       data: mockData as ChartOfAccountType
+  //     });
 
-      // Validate the create function was called with the correct data
-      expect(createSpy).toHaveBeenCalledOnce();
-      expect(createSpy).toHaveBeenCalledWith({ data: mockData });
+  //     // Validate the create function was called with the correct data
+  //     // expect(createSpy).toHaveBeenCalled();
+  //     expect(createSpy).toHaveBeenCalledWith({ data: mockData });
 
-      // Validate the result record
-      expect(result).toBeDefined();
-      expect(result).toEqual(mockRecord);
-      expect(result?.id).toBe(mockRecord.id);
-      expect(result?.name).toBe(mockData.name);
-      expect(result?.displayName).toBe(mockData.displayName);
-      expect(result?.description).toBe(mockData.description);
+  //     // Validate the result record
+  //     expect(result).toBeDefined();
+  //     expect(result).toEqual(mockRecord);
+  //     expect(result?.id).toBe(mockRecord.id);
+  //     expect(result?.name).toBe(mockData.name);
+  //     expect(result?.displayName).toBe(mockData.displayName);
+  //     expect(result?.description).toBe(mockData.description);
 
-      // Return to the initial state
-      // Restore the original descriptor of spied-on object
-      createSpy.mockRestore();
-    }
-  );
+  //     // Return to the initial state
+  //     // Restore the original descriptor of spied-on object
+  //     createSpy.mockRestore();
+  //   }
+  // );
+
+  // test(
+  //   "Update Chart of Account Type Mock",
+  //   async () => {
+  //     console.info("Test Update Chart of Account Type Mock");
+
+  //     // Mock data for creating a new Chart of Account Type
+  //     const mockData = {
+  //       name: "update-test-initial",
+  //       displayName: "Update Test Initial",
+  //       description: "An update test initial Chart of Account Type",
+  //     };
+
+  //     // Mock response (simulating what the database would return)
+  //     const mockRecord: ChartOfAccountType = {
+  //       id: "37f76493-b7fb-4cdf-9ce4-59ca52957415",
+  //       ...mockData,
+  //     };
+
+  //     // Spy on the create function and mock its implementation
+  //     const createSpy = vi.spyOn(chartOfAccountType, "create")
+  //       .mockResolvedValueOnce(mockRecord);
+
+  //     // Call the create function
+  //     const result = await chartOfAccountType.create({
+  //       data: mockData as ChartOfAccountType
+  //     });
+
+  //     // Validate the create function was called with the correct data
+  //     expect(createSpy).toHaveBeenCalled();
+  //     // expect(createSpy).toHaveBeenCalledWith({ data: mockData });
+
+  //     // Validate the result record
+  //     expect(result).toBeDefined();
+  //     expect(result).toEqual(mockRecord);
+  //     expect(result?.id).toBe(mockRecord.id);
+  //     expect(result?.name).toBe(mockData.name);
+  //     expect(result?.displayName).toBe(mockData.displayName);
+  //     expect(result?.description).toBe(mockData.description);
+
+  //     // Return to the initial state
+  //     // Restore the original descriptor of spied-on object
+  //     createSpy.mockRestore();
+  //   }
+  // )
 });

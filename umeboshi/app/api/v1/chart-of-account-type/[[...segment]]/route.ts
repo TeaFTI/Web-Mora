@@ -24,28 +24,29 @@ async function GET(request: NextRequest, {
   params: Promise<{ segment?: string[] }>
 }) {
   // Parse Identifier
-  const chartOfAccountTypeKey = (await params).segment?.[0];
+  const segmentList = (await params).segment;
+  console.debug("Segment List:", segmentList);
 
   try {
-    // Check if the URL end with "expand" or "expand/"
-    const expandRelation = /expand\/?$/.test(request.url);
+    const expandRelation = segmentList?.at(-1) === "expand";
+    const identifier = segmentList?.[0] !== "expand"
+      ? segmentList?.[0] : undefined;
 
-    if (chartOfAccountTypeKey) {
-      if (isValidUuid(chartOfAccountTypeKey)) {
-        return Response.json(await chartOfAccountType.retrieveByUuid({
-          uuid: chartOfAccountTypeKey,
-          expand: expandRelation,
-        }));
-      }
-      // else {
-      //   return Response.json(await chartOfAccountType.retrieveByName({
-      //     name: chartOfAccountTypeKey,
-      //     expand: expandRelation,
-      //   }));
-      // }
+    if (!identifier) {
+      return Response.json(await chartOfAccountType.retrieve({
+        expand: expandRelation
+      }));
     }
 
-    return Response.json(await chartOfAccountType.retrieve({
+    if (isValidUuid(identifier)) {
+      return Response.json(await chartOfAccountType.retrieveByUuid({
+        uuid: identifier,
+        expand: expandRelation,
+      }));
+    }
+
+    return Response.json(await chartOfAccountType.retrieveByName({
+      name: identifier,
       expand: expandRelation,
     }));
   } catch (error) {

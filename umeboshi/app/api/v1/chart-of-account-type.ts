@@ -30,8 +30,6 @@ async function retrieve({
     }
   });
 
-  console.debug("Chart of Account Type List:", result);
-
   return result;
 }
 

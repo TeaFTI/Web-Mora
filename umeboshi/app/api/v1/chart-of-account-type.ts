@@ -52,9 +52,7 @@ async function retrieveByUuid({
 }): Promise<ChartOfAccountType | undefined> {
   return await drizzleClient.query.chartOfAccountTypeTable.findFirst({
     where: { id: uuid },
-    with: {
-      chartOfAccountList: expand,
-    }
+    with: expand ? { chartOfAccountList: true } : undefined,
   });
 }
 
@@ -74,10 +72,18 @@ async function retrieveByName({
   expand?: boolean;
 }): Promise<ChartOfAccountType | undefined> {
   return await drizzleClient.query.chartOfAccountTypeTable.findFirst({
-    where: { name: name }
+    where: { name: name },
+    with: expand ? { chartOfAccountList: true } : undefined,
   });
 }
 
+/**
+ * Create and return the new Chart of Account Type.
+ *
+ * @param data - The data for the new Chart of Account Type.
+ * @returns A promise that resolve to the created Chart of Account Type
+ * object.
+ */
 async function create({
   data,
 }: {
@@ -90,6 +96,15 @@ async function create({
     .then((result) => result[0]);
 }
 
+/**
+ * Update and return the Chart of Account Type by UUID.
+ *
+ * @param uuid - The UUID (Universal Unique IDentifier) of the Chart of
+ * Account Type.
+ * @param data - The data for the Chart of Account Type.
+ * @returns A promise that resolve to the updated Chart of Account Type
+ * object.
+ */
 async function updateByUuid({
   uuid,
   data,
@@ -105,6 +120,14 @@ async function updateByUuid({
     .then((result) => result[0]);
 }
 
+/**
+ * Delete and return the Chart of Account Type by UUID.
+ *
+ * @param uuid - The UUID (Universal Unique IDentifier) of the Chart of
+ * Account Type.
+ * @returns A promise that resolve to the deleted Chart of Account Type
+ * object.
+ */
 async function deleteByUuid({
   uuid,
 }: {

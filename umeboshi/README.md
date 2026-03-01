@@ -15,22 +15,28 @@
 
 ### npm
 
-```bash
+```shell
 npm install --prefix umeboshi/
 ```
 
-```bash
+```shell
 npm run dev --prefix umeboshi/
 ```
 
 ### Bun
 
-```bash
+```shell
 bun install --cwd umeboshi/
 ```
 
-```bash
+```shell
 bun run --bun --cwd umeboshi/ dev
+```
+
+## Test
+
+```shell
+npx vitest run test\api\v1\chart-of-account-type.test.ts
 ```
 
 ## Reference

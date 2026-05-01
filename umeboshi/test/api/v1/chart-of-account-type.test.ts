@@ -62,8 +62,7 @@ describe("Chart of Account Type API v1 Test", () => {
       for (const entry of data) {
         expect(entry).toHaveProperty("chartOfAccountList");
       }
-    }
-    );
+    });
     test("Retrieve Chart of Account Type by UUID", async () => {
       console.info("Test Retrieve Chart of Account Type by UUID");
 
@@ -80,8 +79,12 @@ describe("Chart of Account Type API v1 Test", () => {
           expect.objectContaining(entry)
         );
       }
-    }
-    );
+    });
+    test("Create Chart of Account Type", async () => {
+      console.info("Test Create Chart of Account Type");
+
+
+    });
   });
 
   describe.concurrent("Retrieve Mock", () => {

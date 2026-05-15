@@ -19,7 +19,7 @@ export default defineConfig({
   plugins: [
     // TanStack
     tanstackStart(),
-    devtools({}),
+    devtools(),
     // tailwindcss
     tailwindcss(),
     // Vite React

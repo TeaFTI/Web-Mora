@@ -14,10 +14,10 @@ import {
   Scripts,
 } from "@tanstack/react-router";
 
+import { ModeToggle } from "~/component/theme-toggle";
 import { siteConfiguration } from "~/configuration/site";
-// import { getThemeServerFn } from "~/server/theme";
+import { ThemeProvider } from "~/context/theme";
 
-// import { ThemeProvider, useTheme } from "~/context/theme";
 import globalCss from "../res/css/global.css?url";
 
 export const Route = createRootRoute({
@@ -45,7 +45,10 @@ export const Route = createRootRoute({
 function RootComponent() {
   return (
     <RootDocument>
-      <Outlet />
+      <ThemeProvider defaultTheme="system" storageKey="theme">
+        <ModeToggle />
+        <Outlet />
+      </ThemeProvider>
       <TanStackDevtools />
     </RootDocument>
   )
@@ -53,7 +56,7 @@ function RootComponent() {
 
 function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <HeadContent />
       </head>

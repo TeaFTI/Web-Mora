@@ -6,13 +6,13 @@
 
 import type { ReactNode } from "react";
 
+import { TanStackDevtools } from "@tanstack/react-devtools";
 import {
   createRootRoute,
   HeadContent,
   Outlet,
   Scripts,
 } from "@tanstack/react-router";
-// import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 
 import { siteConfiguration } from "~/configuration/site";
 // import { getThemeServerFn } from "~/server/theme";
@@ -46,6 +46,7 @@ function RootComponent() {
   return (
     <RootDocument>
       <Outlet />
+      <TanStackDevtools />
     </RootDocument>
   )
 }

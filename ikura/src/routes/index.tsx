@@ -1,13 +1,17 @@
+/**
+ * Index Route
+ */
+
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/")({
-  component: RouteComponent,
+  component: Index,
 })
 
-function RouteComponent() {
+function Index() {
   return (
     <div>
-      <h1>Hello "/"!</h1>
+      <h1>Hello Index!</h1>
     </div>
   );
 };

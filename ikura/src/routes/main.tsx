@@ -2,7 +2,7 @@ import {
   createFileRoute,
   Outlet,
 } from "@tanstack/react-router";
-import { ModeToggle } from "~/component/theme-toggle";
+import { ThemeToggle } from "~/component/theme-toggle";
 
 export const Route = createFileRoute("/main")({
   component: MainLayout,
@@ -12,7 +12,7 @@ function MainLayout() {
   return (
     <div>
       <h1>Main Layout</h1>
-      <ModeToggle />
+      <ThemeToggle />
       <Outlet />
     </div>
   );

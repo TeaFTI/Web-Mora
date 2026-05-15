@@ -14,7 +14,7 @@ import {
   Scripts,
 } from "@tanstack/react-router";
 
-import { ModeToggle } from "~/component/theme-toggle";
+import { ThemeToggle } from "~/component/theme-toggle";
 import { siteConfiguration } from "~/configuration/site";
 import { ThemeProvider } from "~/context/theme";
 
@@ -46,7 +46,7 @@ function RootComponent() {
   return (
     <RootDocument>
       <ThemeProvider defaultTheme="system" storageKey="theme">
-        <ModeToggle />
+        <ThemeToggle />
         <Outlet />
       </ThemeProvider>
       <TanStackDevtools />

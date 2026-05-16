@@ -41,12 +41,13 @@ export const Route = createRootRoute({
     ],
   }),
   component: RootComponent,
+  notFoundComponent: NotFoundComponent,
 })
 
 function RootComponent() {
   return (
     <RootDocument>
-      <ThemeProvider defaultTheme="system" storageKey="theme">
+      <ThemeProvider defaultTheme="system" storageKey="mode">
         <ModeToggle />
         <Outlet />
       </ThemeProvider>
@@ -72,4 +73,8 @@ function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
       </body>
     </html>
   );
+}
+
+function NotFoundComponent() {
+  return <p>404 — Page not found</p>
 }

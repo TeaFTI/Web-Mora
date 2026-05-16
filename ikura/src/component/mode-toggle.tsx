@@ -9,7 +9,7 @@ import {
 } from "~/_shadcn/interface/dropdown-menu"
 import { useTheme } from "~/context/theme"
 
-export function ThemeToggle() {
+export function ModeToggle() {
   const { setTheme } = useTheme()
 
   return (

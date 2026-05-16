@@ -13,8 +13,9 @@ import {
   Outlet,
   Scripts,
 } from "@tanstack/react-router";
+import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools';
 
-import { ThemeToggle } from "~/component/theme-toggle";
+import { ModeToggle } from "~/component/mode-toggle";
 import { siteConfiguration } from "~/configuration/site";
 import { ThemeProvider } from "~/context/theme";
 
@@ -46,10 +47,15 @@ function RootComponent() {
   return (
     <RootDocument>
       <ThemeProvider defaultTheme="system" storageKey="theme">
-        <ThemeToggle />
+        <ModeToggle />
         <Outlet />
       </ThemeProvider>
-      <TanStackDevtools />
+      <TanStackDevtools plugins={[
+        {
+          name: "TanStack Router",
+          render: <TanStackRouterDevtoolsPanel />,
+        },
+      ]} />
     </RootDocument>
   )
 }

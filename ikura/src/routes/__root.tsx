@@ -15,7 +15,7 @@ import {
 } from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools';
 
-import { ModeToggle } from "~/component/mode-toggle";
+import { ThemeToggle } from "~/component/theme-toggle";
 import { siteConfiguration } from "~/configuration/site";
 import { ThemeProvider } from "~/context/theme";
 
@@ -47,8 +47,8 @@ export const Route = createRootRoute({
 function RootComponent() {
   return (
     <RootDocument>
-      <ThemeProvider defaultTheme="system" storageKey="mode">
-        <ModeToggle />
+      <ThemeProvider defaultTheme="system" storageKey="theme">
+        <ThemeToggle />
         <Outlet />
       </ThemeProvider>
       <TanStackDevtools plugins={[

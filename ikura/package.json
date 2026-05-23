@@ -25,6 +25,7 @@
     "@tanstack/react-start": "^1.168",
     "class-variance-authority": "^0.7",
     "clsx": "^2.1",
+    "drizzle-orm": "^1.0.0-beta.22",
     "lucide-react": "^1.16",
     "react": "^19.2",
     "react-dom": "^19.2",
@@ -40,6 +41,7 @@
     "@types/react": "^19.2",
     "@types/react-dom": "^19.2",
     "@vitejs/plugin-react": "^6.0",
+    "drizzle-kit": "^1.0.0-beta.22",
     "tailwindcss": "^4.3",
     "typescript": "^6.0",
     "vite": "^8.0"

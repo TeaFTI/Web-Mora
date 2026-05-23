@@ -15,7 +15,6 @@ import {
 } from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools';
 
-import { ThemeToggle } from "~/component/theme-toggle";
 import { siteConfiguration } from "~/configuration/site";
 import { ThemeProvider } from "~/context/theme";
 
@@ -40,23 +39,28 @@ export const Route = createRootRoute({
       { rel: "icon", href: "/favicon.ico" },
     ],
   }),
-  component: RootComponent,
   notFoundComponent: NotFoundComponent,
+  shellComponent: RootDocument,
+  component: RootComponent,
 })
 
 function RootComponent() {
   return (
     <RootDocument>
       <ThemeProvider defaultTheme="system" storageKey="theme">
-        <ThemeToggle />
         <Outlet />
       </ThemeProvider>
-      <TanStackDevtools plugins={[
-        {
-          name: "TanStack Router",
-          render: <TanStackRouterDevtoolsPanel />,
-        },
-      ]} />
+      <TanStackDevtools
+        config={{
+          position: "bottom-right",
+        }}
+        plugins={[
+          {
+            name: "TanStack Router",
+            render: <TanStackRouterDevtoolsPanel />,
+          },
+        ]}
+      />
     </RootDocument>
   )
 }

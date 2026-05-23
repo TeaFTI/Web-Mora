@@ -4,14 +4,17 @@
 
 import { createFileRoute } from "@tanstack/react-router";
 
+import { ThemeToggle } from "~/component/theme-toggle";
+
 export const Route = createFileRoute("/")({
   component: Index,
 })
 
 function Index() {
   return (
-    <div>
+    <main>
+      <ThemeToggle />
       <h1>Hello Index!</h1>
-    </div>
+    </main>
   );
 };

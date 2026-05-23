@@ -1,19 +1,21 @@
 import {
-  createFileRoute,
-  Outlet,
+  createFileRoute
 } from "@tanstack/react-router";
-import { ThemeToggle } from "~/component/theme-toggle";
+
+import { SidebarProvider } from "~/_shadcn/interface/sidebar";
+
+import { MainSidebar } from "~/component/main-sidebar";
 
 export const Route = createFileRoute("/main")({
-  component: MainLayout,
+  component: Main,
 })
 
-function MainLayout() {
+function Main() {
   return (
     <div>
-      <h1>Main Layout</h1>
-      <ThemeToggle />
-      <Outlet />
+      <SidebarProvider>
+        <MainSidebar />
+      </SidebarProvider>
     </div>
   );
 };

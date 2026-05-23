@@ -27,6 +27,9 @@ migration/
 # Rust
 Cargo.lock
 
+# Claude
+.claude/worktrees/
+
 ###########
 # node.js #
 ###########

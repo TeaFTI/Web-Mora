@@ -1,5 +1,5 @@
 /**
- * User Table Schema
+ * Contact Table Schema
  */
 
 import { defineRelations, sql } from "drizzle-orm";
@@ -9,25 +9,23 @@ import { TABLE_PREFIX } from "~/configuration/database";
 
 import profileTable from "./profile";
 
-const userTable = pgTable(`${TABLE_PREFIX}user`, {
+const contactTable = pgTable(`${TABLE_PREFIX}contact`, {
   id: uuid("id").primaryKey().default(sql`uuidv7()`),
   profileId: uuid("profile_id").references(() => profileTable.id),
-  username: text("username").notNull().unique(),
-  password: text("password").notNull(),
-  salt: text("salt").notNull(),
+  company: text("company"),
 });
 
-const userRelationList = defineRelations(
-  { userTable, profileTable },
+const contactRelationList = defineRelations(
+  { contactTable, profileTable },
   (relation) => ({
-    userTable: {
+    contactTable: {
       profile: relation.one.profileTable({
-        from: relation.userTable.profileId,
+        from: relation.contactTable.profileId,
         to: relation.profileTable.id,
-      }),
+      })
     },
   })
 );
 
-export default userTable;
-export { userRelationList, userTable };
+export default contactTable;
+export { contactRelationList, contactTable };

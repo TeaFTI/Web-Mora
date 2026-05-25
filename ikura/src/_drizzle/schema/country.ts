@@ -5,7 +5,7 @@
 import { sql } from "drizzle-orm";
 import { char, pgTable, text, uuid } from "drizzle-orm/pg-core";
 
-import { TABLE_PREFIX } from "~/configuration/drizzle";
+import { TABLE_PREFIX } from "../../configuration/drizzle";
 
 const countryTable = pgTable(`${TABLE_PREFIX}country`, {
   id: uuid("id").primaryKey().default(sql`uuidv7()`),

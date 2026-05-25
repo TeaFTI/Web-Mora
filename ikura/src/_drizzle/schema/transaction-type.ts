@@ -5,7 +5,7 @@
 import { sql } from "drizzle-orm";
 import { pgTable, text, uuid } from "drizzle-orm/pg-core";
 
-import { TABLE_PREFIX } from "~/configuration/drizzle";
+import { TABLE_PREFIX } from "../../configuration/drizzle";
 
 const transactionTypeTable = pgTable(`${TABLE_PREFIX}transaction_type`,
   {

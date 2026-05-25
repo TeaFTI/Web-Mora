@@ -33,3 +33,6 @@ export * from "./contract-status";
 export * from "./property";
 // export * from "./tenant";
 export * from "./user-contract";
+
+// Better Auth
+export * from "./better-auth";

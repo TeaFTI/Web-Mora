@@ -5,7 +5,7 @@
 import { defineRelations, sql } from "drizzle-orm";
 import { AnyPgColumn, pgTable, timestamp, uuid } from "drizzle-orm/pg-core";
 
-import { TABLE_PREFIX } from "~/configuration/drizzle";
+import { TABLE_PREFIX } from "../../configuration/drizzle";
 
 import contractTable from "./contract";
 import propertyTable from "./property";

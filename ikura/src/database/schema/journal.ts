@@ -13,7 +13,7 @@ import {
   uuid,
 } from "drizzle-orm/pg-core";
 
-import { TABLE_PREFIX } from "~/configuration/database";
+import { TABLE_PREFIX } from "~/configuration/drizzle";
 import { JournalType } from "~/type/journal";
 
 import accountTable from "./account";

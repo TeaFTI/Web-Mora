@@ -15,8 +15,8 @@ export default defineConfig({
   dbCredentials: {
     url: DATABASE_URI,
   },
-  out: "./src/database/migration",
-  schema: "./src/database/schema/index.ts",
+  out: "./src/_drizzle/migration",
+  schema: "./src/_drizzle/schema/index.ts",
   verbose: true,
   strict: true,
 });

@@ -2,8 +2,8 @@
  * Database Seed Chart of Account Type
  */
 
-import { DrizzleClient } from "~/database";
-import chartOfAccountTypeTable from "~/database/schema/chart-of-account-type";
+import { DrizzleClient } from "~/_drizzle";
+import chartOfAccountTypeTable from "~/_drizzle/schema/chart-of-account-type";
 
 import chartOfAccountTypeList from "./data/chart-of-account-type.json";
 

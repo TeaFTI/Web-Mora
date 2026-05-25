@@ -2,8 +2,8 @@
  * Database Seed User
  */
 
-import { DrizzleClient } from "~/database";
-import userTable from "~/database/schema/user";
+import { DrizzleClient } from "~/_drizzle";
+import userTable from "~/_drizzle/schema/user";
 
 import userList from "./data/user.json";
 

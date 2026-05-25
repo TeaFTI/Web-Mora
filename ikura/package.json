@@ -19,9 +19,9 @@
     "start": "vite start",
     "drizzle:generate": "dotenvx run -- drizzle-kit generate",
     "drizzle:migrate": "dotenvx run -- drizzle-kit migrate",
-    "drizzle:plant": "dotenvx run -- npx tsx ./src/database/plant.ts",
-    "drizzle:unplant": "dotenvx run -- npx tsx ./src/database/unplant.ts",
-    "drizzle:all": "dotenvx run -- sh -c 'drizzle-kit generate && drizzle-kit migrate && npx tsx ./src/database/plant.ts'",
+    "drizzle:plant": "dotenvx run -- npx tsx ./src/_drizzle/plant.ts",
+    "drizzle:unplant": "dotenvx run -- npx tsx ./src/_drizzle/unplant.ts",
+    "drizzle:all": "dotenvx run -- sh -c 'drizzle-kit generate && drizzle-kit migrate && npx tsx ./src/_drizzle/plant.ts'",
     "betterauth:generate": "auth generate --config"
   },
   "dependencies": {

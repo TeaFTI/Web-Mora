@@ -3,9 +3,9 @@
  */
 
 import { reset } from "drizzle-seed";
-import { drizzleClient, pgClient } from "~/_drizzle";
+import { drizzleClient, pgClient } from "./index";
 
-import * as schema from "~/_drizzle/schema";
+import * as schema from "./schema";
 
 async function clean() {
   try {

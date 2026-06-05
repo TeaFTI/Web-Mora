@@ -16,7 +16,7 @@
     "dev": "vite dev",
     "build": "vite build",
     "preview": "vite preview",
-    "start": "vite start",
+    "start": "node .output/server/index.mjs",
     "drizzle:generate": "dotenvx run -- drizzle-kit generate",
     "drizzle:migrate": "dotenvx run -- drizzle-kit migrate",
     "drizzle:plant": "dotenvx run -- npx tsx ./src/_drizzle/plant.ts",
@@ -45,7 +45,6 @@
   },
   "devDependencies": {
     "@dotenvx/dotenvx": "^1.68",
-    "@noble/ciphers": "^1.3",
     "@tailwindcss/vite": "^4.3",
     "@tanstack/devtools-vite": "^0.7",
     "@tanstack/react-devtools": "^0.10",
@@ -58,5 +57,9 @@
     "tailwindcss": "^4.3",
     "typescript": "^6.0",
     "vite": "^8.0"
+  },
+  "overrides": {
+    "@noble/ciphers": "^2.2",
+    "kysely": "^0.28"
   }
 }

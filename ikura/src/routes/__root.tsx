@@ -18,7 +18,8 @@ import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools';
 import { siteConfiguration } from "~/configuration/site";
 import { ThemeProvider } from "~/context/theme";
 
-import globalCss from "../res/css/global.css?url";
+// import globalCss from "../res/css/global.css?url";
+import "../res/css/global.css";
 
 export const Route = createRootRoute({
   head: () => ({
@@ -35,34 +36,29 @@ export const Route = createRootRoute({
       },
     ],
     links: [
-      { rel: "stylesheet", href: globalCss },
+      // { rel: "stylesheet", href: globalCss },
       { rel: "icon", href: "/favicon.ico" },
     ],
   }),
   notFoundComponent: NotFoundComponent,
-  shellComponent: RootDocument,
+  // shellComponent: RootDocument,
   component: RootComponent,
 })
 
 function RootComponent() {
   return (
     <RootDocument>
-      <ThemeProvider defaultTheme="system" storageKey="theme">
-        <Outlet />
-      </ThemeProvider>
-      <TanStackDevtools
-        config={{
-          position: "bottom-right",
-        }}
-        plugins={[
-          {
-            name: "TanStack Router",
-            render: <TanStackRouterDevtoolsPanel />,
-          },
-        ]}
-      />
+      <Outlet />
     </RootDocument>
   )
+}
+
+function ProviderComponent({ children }: { children: React.ReactNode }) {
+  return (
+    <ThemeProvider defaultTheme="system" storageKey="theme">
+      {children}
+    </ThemeProvider>
+  );
 }
 
 function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
@@ -72,7 +68,22 @@ function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
         <HeadContent />
       </head>
       <body>
-        {children}
+        <ProviderComponent>
+          {children}
+        </ProviderComponent>
+        {import.meta.env.DEV && (
+          <TanStackDevtools
+            config={{
+              position: "bottom-right",
+            }}
+            plugins={[
+              {
+                name: "TanStack Router",
+                render: <TanStackRouterDevtoolsPanel />,
+              },
+            ]}
+          />
+        )}
         <Scripts />
       </body>
     </html>

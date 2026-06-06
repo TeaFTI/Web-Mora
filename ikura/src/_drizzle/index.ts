@@ -6,7 +6,6 @@ import { drizzle } from "drizzle-orm/node-postgres";
 import { Client, Pool } from "pg";
 
 import PostgreSQLConfiguration from "../configuration/drizzle";
-import * as schema from "./schema";
 import {
   accountRelationList,
   accountTransactionRelationList,
@@ -66,8 +65,7 @@ const relationList = {
 
 export const drizzleClient = drizzle({
   client: pgPool,
-  schema: schema,
-  // Required For Relational Query
+  // drizzle 1.0.0-beta.22 Update
   relations: relationList,
   logger: true,
 });

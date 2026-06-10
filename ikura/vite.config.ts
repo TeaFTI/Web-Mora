@@ -11,8 +11,6 @@ import { nitro } from "nitro/vite";
 
 const NOBLE_CIPHERS = "@noble/ciphers";
 
-console.debug("Package Name:", process.env.npm_package_name);
-
 /**
  * Custom plugin to ensure the import of `@noble/ciphers` resolve to the
  * version specified in `better-auth`.

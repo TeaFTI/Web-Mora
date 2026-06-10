@@ -4,7 +4,8 @@
 
 import * as z from "zod";
 
-const TABLE_PREFIX = process.env.IKURA_TABLE_PREFIX ?? "";
+const TABLE_PREFIX = process.env.IKURA_TABLE_PREFIX
+  ?? `${process.env.npm_package_name}_`;
 
 const PostgreSQLSchema = z.object({
   NODE_ENV: z.enum([

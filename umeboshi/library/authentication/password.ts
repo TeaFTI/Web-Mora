@@ -4,13 +4,15 @@
 
 import crypto from "crypto";
 
+const SALT_SIZE = 32;
+
 /**
  * Generate a random salt for hash password.
  *
  * @returns {string} The generated salt.
  */
 export function generateSalt(): string {
-  return crypto.randomBytes(16).toString("hex").normalize();
+  return crypto.randomBytes(SALT_SIZE).toString("hex").normalize();
 }
 
 /**

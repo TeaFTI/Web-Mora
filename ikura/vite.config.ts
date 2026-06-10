@@ -11,6 +11,8 @@ import { nitro } from "nitro/vite";
 
 const NOBLE_CIPHERS = "@noble/ciphers";
 
+console.debug("Package Name:", process.env.npm_package_name);
+
 /**
  * Custom plugin to ensure the import of `@noble/ciphers` resolve to the
  * version specified in `better-auth`.
@@ -57,8 +59,10 @@ function nobleCiphersBetterAuth(): Plugin {
 }
 
 export default defineConfig({
-  server: {
-    port: 3000,
+  define: {
+    // Inject npm package name during build time.
+    // Note: Need to "declare" global variable to TypeScript.
+    // __PACKAGE_NAME__: process.env.npm_package_name ?? "",
   },
   resolve: {
     tsconfigPaths: true,
@@ -75,4 +79,7 @@ export default defineConfig({
     // Note: React's Vite plugin must come after Start's Vite plugin.
     viteReact(),
   ],
+  server: {
+    port: 3000,
+  },
 })

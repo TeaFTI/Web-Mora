@@ -61,6 +61,7 @@
     "vite": "^8.0"
   },
   "overrides": {
+    "esbuild": "^0.28",
     "kysely": "^0.28",
     "better-auth": {
       "@noble/ciphers": "^2.2"

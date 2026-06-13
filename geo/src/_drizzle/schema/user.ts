@@ -13,7 +13,7 @@ const userTable = pgTable(`${TABLE_PREFIX}user`, {
   id: uuid("id").primaryKey().default(sql`uuidv7()`),
   profileId: uuid("profile_id").references(() => profileTable.id),
   username: text("username").notNull().unique(),
-  password: text("password").notNull(),
+  passwordHash: text("password_hash").notNull(),
   salt: text("salt").notNull(),
 });
 
@@ -29,5 +29,6 @@ const userRelationList = defineRelations(
   })
 );
 
+export type UserType = typeof userTable.$inferSelect;
 export default userTable;
 export { userRelationList, userTable };

@@ -17,7 +17,7 @@ function RouteComponent() {
           <div className="flex size-6 items-center justify-center rounded-md bg-primary text-primary-foreground">
             <GalleryVerticalEndIcon className="size-4" />
           </div>
-          Vanilla
+          Geo
         </Link>
       </div>
       <div className="flex flex-1 items-center justify-center">

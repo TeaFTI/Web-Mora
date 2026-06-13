@@ -5,8 +5,8 @@
 import { Box, Home } from "lucide-react";
 
 export const siteConfiguration = {
-  name: "Ikura",
-  description: "Ikura",
+  name: "Geo",
+  description: "Geo",
 }
 
 const siteNavigationMain = [

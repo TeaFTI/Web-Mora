@@ -36,12 +36,12 @@ export function MainSidebarUser() {
             }
           >
             <Avatar>
-              <AvatarImage src={""} alt="Ikura" />
+              <AvatarImage src={""} alt="Geo" />
               <AvatarFallback>IK</AvatarFallback>
             </Avatar>
             <div className="grid flex-1 text-left text-sm leading-tight">
-              <span className="truncate font-medium">Ikura</span>
-              <span className="truncate text-xs">ikura@example.com</span>
+              <span className="truncate font-medium">Geo</span>
+              <span className="truncate text-xs">Geo@example.com</span>
             </div>
             <ChevronsUpDownIcon />
           </DropdownMenuTrigger>
@@ -55,12 +55,12 @@ export function MainSidebarUser() {
               <DropdownMenuLabel className="p-0 font-normal">
                 <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
                   <Avatar>
-                    <AvatarImage src={""} alt="Ikura" />
-                    <AvatarFallback>IK</AvatarFallback>
+                    <AvatarImage src={""} alt="Geo" />
+                    <AvatarFallback>G</AvatarFallback>
                   </Avatar>
                   <div className="grid flex-1 text-left text-sm leading-tight">
-                    <span className="truncate font-medium">Ikura</span>
-                    <span className="truncate text-xs">ikura@example.com</span>
+                    <span className="truncate font-medium">Geo</span>
+                    <span className="truncate text-xs">Geo@example.com</span>
                   </div>
                 </div>
               </DropdownMenuLabel>

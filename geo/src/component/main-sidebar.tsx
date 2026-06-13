@@ -27,7 +27,7 @@ export function MainSidebar() {
                 <ComputerIcon />
               </div>
               <div className="grid flex-1 text-left text-sm leading-tight">
-                <span className="truncate font-medium">Ikura</span>
+                <span className="truncate font-medium">Geo</span>
                 <span className="truncate text-xs">Finance</span>
               </div>
             </SidebarMenuButton>

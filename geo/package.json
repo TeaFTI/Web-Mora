@@ -1,16 +1,16 @@
 {
-  "name": "ikura",
+  "name": "geo",
   "version": "0.0.1",
   "type": "module",
-  "description": "🍥 Ikura 🍥",
+  "description": "🪨 Geo 🪨",
   "keywords": [
-    "ikura"
+    "geo"
   ],
   "license": "None",
-  "author": "Ikura",
+  "author": "Geo",
   "repository": {
     "type": "git",
-    "url": "https://github.com/TeaFTI/Web-Onigiri"
+    "url": "https://github.com/TeaFTI/Web-Mora"
   },
   "scripts": {
     "dev": "vite dev",

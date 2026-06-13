@@ -4,7 +4,7 @@
 
 import * as z from "zod";
 
-const TABLE_PREFIX = process.env.IKURA_TABLE_PREFIX
+const TABLE_PREFIX = process.env.GEO__TABLE_PREFIX
   ?? `${process.env.npm_package_name}_`;
 
 const PostgreSQLSchema = z.object({
@@ -13,12 +13,12 @@ const PostgreSQLSchema = z.object({
     "test",
     "production",
   ]).default("development"),
-  IKURA_DATABASE_SCHEME: z.string().default("postgresql"),
-  IKURA_DATABASE_USERNAME: z.string(),
-  IKURA_DATABASE_PASSWORD: z.string(),
-  IKURA_DATABASE_HOST: z.string(),
-  IKURA_DATABASE_PORT: z.coerce.number().default(5432),
-  IKURA_DATABASE_NAME: z.string(),
+  GEO__DATABASE_SCHEME: z.string().default("postgresql"),
+  GEO__DATABASE_USERNAME: z.string(),
+  GEO__DATABASE_PASSWORD: z.string(),
+  GEO__DATABASE_HOST: z.string(),
+  GEO__DATABASE_PORT: z.coerce.number().default(5432),
+  GEO__DATABASE_NAME: z.string(),
   DATABASE_URI: z.string().default(""),
 });
 
@@ -27,12 +27,12 @@ type PostgreSQLSchema = z.infer<typeof PostgreSQLSchema>;
 // Database Uniform Resource Identifier (URI)
 // SCHEME://USERNAME:PASSWORD@HOST:PORT/NAME
 process.env.DATABASE_URI = [
-  process.env.IKURA_DATABASE_SCHEME,
-  "://", process.env.IKURA_DATABASE_USERNAME,
-  ":", process.env.IKURA_DATABASE_PASSWORD,
-  "@", process.env.IKURA_DATABASE_HOST,
-  ":", process.env.IKURA_DATABASE_PORT,
-  "/", process.env.IKURA_DATABASE_NAME,
+  process.env.GEO__DATABASE_SCHEME,
+  "://", process.env.GEO__DATABASE_USERNAME,
+  ":", process.env.GEO__DATABASE_PASSWORD,
+  "@", process.env.GEO__DATABASE_HOST,
+  ":", process.env.GEO__DATABASE_PORT,
+  "/", process.env.GEO__DATABASE_NAME,
 ].join("");
 
 try {

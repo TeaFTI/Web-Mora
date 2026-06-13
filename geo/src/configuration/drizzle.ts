@@ -56,4 +56,3 @@ export {
   PostgreSQLSchema,
   TABLE_PREFIX
 };
-

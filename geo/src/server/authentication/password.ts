@@ -9,10 +9,15 @@ const SALT_SIZE = 32;
 /**
  * Generate a random salt for hash password.
  *
+ * @param saltSize - The size of the salt in bytes.
  * @returns {string} The generated salt.
  */
-export function generateSalt(): string {
-  return crypto.randomBytes(SALT_SIZE).toString("hex").normalize();
+function generateSalt({
+  saltSize = SALT_SIZE,
+}: {
+  saltSize?: number;
+} = {}): string {
+  return crypto.randomBytes(saltSize).toString("hex").normalize();
 }
 
 /**
@@ -23,7 +28,7 @@ export function generateSalt(): string {
  * @param {string} salt The salt to use for hashing.
  * @returns {Promise<string>} A promise resolve to the hash password.
  */
-export function hashPassword(password: string, salt: string): Promise<string> {
+function hashPassword(password: string, salt: string): Promise<string> {
   return new Promise((resolve, reject) => {
     crypto.scrypt(
       password.normalize(),
@@ -36,3 +41,8 @@ export function hashPassword(password: string, salt: string): Promise<string> {
     );
   });
 }
+
+export {
+  generateSalt,
+  hashPassword
+};

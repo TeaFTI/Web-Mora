@@ -1,12 +1,29 @@
+import crypto from "crypto";
+
 import {
   getRequestHeader,
   setResponseHeader,
 } from "@tanstack/react-start/server";
 
+const SESSION_SIZE = 512;
 const SESSION_COOKIE = "__Host-session";
 const ONE_DAY = 60 * 60 * 24;
 
-export function setSessionCookie(token: string) {
+/**
+ * Generate a random session token for the user session.
+ *
+ * @param sessionSize - The size of the session token in bytes.
+ * @returns {string} The generated session token.
+ */
+function generateSessionToken({
+  sessionSize = SESSION_SIZE,
+}: {
+  sessionSize?: number;
+}): string {
+  return crypto.randomBytes(sessionSize).toString("hex").normalize();
+}
+
+function setSessionCookie(token: string) {
   setResponseHeader(
     "Set-Cookie",
     [
@@ -20,7 +37,7 @@ export function setSessionCookie(token: string) {
   );
 }
 
-export function clearSessionCookie() {
+function clearSessionCookie() {
   setResponseHeader(
     "Set-Cookie",
     `${SESSION_COOKIE}=; HttpOnly; Secure; SameSite=Lax; Path=/; Max-Age=0`,
@@ -41,3 +58,9 @@ export function readSessionToken(): string | null {
 
   return null;
 }
+
+export {
+  clearSessionCookie,
+  generateSessionToken,
+  setSessionCookie
+};

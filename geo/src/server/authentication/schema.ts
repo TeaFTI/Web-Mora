@@ -1,25 +1,21 @@
-/**
- * Authentication Schema
- */
-
 import * as z from "zod";
 
 const usernameRule = z.string().min(3).max(20);
-const emailRule = z.email();
+const emailRule = z.email().optional();
+const passwordRule = z.string().min(16);
 
-const registerSchema = z
-  .object({
-    fullName: z.string().min(3),
-    email: emailRule,
-    username: usernameRule,
-    password: z.string().min(16),
-    confirmPassword: z.string().min(16),
-    salt: z.string().min(16),
-  })
-  .refine((data) => data.password === data.confirmPassword, {
-    message: "Password Do Not Match.",
-    path: ["confirm-password"],
-  });
+const registerSchema = z.object({
+  fullName: z.string().min(3),
+  email: emailRule,
+  username: usernameRule,
+  password: passwordRule,
+});
 
-export { registerSchema };
+const loginSchema = z.object({
+  username: usernameRule.or(emailRule),
+  password: passwordRule,
+});
+
+export { loginSchema, registerSchema };
 export type RegisterSchema = z.infer<typeof registerSchema>;
+export type LoginSchema = z.infer<typeof loginSchema>;

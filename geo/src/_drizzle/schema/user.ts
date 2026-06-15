@@ -30,5 +30,6 @@ const userRelationList = defineRelations(
 );
 
 export type UserType = typeof userTable.$inferSelect;
+export type UserCreateType = typeof userTable.$inferInsert;
 export default userTable;
 export { userRelationList, userTable };

@@ -1,3 +1,4 @@
+import type { AnyFieldApi } from "@tanstack/react-form";
 import { useForm } from "@tanstack/react-form";
 import { Link } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
@@ -16,12 +17,29 @@ import { Input } from "~/_shadcn/interface/input";
 import { registerFn } from "~/server/authentication/authentication";
 import { registerSchema } from "~/server/authentication/schema";
 
+const validatePasswordPair = (
+  partnerName: "password" | "confirmPassword",
+) => ({
+  onChangeListenTo: [partnerName],
+  onChange: ({ value, fieldApi }: { value: string; fieldApi: AnyFieldApi }) => {
+    const parseValue = registerSchema.shape.password.safeParse(value);
+    if (!parseValue.success) {
+      return { message: parseValue.error.issues[0].message };
+    }
+    const partner = fieldApi.form.getFieldValue(partnerName);
+    if (partner && value !== partner) {
+      return { message: "Password pair do not match." };
+    }
+    return undefined;
+  },
+});
+
 export function RegisterForm() {
   const register = useServerFn(registerFn);
   const [serverError, setServerError] = useState<string | null>(null);
 
   const handleRegister = async ({
-    value,
+    value
   }: {
     value: {
       fullName: string;
@@ -29,7 +47,6 @@ export function RegisterForm() {
       username: string;
       password: string;
       confirmPassword: string;
-      salt?: string;
     };
   }) => {
     setServerError(null);
@@ -40,8 +57,6 @@ export function RegisterForm() {
         email: value.email,
         username: value.username,
         password: value.password,
-        confirmPassword: value.confirmPassword,
-        salt: value.salt || "",
       },
     });
     if (result?.error) setServerError(result.error);
@@ -55,12 +70,13 @@ export function RegisterForm() {
       password: "",
       confirmPassword: "",
     },
-    validators: { onChange: registerSchema },
+    // validators: { onChange: registerSchema },
     onSubmit: handleRegister,
   });
 
   return (
     <form
+      id="register-form"
       className="flex flex-col gap-6"
       onSubmit={(event) => {
         event.preventDefault();
@@ -78,6 +94,7 @@ export function RegisterForm() {
         {/* Full Name */}
         <form.Field
           name="fullName"
+          validators={{ onChange: registerSchema.shape.fullName }}
           children={(field) => {
             const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid
             return (
@@ -106,6 +123,7 @@ export function RegisterForm() {
         {/* Email */}
         <form.Field
           name="email"
+          // validators={{ onChange: registerSchema.shape.email }}
           children={(field) => {
             const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid
             return (
@@ -121,7 +139,7 @@ export function RegisterForm() {
                   aria-invalid={isInvalid}
                   type="email"
                   placeholder="email@example.com"
-                  required
+                // required
                 />
                 {isInvalid && (
                   <FieldError errors={field.state.meta.errors} />
@@ -134,46 +152,107 @@ export function RegisterForm() {
           }}
         />
         {/* Username */}
-        <Field>
-          <FieldLabel htmlFor="username">Username</FieldLabel>
-          <Input
-            id="username"
-            className="bg-background"
-            type="text"
-            placeholder="Username"
-            required
-          />
-          <FieldDescription>
-            The Username for the new user.
-          </FieldDescription>
-        </Field>
+        <form.Field
+          name="username"
+          validators={{ onChange: registerSchema.shape.username }}
+          children={(field) => {
+            const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid
+            return (
+              <Field data-invalid={isInvalid}>
+                <FieldLabel htmlFor={field.name}>Username</FieldLabel>
+                <Input
+                  className="bg-background"
+                  id={field.name}
+                  name={field.name}
+                  value={field.state.value}
+                  onBlur={field.handleBlur}
+                  onChange={(event) => field.handleChange(event.target.value)}
+                  aria-invalid={isInvalid}
+                  type="text"
+                  placeholder="Username"
+                  required
+                />
+                {isInvalid && (
+                  <FieldError errors={field.state.meta.errors} />
+                )}
+                <FieldDescription>
+                  The Username for the new user.
+                </FieldDescription>
+              </Field>
+            )
+          }}
+        />
         {/* Password */}
-        <Field>
-          <FieldLabel htmlFor="password">Password</FieldLabel>
-          <Input
-            id="password"
-            className="bg-background"
-            type="password"
-            required
-          />
-          <FieldDescription>
-            Must be at least 16 characters long.
-          </FieldDescription>
-        </Field>
+        <form.Field
+          name="password"
+          validators={validatePasswordPair("confirmPassword")}
+          children={(field) => {
+            const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid
+            return (
+              <Field data-invalid={isInvalid}>
+                <FieldLabel htmlFor={field.name}>Password</FieldLabel>
+                <Input
+                  className="bg-background"
+                  id={field.name}
+                  name={field.name}
+                  value={field.state.value}
+                  onBlur={field.handleBlur}
+                  onChange={(event) => field.handleChange(event.target.value)}
+                  aria-invalid={isInvalid}
+                  type="password"
+                  required
+                />
+                {isInvalid && (
+                  <FieldError errors={field.state.meta.errors} />
+                )}
+                <FieldDescription>
+                  Must be at least 16 characters long.
+                </FieldDescription>
+              </Field>
+            )
+          }}
+        />
         {/* Confirm Password */}
-        <Field>
-          <FieldLabel htmlFor="confirm-password">Confirm Password</FieldLabel>
-          <Input
-            id="confirm-password"
-            className="bg-background"
-            type="password"
-            required
-          />
-          <FieldDescription>Please confirm the password.</FieldDescription>
-        </Field>
+        <form.Field
+          name="confirmPassword"
+          validators={validatePasswordPair("password")}
+          children={(field) => {
+            const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid
+            return (
+              <Field data-invalid={isInvalid}>
+                <FieldLabel htmlFor={field.name}>Confirm Password</FieldLabel>
+                <Input
+                  className="bg-background"
+                  id={field.name}
+                  name={field.name}
+                  value={field.state.value}
+                  onBlur={field.handleBlur}
+                  onChange={(event) => field.handleChange(event.target.value)}
+                  aria-invalid={isInvalid}
+                  type="password"
+                  required
+                />
+                {isInvalid && (
+                  <FieldError errors={field.state.meta.errors} />
+                )}
+                <FieldDescription>Please confirm the password.</FieldDescription>
+              </Field>
+            )
+          }}
+        />
         {/* Submit */}
         <Field>
-          <Button type="submit">Create User</Button>
+          <form.Subscribe selector={(state) => [state.canSubmit, state.isSubmitting]}>
+            {([canSubmit, isSubmitting]) => (
+              <Button
+                type="submit"
+                form="register-form"
+                disabled={!canSubmit}
+              >
+                {isSubmitting ? "Creating..." : "Create User"}
+              </Button>
+            )}
+          </form.Subscribe>
         </Field>
         <FieldSeparator>Or</FieldSeparator>
         <Field>

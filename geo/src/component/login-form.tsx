@@ -24,11 +24,17 @@ export function LoginForm() {
         <CardHeader className="text-center">
           <CardTitle className="text-xl">Login</CardTitle>
           <CardDescription>
-            Login with Username (Email) and Password.
+            Login with Username (or Email) and Password.
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form>
+          <form
+            id="login-form"
+            onSubmit={(event) => {
+              event.preventDefault();
+              event.stopPropagation();
+            }}
+          >
             <FieldGroup>
               <Field>
                 <FieldLabel htmlFor="email">Username</FieldLabel>

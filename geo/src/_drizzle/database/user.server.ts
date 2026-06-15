@@ -1,5 +1,5 @@
-import drizzleClient from "..";
-import { userTable, UserType } from "../schema";
+import { drizzleClient } from "..";
+import { UserCreateType, userTable, UserType } from "../schema";
 
 /**
  * Retrieve and return the list of user(s).
@@ -11,7 +11,7 @@ async function retrieve({
   expand = false,
 }: {
   expand?: boolean;
-}): Promise<UserType[]> {
+}) {
   return await drizzleClient.query.userTable.findMany({
     with: expand ? {
       profile: true,
@@ -61,7 +61,7 @@ async function retrieveByUsername({
 async function create({
   data,
 }: {
-  data: Omit<UserType, "id">;
+  data: UserCreateType;
 }): Promise<UserType> {
   let userData = await retrieveByUsername({
     username: data.username,

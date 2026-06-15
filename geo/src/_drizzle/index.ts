@@ -5,7 +5,8 @@
 import { drizzle } from "drizzle-orm/node-postgres";
 import { Client, Pool } from "pg";
 
-import PostgreSQLConfiguration from "../configuration/drizzle";
+import { DATABASE_URI } from "~/configuration/drizzle";
+
 import {
   accountRelationList,
   accountTransactionRelationList,
@@ -27,9 +28,6 @@ import {
   userContractRelationList,
   userRelationList
 } from "./schema";
-
-const DATABASE_URI = PostgreSQLConfiguration.DATABASE_URI;
-// console.debug(`Database URI: ${DATABASE_URI}`);
 
 const pgClient = new Client({
   connectionString: DATABASE_URI,
@@ -63,13 +61,12 @@ const relationList = {
   ...userRelationList,
 };
 
-export const drizzleClient = drizzle({
+const drizzleClient = drizzle({
   client: pgPool,
   // drizzle 1.0.0-beta.22 Update
   relations: relationList,
   logger: true,
 });
 
-export { pgClient, pgPool };
+export { drizzleClient, pgClient, pgPool };
 export type DrizzleClient = typeof drizzleClient;
-export default drizzleClient;

@@ -12,12 +12,12 @@ const PostgreSQLSchema = z.object({
     "test",
     "production",
   ]).default("development"),
-  GEO_DATABASE_SCHEME: z.string().default("postgresql"),
-  GEO_DATABASE_HOST: z.string(),
-  GEO_DATABASE_PORT: z.coerce.number().default(5432),
-  GEO_DATABASE_USERNAME: z.string(),
-  GEO_DATABASE_PASSWORD: z.string(),
-  GEO_DATABASE_NAME: z.string(),
+  MORA_POSTGRESQL_SCHEME: z.string().default("postgresql"),
+  MORA_POSTGRESQL_HOST: z.string(),
+  MORA_POSTGRESQL_PORT: z.coerce.number().default(5432),
+  MORA_POSTGRESQL_USERNAME: z.string(),
+  MORA_POSTGRESQL_PASSWORD: z.string(),
+  MORA_POSTGRESQL_NAME: z.string(),
   // DATABASE_URI: z.string().default(""),
 });
 
@@ -30,12 +30,12 @@ try {
   // SCHEME://USERNAME:PASSWORD@HOST:PORT/NAME
   // process.env.DATABASE_URI = [
   POSTGRESQL_URI = [
-    process.env.GEO_DATABASE_SCHEME,
-    "://", process.env.GEO_DATABASE_USERNAME,
-    ":", process.env.GEO_DATABASE_PASSWORD,
-    "@", process.env.GEO_DATABASE_HOST,
-    ":", process.env.GEO_DATABASE_PORT,
-    "/", process.env.GEO_DATABASE_NAME,
+    process.env.MORA_POSTGRESQL_SCHEME,
+    "://", process.env.MORA_POSTGRESQL_USERNAME,
+    ":", process.env.MORA_POSTGRESQL_PASSWORD,
+    "@", process.env.MORA_POSTGRESQL_HOST,
+    ":", process.env.MORA_POSTGRESQL_PORT,
+    "/", process.env.MORA_POSTGRESQL_NAME,
   ].join("");
 } catch (error) {
   if (error instanceof z.ZodError) {

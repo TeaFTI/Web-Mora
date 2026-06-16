@@ -5,7 +5,7 @@
 import { getTableName, is, Table } from "drizzle-orm";
 import { isPgEnum, PgEnum, PgTable } from "drizzle-orm/pg-core";
 
-import { pgClient } from ".";
+import { pgClient } from "./client";
 import * as schema from "./schema";
 
 async function unplant() {

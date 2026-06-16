@@ -3,7 +3,7 @@
  */
 
 import { reset } from "drizzle-seed";
-import { drizzleClient, pgClient } from "./index";
+import { drizzleClient, pgClient } from "./client";
 
 import * as schema from "./schema";
 

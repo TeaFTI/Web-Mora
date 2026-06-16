@@ -2,7 +2,7 @@
  * Database Plant
  */
 
-import { drizzleClient, pgClient } from ".";
+import { drizzleClient, pgClient } from "./client";
 
 import * as chartOfAccountType from "./seed/chart-of-account-type";
 import * as user from "./seed/user";

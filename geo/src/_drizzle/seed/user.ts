@@ -2,7 +2,7 @@
  * Database Seed User
  */
 
-import { DrizzleClient } from "..";
+import { type DrizzleClient } from "../client";
 import userTable from "../schema/user";
 
 import userList from "./data/user.json";

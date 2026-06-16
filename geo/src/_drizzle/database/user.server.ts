@@ -1,4 +1,4 @@
-import { drizzleClient } from "..";
+import { drizzleClient } from "../client";
 import { UserCreateType, userTable, UserType } from "../schema";
 
 /**

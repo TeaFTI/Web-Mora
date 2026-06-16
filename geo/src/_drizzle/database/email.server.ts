@@ -1,4 +1,4 @@
-import drizzleClient from "..";
+import { drizzleClient } from "../client";
 import { EmailType } from "../schema";
 
 /**
@@ -32,3 +32,4 @@ export {
   retrieve,
   retrieveById
 };
+

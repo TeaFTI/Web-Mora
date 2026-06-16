@@ -6,7 +6,7 @@ erDiagram
 
     %% User
     %% The user of the system
-    user ||--|| profile : has
+    user ||--o| profile : has
     user ||--o{ user_account : has
     user ||--o| tenant : is
     user ||--o{ user_contract : own
@@ -16,6 +16,12 @@ erDiagram
         text username
         text password
         text salt
+    }
+
+    %% Session
+    session:::general {
+        uuid id PK
+        timestampz expiration
     }
 
     %% User Account

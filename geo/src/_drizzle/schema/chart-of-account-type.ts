@@ -18,4 +18,5 @@ const chartOfAccountTypeTable = pgTable(
 );
 
 export type ChartOfAccountType = typeof chartOfAccountTypeTable.$inferSelect;
+export type ChartOfAccountTypeCreate = typeof chartOfAccountTypeTable.$inferInsert;
 export { chartOfAccountTypeTable };

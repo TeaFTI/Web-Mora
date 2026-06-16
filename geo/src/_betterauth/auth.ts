@@ -2,7 +2,7 @@ import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { tanstackStartCookies } from "better-auth/tanstack-start";
 
-import drizzleClient from "../_drizzle";
+import drizzleClient from "../_drizzle/client";
 
 export const auth = betterAuth({
   // Database

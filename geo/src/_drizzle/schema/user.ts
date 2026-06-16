@@ -7,7 +7,7 @@ import { pgTable, text, uuid } from "drizzle-orm/pg-core";
 
 import { TABLE_PREFIX } from "../../configuration/global";
 
-import profileTable from "./profile";
+import { profileTable } from "./profile";
 
 const userTable = pgTable(`${TABLE_PREFIX}user`, {
   id: uuid("id").primaryKey().default(sql`uuidv7()`),
@@ -31,5 +31,4 @@ const userRelationList = defineRelations(
 
 export type UserType = typeof userTable.$inferSelect;
 export type UserCreateType = typeof userTable.$inferInsert;
-export default userTable;
 export { userRelationList, userTable };

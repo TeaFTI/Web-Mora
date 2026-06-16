@@ -7,8 +7,8 @@ import { defineRelations } from "drizzle-orm/relations";
 
 import { TABLE_PREFIX } from "../../configuration/global";
 
-import profileTable from "./profile";
-import telephoneNumberTable from "./telephone-number";
+import { profileTable } from "./profile";
+import { telephoneNumberTable } from "./telephone-number";
 
 const profileTelephoneNumberTable = pgTable(
   `${TABLE_PREFIX}profile_telephone_number`,
@@ -42,5 +42,4 @@ const profileTelephoneNumberRelation = defineRelations(
   })
 );
 
-export default profileTelephoneNumberTable;
 export { profileTelephoneNumberRelation };

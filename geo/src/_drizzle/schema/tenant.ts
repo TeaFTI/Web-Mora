@@ -14,5 +14,4 @@ const tenantTable = pgTable(`${TABLE_PREFIX}tenant`, {
   id: uuid("id").primaryKey().default(sql`uuidv7()`),
 });
 
-export default tenantTable;
 export { tenantTable };

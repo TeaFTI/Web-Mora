@@ -18,5 +18,4 @@ const accountTransactionRoleTable = pgTable(
   },
 );
 
-export default accountTransactionRoleTable;
 export { accountTransactionRoleTable };

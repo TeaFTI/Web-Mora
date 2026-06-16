@@ -16,6 +16,5 @@ const transactionTypeTable = pgTable(`${TABLE_PREFIX}transaction_type`,
   }
 );
 
-export default transactionTypeTable;
 export { transactionTypeTable };
 

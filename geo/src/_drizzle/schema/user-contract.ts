@@ -7,8 +7,8 @@ import { pgTable, primaryKey, uuid } from "drizzle-orm/pg-core";
 import { TABLE_PREFIX } from "../../configuration/global";
 
 import { defineRelations } from "drizzle-orm";
-import contractTable from "./contract";
-import userTable from "./user";
+import { contractTable } from "./contract";
+import { userTable } from "./user";
 
 const userContractTable = pgTable(`${TABLE_PREFIX}user_contract`,
   {
@@ -43,6 +43,5 @@ const userContractRelationList = defineRelations(
   })
 );
 
-export default userContractTable;
 export { userContractRelationList, userContractTable };
 

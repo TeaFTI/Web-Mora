@@ -15,5 +15,4 @@ const accountTypeTable = pgTable(`${TABLE_PREFIX}account_type`, {
   description: text("description"),
 });
 
-export default accountTypeTable;
 export { accountTypeTable };

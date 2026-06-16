@@ -7,7 +7,7 @@ import { pgTable, text, uuid } from "drizzle-orm/pg-core";
 
 import { TABLE_PREFIX } from "../../configuration/global";
 
-import accountTypeTable from "./account-type";
+import { accountTypeTable } from "./account-type";
 
 const accountTable = pgTable(`${TABLE_PREFIX}account`, {
   id: uuid("id").primaryKey().default(sql`uuidv7()`),
@@ -33,5 +33,4 @@ const accountRelationList = defineRelations(
   })
 );
 
-export default accountTable;
 export { accountRelationList, accountTable };

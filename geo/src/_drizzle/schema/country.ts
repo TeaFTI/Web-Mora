@@ -17,5 +17,4 @@ const countryTable = pgTable(`${TABLE_PREFIX}country`, {
   iso31661Numeric: char("iso_3166_1_numeric", { length: 3 }).notNull().unique(),
 });
 
-export default countryTable;
 export { countryTable };

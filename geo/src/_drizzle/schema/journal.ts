@@ -16,10 +16,10 @@ import {
 import { TABLE_PREFIX } from "../../configuration/global";
 import { JournalType } from "../../type/journal";
 
-import accountTable from "./account";
-import chartOfAccountTable from "./chart-of-account";
-import currencyTable from "./currency";
-import transactionTable from "./transaction";
+import { accountTable } from "./account";
+import { chartOfAccountTable } from "./chart-of-account";
+import { currencyTable } from "./currency";
+import { transactionTable } from "./transaction";
 
 const journalTypeEnum = pgEnum(
   "journal_type_enum",
@@ -88,5 +88,4 @@ const journalRelationList = defineRelations(
   })
 );
 
-export default journalTable;
 export { journalRelationList, journalTable, journalTypeEnum };

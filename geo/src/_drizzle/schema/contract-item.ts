@@ -7,8 +7,8 @@ import { AnyPgColumn, pgTable, timestamp, uuid } from "drizzle-orm/pg-core";
 
 import { TABLE_PREFIX } from "../../configuration/global";
 
-import contractTable from "./contract";
-import propertyTable from "./property";
+import { contractTable } from "./contract";
+import { propertyTable } from "./property";
 
 const contractItemTable = pgTable(`${TABLE_PREFIX}contract_item`, {
   id: uuid("id").primaryKey().default(sql`uuidv7()`),
@@ -48,5 +48,4 @@ const contractItemRelationList = defineRelations(
   })
 );
 
-export default contractItemTable;
 export { contractItemRelationList, contractItemTable };

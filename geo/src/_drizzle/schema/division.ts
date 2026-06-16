@@ -7,7 +7,7 @@ import { pgTable, text, uuid } from "drizzle-orm/pg-core";
 
 import { TABLE_PREFIX } from "../../configuration/global";
 
-import countryTable from "./country";
+import { countryTable } from "./country";
 
 const divisionTable = pgTable(`${TABLE_PREFIX}division`, {
   id: uuid("id").primaryKey().default(sql`uuidv7()`),
@@ -33,5 +33,4 @@ const divisionRelationList = defineRelations(
   })
 );
 
-export default divisionTable;
 export { divisionRelationList, divisionTable };

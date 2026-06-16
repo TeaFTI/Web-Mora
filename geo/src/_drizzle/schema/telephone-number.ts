@@ -15,5 +15,4 @@ const telephoneNumberTable = pgTable(`${TABLE_PREFIX}telephone_number`,
   }
 );
 
-export default telephoneNumberTable;
 export { telephoneNumberTable };

@@ -20,5 +20,4 @@ const profileTable = pgTable(`${TABLE_PREFIX}profile`, {
   nickname: text("nickname"),
 });
 
-export default profileTable;
 export { profileTable };

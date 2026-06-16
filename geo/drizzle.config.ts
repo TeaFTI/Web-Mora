@@ -14,7 +14,7 @@ export default defineConfig({
     url: POSTGRESQL_URI,
   },
   out: "./src/_drizzle/migration",
-  schema: "./src/_drizzle/schema/index.ts",
+  schema: "./src/_drizzle/schema",
   verbose: true,
   strict: true,
 });

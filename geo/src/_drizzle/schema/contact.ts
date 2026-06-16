@@ -7,7 +7,7 @@ import { pgTable, text, uuid } from "drizzle-orm/pg-core";
 
 import { TABLE_PREFIX } from "../../configuration/global";
 
-import profileTable from "./profile";
+import { profileTable } from "./profile";
 
 const contactTable = pgTable(`${TABLE_PREFIX}contact`, {
   id: uuid("id").primaryKey().default(sql`uuidv7()`),
@@ -27,5 +27,4 @@ const contactRelationList = defineRelations(
   })
 );
 
-export default contactTable;
 export { contactRelationList, contactTable };

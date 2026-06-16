@@ -13,7 +13,7 @@ import {
 
 import { TABLE_PREFIX } from "../../configuration/global";
 
-import transactionTypeTable from "./transaction-type";
+import { transactionTypeTable } from "./transaction-type";
 
 const transactionTable = pgTable(`${TABLE_PREFIX}transaction`, {
   id: uuid("id").primaryKey().default(sql`uuidv7()`),
@@ -47,6 +47,5 @@ const transactionRelationList = defineRelations(
   })
 );
 
-export default transactionTable;
 export { transactionRelationList, transactionTable };
 

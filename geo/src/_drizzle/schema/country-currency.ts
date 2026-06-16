@@ -7,8 +7,8 @@ import { pgTable, primaryKey, uuid } from "drizzle-orm/pg-core";
 
 import { TABLE_PREFIX } from "../../configuration/global";
 
-import countryTable from "./country";
-import currencyTable from "./currency";
+import { countryTable } from "./country";
+import { currencyTable } from "./currency";
 
 const countryCurrencyTable = pgTable(`${TABLE_PREFIX}country_currency`,
   {
@@ -41,5 +41,4 @@ const countryCurrencyRelationList = defineRelations(
   })
 );
 
-export default countryCurrencyTable;
 export { countryCurrencyRelationList, countryCurrencyTable };

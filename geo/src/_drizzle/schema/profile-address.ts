@@ -7,8 +7,8 @@ import { pgTable, primaryKey, uuid } from "drizzle-orm/pg-core";
 
 import { TABLE_PREFIX } from "../../configuration/global";
 
-import addressTable from "./address";
-import profileTable from "./profile";
+import { addressTable } from "./address";
+import { profileTable } from "./profile";
 
 const profileAddressTable = pgTable(`${TABLE_PREFIX}profile_address`,
   {
@@ -43,5 +43,4 @@ const profileAddressRelationList = defineRelations(
   })
 );
 
-export default profileAddressTable;
 export { profileAddressRelationList, profileAddressTable };

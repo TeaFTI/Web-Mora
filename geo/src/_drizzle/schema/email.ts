@@ -13,5 +13,4 @@ const emailTable = pgTable(`${TABLE_PREFIX}email`, {
 });
 
 export type EmailType = typeof emailTable.$inferSelect;
-export default emailTable;
 export { emailTable };

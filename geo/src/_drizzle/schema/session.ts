@@ -12,5 +12,4 @@ const sessionTable = pgTable(`${TABLE_PREFIX}session`, {
   expiration: timestamp("expiration", { withTimezone: true }).notNull(),
 });
 
-export default sessionTable;
 export { sessionTable };

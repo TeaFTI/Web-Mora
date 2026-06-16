@@ -7,9 +7,9 @@ import { pgTable, primaryKey, uuid } from "drizzle-orm/pg-core";
 
 import { TABLE_PREFIX } from "../../configuration/global";
 
-import accountTable from "./account";
-import accountTransactionRoleTable from "./account-transaction-role";
-import transactionTable from "./transaction";
+import { accountTable } from "./account";
+import { accountTransactionRoleTable } from "./account-transaction-role";
+import { transactionTable } from "./transaction";
 
 const accountTransactionTable = pgTable(
   `${TABLE_PREFIX}account_transaction`,
@@ -62,5 +62,4 @@ const accountTransactionRelationList = defineRelations(
   })
 );
 
-export default accountTransactionTable;
 export { accountTransactionRelationList, accountTransactionTable };

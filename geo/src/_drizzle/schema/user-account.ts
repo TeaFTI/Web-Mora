@@ -43,5 +43,4 @@ const userAccountRelationList = defineRelations(
   })
 );
 
-export default userAccountTable;
 export { userAccountRelationList, userAccountTable };

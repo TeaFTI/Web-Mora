@@ -32,5 +32,4 @@ const cityRelationList = defineRelations(
   })
 );
 
-export default cityTable;
 export { cityRelationList, cityTable };

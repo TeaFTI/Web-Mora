@@ -7,7 +7,7 @@ import { pgTable, text, uuid } from "drizzle-orm/pg-core";
 
 import { TABLE_PREFIX } from "../../configuration/global";
 
-import cityTable from "./city";
+import { cityTable } from "./city";
 
 const addressTable = pgTable(`${TABLE_PREFIX}address`, {
   id: uuid("id").primaryKey().default(sql`uuidv7()`),
@@ -32,5 +32,4 @@ const addressRelationList = defineRelations(
   })
 );
 
-export default addressTable;
 export { addressRelationList, addressTable };

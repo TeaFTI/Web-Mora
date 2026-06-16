@@ -14,5 +14,4 @@ const contractStatusTable = pgTable(`${TABLE_PREFIX}contract_status`, {
   description: text("description"),
 });
 
-export default contractStatusTable;
 export { contractStatusTable };

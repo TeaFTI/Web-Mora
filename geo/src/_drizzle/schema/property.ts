@@ -12,7 +12,7 @@ import {
 
 import { TABLE_PREFIX } from "../../configuration/global";
 
-import addressTable from "./address";
+import { addressTable } from "./address";
 
 const propertyTable = pgTable(`${TABLE_PREFIX}property`, {
   id: uuid("id").primaryKey().default(sql`uuidv7()`),
@@ -48,5 +48,4 @@ const propertyRelationList = defineRelations(
   })
 );
 
-export default propertyTable;
 export { propertyRelationList, propertyTable };

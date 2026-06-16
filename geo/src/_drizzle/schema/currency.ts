@@ -18,5 +18,4 @@ const currencyTable = pgTable(`${TABLE_PREFIX}currency`, {
   base: text("base"),
 });
 
-export default currencyTable;
 export { currencyTable };

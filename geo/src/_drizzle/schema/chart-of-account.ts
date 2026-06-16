@@ -57,6 +57,5 @@ const chartOfAccountRelationList = defineRelations(
   })
 );
 
-export default chartOfAccountTable;
 export { chartOfAccountRelationList, chartOfAccountTable };
 

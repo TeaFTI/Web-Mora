@@ -13,7 +13,7 @@ import {
   uuid,
 } from "drizzle-orm/pg-core";
 
-import { TABLE_PREFIX } from "../../configuration/drizzle";
+import { TABLE_PREFIX } from "../../configuration/global";
 
 import { chartOfAccountTypeTable } from "./chart-of-account-type";
 

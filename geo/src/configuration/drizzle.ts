@@ -4,10 +4,7 @@
 
 import * as z from "zod";
 
-const TABLE_PREFIX = process.env.GEO_TABLE_PREFIX
-  ?? `${process.env.npm_package_name}_`;
-
-let DATABASE_URI: string;
+let POSTGRESQL_URI: string;
 
 const PostgreSQLSchema = z.object({
   NODE_ENV: z.enum([
@@ -32,7 +29,7 @@ try {
   // Database Uniform Resource Identifier (URI)
   // SCHEME://USERNAME:PASSWORD@HOST:PORT/NAME
   // process.env.DATABASE_URI = [
-  DATABASE_URI = [
+  POSTGRESQL_URI = [
     process.env.GEO_DATABASE_SCHEME,
     "://", process.env.GEO_DATABASE_USERNAME,
     ":", process.env.GEO_DATABASE_PASSWORD,
@@ -55,8 +52,7 @@ try {
 }
 
 export {
-  DATABASE_URI,
-  PostgreSQLSchema,
-  TABLE_PREFIX
+  POSTGRESQL_URI,
+  PostgreSQLSchema
 };
 

@@ -5,7 +5,7 @@
 import { defineRelations } from "drizzle-orm";
 import { pgTable, primaryKey, uuid } from "drizzle-orm/pg-core";
 
-import { TABLE_PREFIX } from "../../configuration/drizzle";
+import { TABLE_PREFIX } from "../../configuration/global";
 
 import emailTable from "./email";
 import profileTable from "./profile";

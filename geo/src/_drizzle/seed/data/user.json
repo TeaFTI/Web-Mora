@@ -1,0 +1,7 @@
+[
+  {
+    "username": "administrator",
+    "passwordHash": "IHopeThisIsNotYourPassword",
+    "salt": "correcthorsebatterystaple"
+  }
+]

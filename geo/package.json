@@ -1,0 +1,71 @@
+{
+  "name": "geo",
+  "version": "0.0.1",
+  "type": "module",
+  "description": "🪨 Geo 🪨",
+  "keywords": [
+    "geo"
+  ],
+  "license": "None",
+  "author": "Geo",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TeaFTI/Web-Mora"
+  },
+  "scripts": {
+    "dev": "vite dev",
+    "build": "vite build",
+    "preview": "vite preview",
+    "start": "node .output/server/index.mjs",
+    "drizzle:generate": "dotenvx run -- drizzle-kit generate",
+    "drizzle:migrate": "dotenvx run -- drizzle-kit migrate",
+    "drizzle:plant": "dotenvx run -- npx tsx ./src/_drizzle/plant.ts",
+    "drizzle:unplant": "dotenvx run -- npx tsx ./src/_drizzle/unplant.ts",
+    "drizzle:all": "dotenvx run -- sh -c 'drizzle-kit generate && drizzle-kit migrate && npx tsx ./src/_drizzle/plant.ts'",
+    "betterauth:generate": "npx auth@latest generate --config ./src/_betterauth/auth.ts --output ./src/_drizzle/schema/better-auth.ts"
+  },
+  "dependencies": {
+    "@base-ui/react": "^1.4",
+    "@noble/ciphers": "^1.3",
+    "@tanstack/react-form": "^1.33",
+    "@tanstack/react-router": "^1.170",
+    "@tanstack/react-router-devtools": "^1.167",
+    "@tanstack/react-start": "^1.168",
+    "better-auth": "^1.6",
+    "class-variance-authority": "^0.7",
+    "clsx": "^2.1",
+    "drizzle-orm": "^1.0.0-beta.22",
+    "lucide-react": "^1.16",
+    "nitro": "^3.0.260603-beta",
+    "pg": "^8.21",
+    "react": "^19.2",
+    "react-dom": "^19.2",
+    "redis": "^6.0",
+    "shadcn": "^4.7.0",
+    "tailwind-merge": "^3.6",
+    "tw-animate-css": "^1.4",
+    "zod": "^4.4"
+  },
+  "devDependencies": {
+    "@dotenvx/dotenvx": "^1.71",
+    "@tailwindcss/vite": "^4.3",
+    "@tanstack/devtools-vite": "^0.7",
+    "@tanstack/react-devtools": "^0.10",
+    "@types/node": "^25.8",
+    "@types/pg": "^8.20",
+    "@types/react": "^19.2",
+    "@types/react-dom": "^19.2",
+    "@vitejs/plugin-react": "^6.0",
+    "drizzle-kit": "^1.0.0-beta.22",
+    "tailwindcss": "^4.3",
+    "typescript": "^6.0",
+    "vite": "^8.0"
+  },
+  "overrides": {
+    "esbuild": "^0.28",
+    "kysely": "^0.28",
+    "better-auth": {
+      "@noble/ciphers": "^2.2"
+    }
+  }
+}

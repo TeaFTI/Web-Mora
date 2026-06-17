@@ -6,14 +6,29 @@
 package-lock.json
 
 # Bun
-bun.lockb
+bun.lock
 
 # Vercel
 .vercel
 
+# NEXT.JS TypeScript
+next-env.d.ts
+
+# TanStack
+.nitro
+.output
+.tanstack
+dist-ssr
+routeTree.gen.ts
+
+# drizzle
+migration/
+
 # Rust
 Cargo.lock
 
+# Claude
+.claude/worktrees/
 
 ###########
 # node.js #

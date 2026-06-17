@@ -49,5 +49,14 @@
   "editor.codeActionsOnSave": {
     "source.organizeImports": "explicit"
   },
-  "editor.insertSpaces": true
+  "editor.insertSpaces": true,
+  "files.watcherExclude": {
+    "**/routeTree.gen.ts": true
+  },
+  "search.exclude": {
+    "**/routeTree.gen.ts": true
+  },
+  "files.readonlyInclude": {
+    "**/routeTree.gen.ts": true
+  }
 }

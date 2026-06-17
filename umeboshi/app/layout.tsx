@@ -3,23 +3,26 @@
  */
 
 import { Metadata, Viewport } from "next";
-import reactArrayToTree from 'react-array-to-tree';
+import reactArrayToTree from "react-array-to-tree";
 
 // Context
+import { ThemeProvider } from "@/context/shadcn/theme-provider";
 
 // Component
+import { siteConfiguration } from "@/configuration/site";
 
 // CSS
-
-// SCSS
-import "@/app/global.scss";
+import "@/app/global.css";
 
 export const metadata: Metadata = {
   title: {
-    template: "%s 🌼 Umebosh 🌼",
-    default: "🌼 Umebosh 🌼",
+    template: `%s 🌼 ${siteConfiguration.name} 🌼`,
+    default: `🌼 ${siteConfiguration.name} 🌼`,
   },
-  description: "🌼 Umebosh 🌼",
+  description: `🌼 ${siteConfiguration.description} 🌼`,
+  icons: {
+    icon: "/res/img/icon.svg",
+  },
 }
 
 export const viewport: Viewport = {
@@ -29,6 +32,13 @@ export const viewport: Viewport = {
 }
 
 const ProviderTree = reactArrayToTree([
+  <ThemeProvider
+    key="shadcn-theme-provider"
+    attribute="class"
+    defaultTheme="system"
+    enableSystem
+    disableTransitionOnChange
+  />
 ]);
 
 export default function RootLayout({
@@ -37,7 +47,7 @@ export default function RootLayout({
   children: React.ReactNode,
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body>
         <ProviderTree>
           {children}

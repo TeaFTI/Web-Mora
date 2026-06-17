@@ -1,0 +1,30 @@
+{
+  "include": [
+    "**/*.ts",
+    "**/*.tsx"
+  ],
+  "compilerOptions": {
+    "target": "ES2024",
+    "jsx": "react-jsx",
+    "module": "ESNext",
+    "lib": [
+      "DOM",
+      "DOM.Iterable",
+      "ES2024"
+    ],
+    "strict": true,
+    "esModuleInterop": true,
+    "moduleResolution": "Bundler",
+    "isolatedModules": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "allowJs": true,
+    "forceConsistentCasingInFileNames": true,
+    "paths": {
+      "~/*": [
+        "./src/*"
+      ]
+    },
+    "noEmit": true
+  }
+}
